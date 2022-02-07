@@ -112,7 +112,7 @@ ax.legend()
 
 
 m = n0      #Número inicial de Li0
-nt = 300   #Número de pasos temporales
+nt = 500   #Número de pasos temporales
 
 #Los vectores lix_0 y liy_0 son los que van aumentando de dimension y me van contando en cada paso temporal cuantos li+ pasan a ser li0.
 #Yo los puedo definir inicialmente como los litios depositados ya que m=n0
@@ -138,8 +138,10 @@ for i in range(nt):
         ex[j] = ex_0[j] + q*gx + rx
         ey[j] = ey_0[j] + q*gy + ry
         #Meto las PBC en la caja de tamaño 1x1 (normalizada)
-        ex[j] = ex[j] - int(ex[j])
-        ey[j] = ey[j] - int(ey[j])
+        ex[j] = ex[j] % 1
+        ey[j] = ey[j] % 1
+        #ex[j] = ex[j] - int(ex[j])
+        #ey[j] = ey[j] - int(ey[j])
         #Definición de la condición Li+-->Li0
         for k in range(m):
             #print('k = ',k)
@@ -183,26 +185,20 @@ for i in range(nt):
                     
                 #PBC
                 for l in range(m):
-                    lix_0[l] = lix_0[l] - int(lix_0[l])
-                    liy_0[l] = liy_0[l] - int(liy_0[l])
+                    lix_0[l] = lix_0[l] % 1
+                    liy_0[l] = liy_0[l] % 1
+                    #lix_0[l] = lix_0[l] - int(lix_0[l])
+                    #liy_0[l] = liy_0[l] - int(liy_0[l])
                 #Save_Li0(n0,m,lix_d,liy_d,exs,eys,lix_0,liy_0,lix_aux,liy_aux)
                 #repongo el ion
                 ex[j] = int(np.random.rand()*200)*dx
                 ey[j] = int(np.random.rand()*200)*dy
                 #Las PBC
-                ex[j] = ex[j] - int(ex[j])
-                ey[j] = ey[j] - int(ey[j])
-            #else:
-             #if (m<=n0):
-              #modd = np.sqrt((ex[j] - lix_d[k])*(ex[j] - lix_d[k]) + (ey[j] - liy_d[k])*(ey[j] - liy_d[k]))
-               #     exs = (ex[j]-lix_d[k])*datt/modd + lix_d[k]
-                #    eys = (ey[j]-liy_d[k])*datt/modd + liy_d[k]
-                #elif (m>n0):
-                 #   modd = np.sqrt((ex[j] - lix_0[k])*(ex[j] - lix_0[k]) + (ey[j] - liy_0[k])*(ey[j] - liy_0[k]))
-                  #  exs = (ex[j]-lix_0[k])*datt/modd + lix_0[k]
-                   # eys = (ey[j]-liy_0[k])*datt/modd + liy_0[k]
-                
-                #Save_Li0(n0,m,lix_d,liy_d,exs,eys,lix_0,liy_0,lix_aux,liy_aux)
+                ex[j] = ex[j] % 1
+                ey[j] = ey[j] % 1
+                #ex[j] = ex[j] - int(ex[j])
+                #ey[j] = ey[j] - int(ey[j])
+            
     t = (i+1)*dt
     ex_0 = ex
     ey_0 = ey
@@ -210,20 +206,8 @@ for i in range(nt):
     
 #%%           
         
+               
 plt.figure(20)
-x = ex
-f = ey
-#x = np.arange(0,1,0.005)
-#f = np.arange([ex],[ey])
-ax = plt.subplot(111)
-ax.plot(x,f,linestyle='', marker='.',linewidth=2, label=r' a ver ')
-
-plt.xlabel('x')
-plt.ylabel('y')
-plt.title(' ')
-ax.legend()       
-        
-plt.figure(21)
 x = ex
 f = ey
 y = lix_0
