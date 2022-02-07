@@ -89,30 +89,16 @@ dx = rli0/(2*Long)
 dy = rli0/(2*Long)
 
 for i in range(nm):
-    ex_0[i] = int(np.random.rand()*200)*dx
-    ey_0[i] = int(np.random.rand()*200)*dy
-    
-#Grafico para ver que esté en orden 
-
-plt.figure(10)
-x = ex_0
-f = ey_0
-y = lix_d
-g = liy_d
-ax = plt.subplot(111)
-ax.plot(x,f,linestyle='', marker='.', linewidth=2,color='#1f77b4', label=' Li+')
-ax.plot(y,g,linestyle='', marker='.', linewidth=2,color='#d62728', label=' Li0')
-plt.xlabel('x')
-plt.ylabel('y')
-plt.title(' init ')
-ax.legend()      
-    
-    
+    ex_0[i] = np.random.rand()
+    ey_0[i] = np.random.rand()
+    ex_0[i] = ex_0[i] % 1
+    ey_0[i] = ey_0[i] % 1
+        
 #Comienza el loop de evolución temporal
 
 
 m = n0      #Número inicial de Li0
-nt = 500   #Número de pasos temporales
+nt = 5000   #Número de pasos temporales
 
 #Los vectores lix_0 y liy_0 son los que van aumentando de dimension y me van contando en cada paso temporal cuantos li+ pasan a ser li0.
 #Yo los puedo definir inicialmente como los litios depositados ya que m=n0
@@ -140,13 +126,13 @@ for i in range(nt):
         #Meto las PBC en la caja de tamaño 1x1 (normalizada)
         ex[j] = ex[j] % 1
         ey[j] = ey[j] % 1
-        #ex[j] = ex[j] - int(ex[j])
-        #ey[j] = ey[j] - int(ey[j])
+    
         #Definición de la condición Li+-->Li0
         for k in range(m):
             #print('k = ',k)
-            #if (m==600): 
-                #break
+            if (m==600): 
+                break
+                print('Se alcanzó la cantidad máxima de Li0')
             if (m<=n0):
                 distx = ex[j] - lix_d[k]
                 disty = ey[j] - liy_d[k]
@@ -157,7 +143,6 @@ for i in range(nt):
                 dist = np.sqrt(distx*distx + disty*disty)
                 
             if (dist<datt):
-                print('entró al dist < datt')
                 if (m<=n0):
                     modd = np.sqrt((ex[j] - lix_d[k])*(ex[j] - lix_d[k]) + (ey[j] - liy_d[k])*(ey[j] - liy_d[k]))
                     exs = (ex[j]-lix_d[k])*datt/modd + lix_d[k]
@@ -168,7 +153,6 @@ for i in range(nt):
                     eys = (ey[j]-liy_0[k])*datt/modd + liy_0[k]
                 
                 exys.append([exs,eys])
-                print('m = ',m)
                 m = m+1
                 lix_0 = np.zeros(m)
                 liy_0 = np.zeros(m)
@@ -187,38 +171,55 @@ for i in range(nt):
                 for l in range(m):
                     lix_0[l] = lix_0[l] % 1
                     liy_0[l] = liy_0[l] % 1
-                    #lix_0[l] = lix_0[l] - int(lix_0[l])
-                    #liy_0[l] = liy_0[l] - int(liy_0[l])
-                #Save_Li0(n0,m,lix_d,liy_d,exs,eys,lix_0,liy_0,lix_aux,liy_aux)
-                #repongo el ion
+                #Repongo el ion
                 ex[j] = int(np.random.rand()*200)*dx
                 ey[j] = int(np.random.rand()*200)*dy
                 #Las PBC
                 ex[j] = ex[j] % 1
                 ey[j] = ey[j] % 1
-                #ex[j] = ex[j] - int(ex[j])
-                #ey[j] = ey[j] - int(ey[j])
-            
+                
     t = (i+1)*dt
     ex_0 = ex
     ey_0 = ey
     print('% = ',(i/nt)*100)
     
-#%%           
+print('Cantidad de Li0 =', m)
+              
+#%%  
+         
+#Gráfico del sistema inicial
+
+plt.figure(10)
+x = ex_0
+f = ey_0
+y = lix_d
+g = liy_d
+ax = plt.subplot(111)
+ax.plot(x,f,linestyle='', marker='.', markersize=8,color='#1f77b4', label=' Li+')
+ax.plot(y,g,linestyle='', marker='.', markersize=8,color='#d62728', label=' Li0')
+plt.ylim([-0.05,1.05])
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title(' init ')
+ax.legend()      
+ax.set_aspect('equal', adjustable='box')
+
+#Gráfico del sistema final
         
-               
 plt.figure(20)
 x = ex
 f = ey
 y = lix_0
 g = liy_0
 ax = plt.subplot(111)
-ax.plot(x,f,linestyle='', marker='.', linewidth=2,color='#1f77b4', label=' Li+')
-ax.plot(y,g,linestyle='', marker='.', linewidth=2,color='#d62728', label=' Li0')
+ax.plot(x,f,linestyle='', marker='.', markersize=8,color='#1f77b4', label=' Li+')
+ax.plot(y,g,linestyle='', marker='.', markersize=8,color='#d62728', label=' Li0')
+plt.ylim([-0.05,1.05])
 plt.xlabel('x')
 plt.ylabel('y')
 plt.title(' ')
 ax.legend()
+ax.set_aspect('equal', adjustable='box')
 
 
 plt.show()
