@@ -71,7 +71,7 @@ for i in range(nm):
     if (ey_0[i]<0):
         ey_0[i] = abs(ey_0[i])
     elif (ey_0[i]>1):
-        ey_0[i] = ey_0[i]-2*(ey_0[i]-1)
+        ey_0[i] = 1-ey_0[i]
     
 
 #Guardo las coordenadas del sistema inicial
@@ -83,7 +83,7 @@ ey_init = ey_0
 
 
 m = n0      #Número inicial de Li0
-nt = 5000   #Número de pasos temporales
+nt = 8000   #Número de pasos temporales
 
 
 #Inicialmente los vectores de Li0 son iguales al litio depositado
@@ -94,7 +94,7 @@ liy_0 = liy_d
 lix_aux = np.zeros(n0max)
 liy_aux = np.zeros(n0max)
 
-porcent = 9
+porcent = 9 #Porcentaje inicial para el contador
 
 exys = []
 
@@ -112,7 +112,7 @@ for i in range(nt):
         if (ey[j]<0):
             ey[j] = abs(ey[j])
         elif (ey[j]>1):
-            ey[j] = ey[j]-2*(ey[j]-1)
+            ey[j] = 2-ey[j]
     
         #Definición de la condición Li+-->Li0
         for k in range(m):
@@ -160,7 +160,7 @@ for i in range(nt):
                     if (liy_0[l]<0):
                         liy_0[l] = abs(liy_0[l])
                     elif (liy_0[l]>1):
-                        liy_0[l] = liy_0[l]-2*(liy_0[l]-1)
+                        liy_0[l] = 2-liy_0[l]
                 #Repongo el ion
                 ex[j] = np.random.rand()
                 ey[j] = np.random.rand()
@@ -169,7 +169,7 @@ for i in range(nt):
                 if (ey[j]<0):
                     ey[j] = abs(ey[j])
                 elif (ey[j]>1):
-                    ey[j] = ey[j]-2*(ey[j]-1)
+                    ey[j] = 2-ey[j]
                 
     t = (i+1)*dt
     ex_0 = ex
@@ -193,8 +193,8 @@ f = ey_init
 y = lix_d
 g = liy_d
 ax = plt.subplot(111)
-ax.plot(x,f,linestyle='', marker='.', markersize=7,color='#1f77b4', label=' Li+')
-ax.plot(y,g,linestyle='', marker='.', markersize=7,color='#d62728', label=' Li0')
+ax.plot(x,f,linestyle='', marker='.', markersize=7,color='#1f77b4', label=' Li$^+$')
+ax.plot(y,g,linestyle='', marker='.', markersize=7,color='#d62728', label=' Li$^0$')
 plt.ylim([-0.05,1.05])
 plt.xlabel('x')
 plt.ylabel('y')
@@ -210,8 +210,8 @@ f = ey
 y = lix_0
 g = liy_0
 ax = plt.subplot(111)
-ax.plot(x,f,linestyle='', marker='.', markersize=7,color='#1f77b4', label=' Li+')
-ax.plot(y,g,linestyle='', marker='.', markersize=7,color='#d62728', label=' Li0')
+ax.plot(x,f,linestyle='', marker='.', markersize=7,color='#1f77b4', label=' Li$^+$')
+ax.plot(y,g,linestyle='', marker='.', markersize=7,color='#d62728', label=' Li$^0$')
 plt.ylim([-0.05,1.05])
 plt.xlabel('x')
 plt.ylabel('y')
