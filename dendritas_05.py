@@ -8,30 +8,6 @@ Created on Mon Feb  7 09:10:04 2022
 import numpy as np 
 import matplotlib.pyplot as plt
 
-#Definición de la función Save_Li0
-def Save_Li0(nn0,mm,lixx_d,liyy_d,exss,eyss,lixx_0,liyy_0,lixx_aux,liyy_aux):
-    lixx_0 = np.zeros(mm)
-    liyy_0 = np.zeros(mm)
-    
-    for i in range(nn0):
-        lixx_aux[i] = lixx_d[i]
-        liyy_aux[i] = liyy_d[i]
-        
-    lixx_aux[mm] = exss
-    liyy_aux[mm] = eyss
-    
-    for i in range(mm):
-        lixx_0[i] = lixx_aux[i]
-        liyy_0[i] = liyy_aux[i]
-        
-    #PBC
-    for i in range(mm):
-        lixx_0[i] = lixx_0[i] - int(lixx_0[i])
-        liyy_0[i] = liyy_0[i] - int(liyy_0[i])
-    
-    return lixx_0,liyy_0,lixx_aux,liyy_aux
-
-
 
 # Inicialización de variables
 
@@ -92,7 +68,10 @@ for i in range(nm):
     ex_0[i] = np.random.rand()
     ey_0[i] = np.random.rand()
     ex_0[i] = ex_0[i] % 1
-    ey_0[i] = ey_0[i] % 1
+    if (ey_0[i]<0):
+        ey_0[i] = abs(ey_0[i])
+    elif (ey_0[i]>1):
+        ey_0[i] = ey_0[i]-2*(ey_0[i]-1)
     
 
 #Guardo las coordenadas del sistema inicial
@@ -115,6 +94,7 @@ liy_0 = liy_d
 lix_aux = np.zeros(n0max)
 liy_aux = np.zeros(n0max)
 
+porcent = 9
 
 exys = []
 
@@ -129,7 +109,10 @@ for i in range(nt):
         ey[j] = ey_0[j] + q*gy + ry
         #Meto las PBC en la caja de tamaño 1x1 (normalizada)
         ex[j] = ex[j] % 1
-        ey[j] = ey[j] % 1
+        if (ey[j]<0):
+            ey[j] = abs(ey[j])
+        elif (ey[j]>1):
+            ey[j] = ey[j]-2*(ey[j]-1)
     
         #Definición de la condición Li+-->Li0
         for k in range(m):
@@ -174,18 +157,29 @@ for i in range(nt):
                 #PBC
                 for l in range(m):
                     lix_0[l] = lix_0[l] % 1
-                    liy_0[l] = liy_0[l] % 1
+                    if (liy_0[l]<0):
+                        liy_0[l] = abs(liy_0[l])
+                    elif (liy_0[l]>1):
+                        liy_0[l] = liy_0[l]-2*(liy_0[l]-1)
                 #Repongo el ion
                 ex[j] = np.random.rand()
                 ey[j] = np.random.rand()
                 #Las PBC
                 ex[j] = ex[j] % 1
-                ey[j] = ey[j] % 1
+                if (ey[j]<0):
+                    ey[j] = abs(ey[j])
+                elif (ey[j]>1):
+                    ey[j] = ey[j]-2*(ey[j]-1)
                 
     t = (i+1)*dt
     ex_0 = ex
     ey_0 = ey
-    print('% = ',(i/nt)*100)
+    #Agrego el pocentaje de corrida del programa
+    ip = int((i/nt)*100)
+    if (ip > porcent):
+        if (ip % 10 == 0):
+            print(ip,'%')
+        porcent = ip
     
 print('Cantidad de Li0 =', m)
               
@@ -199,8 +193,8 @@ f = ey_init
 y = lix_d
 g = liy_d
 ax = plt.subplot(111)
-ax.plot(x,f,linestyle='', marker='.', markersize=8,color='#1f77b4', label=' Li+')
-ax.plot(y,g,linestyle='', marker='.', markersize=8,color='#d62728', label=' Li0')
+ax.plot(x,f,linestyle='', marker='.', markersize=7,color='#1f77b4', label=' Li+')
+ax.plot(y,g,linestyle='', marker='.', markersize=7,color='#d62728', label=' Li0')
 plt.ylim([-0.05,1.05])
 plt.xlabel('x')
 plt.ylabel('y')
@@ -216,8 +210,8 @@ f = ey
 y = lix_0
 g = liy_0
 ax = plt.subplot(111)
-ax.plot(x,f,linestyle='', marker='.', markersize=8,color='#1f77b4', label=' Li+')
-ax.plot(y,g,linestyle='', marker='.', markersize=8,color='#d62728', label=' Li0')
+ax.plot(x,f,linestyle='', marker='.', markersize=7,color='#1f77b4', label=' Li+')
+ax.plot(y,g,linestyle='', marker='.', markersize=7,color='#d62728', label=' Li0')
 plt.ylim([-0.05,1.05])
 plt.xlabel('x')
 plt.ylabel('y')
