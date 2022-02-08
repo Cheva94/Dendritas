@@ -93,6 +93,12 @@ for i in range(nm):
     ey_0[i] = np.random.rand()
     ex_0[i] = ex_0[i] % 1
     ey_0[i] = ey_0[i] % 1
+    
+
+#Guardo las coordenadas del sistema inicial
+ex_init = ex_0
+ey_init = ey_0
+
         
 #Comienza el loop de evolución temporal
 
@@ -100,12 +106,10 @@ for i in range(nm):
 m = n0      #Número inicial de Li0
 nt = 5000   #Número de pasos temporales
 
-#Los vectores lix_0 y liy_0 son los que van aumentando de dimension y me van contando en cada paso temporal cuantos li+ pasan a ser li0.
-#Yo los puedo definir inicialmente como los litios depositados ya que m=n0
-#Habria que ver que efectivamente aumenten de dimension dentro del loop temporal cuando m>n0
 
-lix_0 = np.zeros(m)
-liy_0 = np.zeros(m)
+#Inicialmente los vectores de Li0 son iguales al litio depositado
+lix_0 = lix_d
+liy_0 = liy_d
 
 
 lix_aux = np.zeros(n0max)
@@ -172,8 +176,8 @@ for i in range(nt):
                     lix_0[l] = lix_0[l] % 1
                     liy_0[l] = liy_0[l] % 1
                 #Repongo el ion
-                ex[j] = int(np.random.rand()*200)*dx
-                ey[j] = int(np.random.rand()*200)*dy
+                ex[j] = np.random.rand()
+                ey[j] = np.random.rand()
                 #Las PBC
                 ex[j] = ex[j] % 1
                 ey[j] = ey[j] % 1
@@ -190,8 +194,8 @@ print('Cantidad de Li0 =', m)
 #Gráfico del sistema inicial
 
 plt.figure(10)
-x = ex_0
-f = ey_0
+x = ex_init
+f = ey_init
 y = lix_d
 g = liy_d
 ax = plt.subplot(111)
