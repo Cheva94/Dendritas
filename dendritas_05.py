@@ -99,7 +99,11 @@ porcent = 9 #Porcentaje inicial para el contador
 exys = []
 
 for i in range(nt):
+    if (m==600):
+        break
     for j in range(nm):
+        if (m==600):
+            break
         tita = 2*np.pi*np.random.rand()
         #Definición del vector unitario g
         gx = np.cos(tita)
@@ -116,10 +120,6 @@ for i in range(nt):
     
         #Definición de la condición Li+-->Li0
         for k in range(m):
-            #print('k = ',k)
-            if (m==600): 
-                break
-                print('Se alcanzó la cantidad máxima de Li0')
             if (m<=n0):
                 distx = ex[j] - lix_d[k]
                 disty = ey[j] - liy_d[k]
@@ -141,6 +141,9 @@ for i in range(nt):
                 
                 exys.append([exs,eys])
                 m = m+1
+                if (m==600):
+                    print('Se alcanzó la cantidad máxima de Li0')
+                    break
                 lix_0 = np.zeros(m)
                 liy_0 = np.zeros(m)
                 for l in range(n0):
