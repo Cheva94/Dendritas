@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#-*- coding: utf-8 -*-
 """
 Created on Mon Feb 14 10:03:43 2022
 
@@ -47,8 +47,9 @@ dy = Long/(nmalla*Long)
 #Defino y calculo el voltaje V0
 Vm = 10 #Volts
 V0 = np.zeros([nmalla+1,nmalla+1])
+V =  np.zeros([nmalla+1,nmalla+1])
 
-V0[:,0] = 100 #Condición de borde
+V0[:,0] = Vm #Condición de borde
 
 for k in range(N_iter): 
     for i in range(1,nmalla,1):
@@ -58,6 +59,8 @@ for k in range(N_iter):
 #Defino y Calculo el campo E0
 E0_x = np.zeros([nmalla+1,nmalla+1])
 E0_y = np.zeros([nmalla+1,nmalla+1])
+E_x = np.zeros([nmalla+1,nmalla+1])
+E_y = np.zeros([nmalla+1,nmalla+1])
 
 for j in range(0,nmalla+1,1):
     for i in range(1,nmalla,1):
@@ -67,27 +70,12 @@ for j in range(0,nmalla+1,1): #Defino el campo en x respetando las PBC
     E0_x[0,j] = -(V0[1,j]-V0[nmalla,j])/dx
     E0_x[nmalla,j] = - (V0[0,j]-V0[nmalla-1,j])/dx
     
-for j in range(0,nmalla,1):
+for j in range(1,nmalla,1):
     for i in range(0,nmalla+1,1):
-        E0_y[i,1] = -(V0[i,2]-Vm)/dy
+        E0_y[i,0] = -V0[i,1]/dy
         E0_y[i,j] = -(V0[i,j+1]-V0[i,j-1])/dy
         E0_y[i,nmalla] = V0[i,nmalla-1]/dy
         
-#%%        
-#Calculo los vectores rx y ry
-
-for i in range(nm)
-    k = ex_0[i]
-    l = ey_0[i]
-    rx(i) = u*E0_x[k,l]*dt/Long
-    ry(i) = u*E0_y[k,l]*dt/Long
-      #ESTO YA ESTA MAL PORQUE LAS COORDENADAS
-      #K Y L NO EXISTEN EN LA MALLA
-
-
-
-#rx = u*E0_x*dt/Long
-#ry = u*E0_y*dt/Long #mu+*E*dt/Long es el desplazamiento debido al campo electrico
 
 #Inicialización de vectores 
 ex = np.zeros(nm)
@@ -123,6 +111,33 @@ for i in range(nm):
 #Guardo las coordenadas del sistema inicial
 ex_init = ex_0
 ey_init = ey_0
+ 
+#Calculo los vectores rx y ry
+
+rx = np.zeros(nm)
+ry = np.zeros(nm)
+
+indices = [] #Me guardo los indices que entran
+
+#Bueno empiezo a escribir a ver kionda
+Rcut = 0.007 #1/100 (escala de las separaciones)/2*raiz(2)
+Rcut2 = Rcut*Rcut
+
+for i in range(nm):
+    for j in range(nmalla+1):
+        for k in range(nmalla+1):
+            d1 = ex_0[i] - j*0.01
+            d2 = ey_0[i] - k*0.01
+            dist2 = d1*d1 + d2*d2
+            div = 1
+            if dist2<=Rcut2:
+                indices.append((j,k))
+                div = div+1
+                rx[i] = u*E0_x[j,k]*dt/(Long*div)
+                ry[i] = u*E0_x[j,k]*dt/(Long*div)
+                
+
+#mu+*E*dt/Long es el desplazamiento debido al campo electrico
 
         
 #Comienza el loop de evolución temporal
@@ -153,8 +168,8 @@ for i in range(nt):
         gx = np.cos(tita)
         gy = np.sin(tita)
         #Evolución de la posición de los iones
-        ex[j] = ex_0[j] + q*gx + rx
-        ey[j] = ey_0[j] + q*gy + ry
+        ex[j] = ex_0[j] + q*gx + rx[j]
+        ey[j] = ey_0[j] + q*gy + ry[j]
         #Meto las PBC en la caja de tamaño 1x1 (normalizada)
         ex[j] = ex[j] % 1
         if (ey[j]<0):
