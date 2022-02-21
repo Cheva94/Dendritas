@@ -26,7 +26,7 @@ x=0
 y=0
 Long = 16.7e-9
 datt = 1.3*rli0/Long     #que es rli0/(pi/4)
-q = np.sqrt(2*D*dt)/Long   #desplazamiento medio debido a la difusion
+qu = np.sqrt(2*D*dt)/Long   #desplazamiento medio debido a la difusion
 
 alfa = 0
 mod_li0 = 0
@@ -106,9 +106,8 @@ for i in range(nm):
     if (ey_0[i]<0):
         ey_0[i] = abs(ey_0[i])
     elif (ey_0[i]>1):
-        ey_0[i] = 1-ey_0[i]
+        ey_0[i] = 1-(ey_0[i]-1)
     
-
 #Guardo las coordenadas del sistema inicial
 ex_init = ex_0
 ey_init = ey_0
@@ -145,7 +144,7 @@ for i in range(nm):
 
 
 m = n0      #Número inicial de Li0
-nt = 3000  #Número de pasos temporales
+nt = 500  #Número de pasos temporales
 
 
 #Inicialmente los vectores de Li0 son iguales al litio depositado
@@ -160,6 +159,8 @@ porcent = 9 #Porcentaje inicial para el contador
 
 exys = []
 pqs = []
+list_p = []
+list_q = []
 
 for i in range(nt):
     break_out_of_i = False
@@ -170,14 +171,14 @@ for i in range(nt):
         gx = np.cos(tita)
         gy = np.sin(tita)
         #Evolución de la posición de los iones
-        ex[j] = ex_0[j] + q*gx + rx[j]
-        ey[j] = ey_0[j] + q*gy + ry[j]
+        ex[j] = ex_0[j] + qu*gx + rx[j]
+        ey[j] = ey_0[j] + qu*gy + ry[j]
         #Meto las PBC en la caja de tamaño 1x1 (normalizada)
         ex[j] = ex[j] % 1
         if (ey[j]<0):
             ey[j] = abs(ey[j])
         elif (ey[j]>1):
-            ey[j] = 2-ey[j]
+            ey[j] = 1-(ey[j]-1)
     
         #Definición de la condición Li+-->Li0
         for k in range(m):
@@ -226,13 +227,15 @@ for i in range(nt):
                     if (liy_0[l]<0):
                         liy_0[l] = abs(liy_0[l])
                     elif (liy_0[l]>1):
-                        liy_0[l] = 2-liy_0[l]
+                        liy_0[l] = 1-(liy_0[l]-1)
                 #Calculo el nuevo voltaje
                 #Primero paso las coordenadas a indices de la malla
                 print('Calculo en nuevo voltaje')
                 p = int(exs*100)
                 q0 = int(eys*100)
-                q = q0 + (100-2*q0) - 1
+                q = q0 + (100-2*q0)
+                list_p.append(p)
+                list_q.append(q)
                 pqs.append((p,q))
                 V[:,:] = V0[:,:] #inicialmente
                 V[:,0] = Vm
@@ -243,9 +246,17 @@ for i in range(nt):
                 for kk in range(N_iter): 
                     for ii in range(1,nmalla,1):
                         for jj in range(1,nmalla,1):
-                            V[p,q] = 0
-                            V[ii,jj] = (V[ii+1,jj]+V[ii-1,jj]+V[ii,jj+1]+V[ii,jj-1])/4
-                        V[p,q] = 0
+                            for ll in range(np.size(list_p)):
+                                for mm in range(np.size(list_q)):
+                                    site_p = list_p[ll]
+                                    site_q = list_q[mm]
+                                    V[site_p,site_q] = 0
+                                    V[ii,jj] = (V[ii+1,jj]+V[ii-1,jj]+V[ii,jj+1]+V[ii,jj-1])/4
+                        for ll in range(np.size(list_p)):
+                            for mm in range(np.size(list_q)):
+                                site_p = list_p[ll]
+                                site_q = list_q[mm]
+                                V[site_p,site_q] = 0
                             
                 V0[:,:] = V[:,:] #Para la prox iteracion
                 #Repongo el ion
@@ -256,7 +267,7 @@ for i in range(nt):
                 if (ey[j]<0):
                     ey[j] = abs(ey[j])
                 elif (ey[j]>1):
-                    ey[j] = 2-ey[j]
+                    ey[j] = 1-(ey[j]-1)
         if break_out_of_j: break
                 
     t = (i+1)*dt
@@ -301,7 +312,7 @@ g = liy_0
 ax = plt.subplot(111)
 ax.plot(x,f,linestyle='', marker='.', markersize=7,color='#1f77b4', label=' Li$^+$')
 ax.plot(y,g,linestyle='', marker='.', markersize=7,color='#d62728', label=' Li$^0$')
-#plt.ylim([-0.05,1.05])
+plt.ylim([-0.05,1.05])
 plt.xlabel('x')
 plt.ylabel('y')
 plt.title(' ')
