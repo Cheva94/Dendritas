@@ -46,7 +46,7 @@ dx = Long/(nmalla*Long)
 dy = Long/(nmalla*Long)
 
 #Defino y calculo el voltaje V0
-Vm = 10 #Volts
+Vm = 0.85 #Volts
 V0 = np.zeros([nmalla+1,nmalla+1])
 V =  np.zeros([nmalla+1,nmalla+1])
 
@@ -127,14 +127,15 @@ for i in range(nm):
     for j in range(nmalla+1):
         for k in range(nmalla+1):
             d1 = ex_0[i] - j*0.01
-            d2 = ey_0[i] - k*0.01
+            ka = k*0.01 + (1-2*k*0.01)
+            d2 = ey_0[i] - ka
             dist2 = d1*d1 + d2*d2
             div = 1
             if dist2<=Rcut2:
                 indices.append((j,k))
                 div = div+1
                 rx[i] = u*E0_x[j,k]*dt/(Long*div)
-                ry[i] = u*E0_x[j,k]*dt/(Long*div)
+                ry[i] = -u*E0_y[j,k]*dt/(Long*div)
                 
 
 #mu+*E*dt/Long es el desplazamiento debido al campo electrico
@@ -144,7 +145,7 @@ for i in range(nm):
 
 
 m = n0      #Número inicial de Li0
-nt = 500  #Número de pasos temporales
+nt = 100  #Número de pasos temporales
 
 
 #Inicialmente los vectores de Li0 son iguales al litio depositado
