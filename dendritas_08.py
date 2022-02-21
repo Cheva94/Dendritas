@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Feb 14 10:03:43 2022
+Created on Mon Feb 21 10:26:07 2022
 
 @author: Muri
 """
+
 
 import numpy as np 
 import matplotlib.pyplot as plt
@@ -144,7 +145,7 @@ for i in range(nm):
 
 
 m = n0      #Número inicial de Li0
-nt = 500  #Número de pasos temporales
+nt = 3000  #Número de pasos temporales
 
 
 #Inicialmente los vectores de Li0 son iguales al litio depositado
@@ -231,7 +232,7 @@ for i in range(nt):
                 print('Calculo en nuevo voltaje')
                 p = int(exs*100)
                 q0 = int(eys*100)
-                q = q0 + (100-2*q0)
+                q = q0 + (100-2*q0) - 1
                 pqs.append((p,q))
                 V[:,:] = V0[:,:] #inicialmente
                 V[:,0] = Vm
@@ -240,27 +241,12 @@ for i in range(nt):
                 V[100,:] = 0
                 V[p,q] = 0 #Lugar del nuevo Li0
                 for kk in range(N_iter): 
-                    ii = 0
-                    while ii < p:
-                        jj = 0
-                        while jj < q:
+                    for ii in range(1,nmalla,1):
+                        for jj in range(1,nmalla,1):
+                            V[p,q] = 0
                             V[ii,jj] = (V[ii+1,jj]+V[ii-1,jj]+V[ii,jj+1]+V[ii,jj-1])/4
-                            jj = jj+1
-                        while jj > q and jj<=nmalla:
-                            V[ii,jj] = (V[ii+1,jj]+V[ii-1,jj]+V[ii,jj+1]+V[ii,jj-1])/4
-                            jj = jj+1
-                        ii = ii +1
-                for kk in range(N_iter): 
-                    ii = 0
-                    while ii > p and ii<=nmalla:
-                        jj = 0
-                        while jj < q:
-                            V[ii,jj] = (V[ii+1,jj]+V[ii-1,jj]+V[ii,jj+1]+V[ii,jj-1])/4
-                            jj = jj+1
-                        while jj > q and jj<=nmalla:
-                            V[ii,jj] = (V[ii+1,jj]+V[ii-1,jj]+V[ii,jj+1]+V[ii,jj-1])/4
-                            jj = jj+1
-                        ii = ii +1
+                        V[p,q] = 0
+                            
                 V0[:,:] = V[:,:] #Para la prox iteracion
                 #Repongo el ion
                 ex[j] = np.random.rand()
