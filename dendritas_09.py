@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Feb 21 10:26:07 2022
+Created on Tue Feb 22 15:26:26 2022
 
 @author: Muri
 """
@@ -145,7 +145,7 @@ for i in range(nm):
 
 
 m = n0      #Número inicial de Li0
-nt = 3000  #Número de pasos temporales
+nt = 50  #Número de pasos temporales
 
 
 #Inicialmente los vectores de Li0 son iguales al litio depositado
@@ -312,7 +312,74 @@ for i in range(nt):
 print('Cantidad de Li0 =', m)
               
 #%%  
-         
+
+#En este bloque voy a guardar los sitios de la malla que corresponden a equipotenciales.
+
+equip_sites_x1 = []
+equip_sites_y1= []
+equip_sites_x2 = []
+equip_sites_y2= []
+equip_sites_x3 = []
+equip_sites_y3= []
+equip_sites_x4 = []
+equip_sites_y4= []
+equip_sites_x5 = []
+equip_sites_y5= []
+volt = 0.84
+vol = [0.84,0.67,0.4,0.2,0]
+
+
+for i in range(nmalla+1):
+    for j in range(nmalla+1):
+        if 0.85>=V0[i,j]>=0.84:
+            equip_sites_x1.append(i/100)
+            equip_sites_y1.append((j+(100-2*j))/100)
+            
+for i in range(nmalla+1):
+    for j in range(nmalla+1):
+        if 0.67>=V0[i,j]>=0.66:
+            equip_sites_x2.append(i/100)
+            equip_sites_y2.append((j+(100-2*j))/100)
+            
+for i in range(nmalla+1):
+    for j in range(nmalla+1):
+        if 0.4>=V0[i,j]>=0.39:
+            equip_sites_x3.append(i/100)
+            equip_sites_y3.append((j+(100-2*j))/100)
+            
+for i in range(nmalla+1):
+    for j in range(nmalla+1):
+        if 0.2>=V0[i,j]>=0.19:
+            equip_sites_x4.append(i/100)
+            equip_sites_y4.append((j+(100-2*j))/100)
+
+
+for i in range(nmalla+1):
+    for j in range(nmalla+1):
+        if 0.001>=V0[i,j]>=0.0008:
+            equip_sites_x5.append(i/100)
+            equip_sites_y5.append((j+(100-2*j))/100)
+
+
+plt.figure(40)
+ax = plt.subplot(111)
+ax.plot(equip_sites_x1,equip_sites_y1,'-',linewidth=2, label=' Equipotencial en 0.85 V')
+ax.plot(equip_sites_x2,equip_sites_y2,'-',linewidth=2, label=' Equipotencial en 0.67 V')
+ax.plot(equip_sites_x3,equip_sites_y3,'-',linewidth=2, label=' Equipotencial en 0.4 V')
+ax.plot(equip_sites_x4,equip_sites_y4,'-',linewidth=2, label=' Equipotencial en 0.2 V')
+ax.plot(equip_sites_x5,equip_sites_y5,'-',linewidth=2, label=' Equipotencial en 0.0 V')
+plt.xlabel('sitios de la malla')
+plt.ylabel(' sitios de la malla ')
+ax.legend()
+ax.set_aspect('equal', adjustable='box')
+
+
+
+
+
+
+
+#%%
 #Gráfico del sistema inicial
 
 plt.figure(10)
