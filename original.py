@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Feb  7 09:10:04 2022
+Created on Wed Feb  9 10:56:52 2022
 
 @author: Muri
 """
 
-import numpy as np 
+import numpy as np
 import matplotlib.pyplot as plt
 
 
@@ -43,7 +43,7 @@ E0_y = -1.7e7
 rx = u*E0_x*dt/Long
 ry = u*E0_y*dt/Long #mu+*E*dt/Long es el desplazamiento debido al campo electrico
 
-#Inicialización de vectores 
+#Inicialización de vectores
 ex = np.zeros(nm)
 ey = np.zeros(nm)
 ex_0 = np.zeros(nm)
@@ -72,13 +72,13 @@ for i in range(nm):
         ey_0[i] = abs(ey_0[i])
     elif (ey_0[i]>1):
         ey_0[i] = 1-ey_0[i]
-    
+
 
 #Guardo las coordenadas del sistema inicial
 ex_init = ex_0
 ey_init = ey_0
 
-        
+
 #Comienza el loop de evolución temporal
 
 
@@ -99,11 +99,9 @@ porcent = 9 #Porcentaje inicial para el contador
 exys = []
 
 for i in range(nt):
-    if (m==600):
-        break
+    break_out_of_i = False
     for j in range(nm):
-        if (m==600):
-            break
+        break_out_of_j = False
         tita = 2*np.pi*np.random.rand()
         #Definición del vector unitario g
         gx = np.cos(tita)
@@ -117,7 +115,7 @@ for i in range(nt):
             ey[j] = abs(ey[j])
         elif (ey[j]>1):
             ey[j] = 2-ey[j]
-    
+
         #Definición de la condición Li+-->Li0
         for k in range(m):
             if (m<=n0):
@@ -128,7 +126,7 @@ for i in range(nt):
                 distx = ex[j] - lix_0[k]
                 disty = ey[j] - liy_0[k]
                 dist = np.sqrt(distx*distx + disty*disty)
-                
+
             if (dist<datt):
                 if (m<=n0):
                     modd = np.sqrt((ex[j] - lix_d[k])*(ex[j] - lix_d[k]) + (ey[j] - liy_d[k])*(ey[j] - liy_d[k]))
@@ -138,10 +136,12 @@ for i in range(nt):
                     modd = np.sqrt((ex[j] - lix_0[k])*(ex[j] - lix_0[k]) + (ey[j] - liy_0[k])*(ey[j] - liy_0[k]))
                     exs = (ex[j]-lix_0[k])*datt/modd + lix_0[k]
                     eys = (ey[j]-liy_0[k])*datt/modd + liy_0[k]
-                
+
                 exys.append([exs,eys])
                 m = m+1
                 if (m==600):
+                    break_out_of_i = True
+                    break_out_of_j = True
                     print('Se alcanzó la cantidad máxima de Li0')
                     break
                 lix_0 = np.zeros(m)
@@ -149,14 +149,14 @@ for i in range(nt):
                 for l in range(n0):
                     lix_aux[l] = lix_d[l]
                     liy_aux[l] = liy_d[l]
-                    
+
                 lix_aux[m] = exs
                 liy_aux[m] = eys
-                
+
                 for l in range(m):
                     lix_0[l] = lix_aux[l]
                     liy_0[l] = liy_aux[l]
-                    
+
                 #PBC
                 for l in range(m):
                     lix_0[l] = lix_0[l] % 1
@@ -173,7 +173,8 @@ for i in range(nt):
                     ey[j] = abs(ey[j])
                 elif (ey[j]>1):
                     ey[j] = 2-ey[j]
-                
+        if break_out_of_j: break
+
     t = (i+1)*dt
     ex_0 = ex
     ey_0 = ey
@@ -183,11 +184,12 @@ for i in range(nt):
         if (ip % 10 == 0):
             print(ip,'%')
         porcent = ip
-    
+    if break_out_of_i: break
+
 print('Cantidad de Li0 =', m)
-              
-#%%  
-         
+
+#%%
+
 #Gráfico del sistema inicial
 
 plt.figure(10)
@@ -202,11 +204,11 @@ plt.ylim([-0.05,1.05])
 plt.xlabel('x')
 plt.ylabel('y')
 plt.title(' init ')
-ax.legend()      
+ax.legend()
 ax.set_aspect('equal', adjustable='box')
 
 #Gráfico del sistema final
-        
+
 plt.figure(20)
 x = ex
 f = ey
