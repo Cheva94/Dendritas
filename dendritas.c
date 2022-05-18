@@ -13,6 +13,21 @@
 
 int main()
 {
+    // 1/5 - Crea el puntero al archivo
+    FILE *f_initLi0, *f_endLi0, *f_initLiM, *f_endLiM;
+
+    // 2/5 - Intenta abrir el archivo
+    f_initLi0 = fopen("EstadoInicial_Li0.csv", "w");
+    f_endLi0 = fopen("EstadoFinal_Li0.csv", "w");
+    f_initLiM = fopen("EstadoInicial_LiM.csv", "w");
+    f_endLiM = fopen("EstadoFinal_LiM.csv", "w");
+
+    // 3/5 - Corrobora que se hayan abierto los archivos
+    if ((f_initLi0 == NULL) || (f_endLi0 == NULL) || (f_initLiM == NULL) || (f_endLiM == NULL)) {
+        printf("No se encontró alguno de los archivos.");
+        exit(0);
+    }
+
     int i, j, k, l; // Variables mudas
     double tita = 0.0, gx = 0.0, gy = 0.0; // Vector unitario aleatorio
     // En .py aparecen x = y = 0, pero es para plotear ¿?
@@ -53,6 +68,26 @@ int main()
     }
 
     // Guardar coordenadas del sistema inicial. Esto es con fines de graficar
+    // ex_init = ex_0
+    // ey_init = ey_0
+    // ver si conviene hacer un nuevo par de variables, alojar memoria y etc solo para escribir todo de un solo sauqe en un archivo o hacer 4 archivos
+
+    // 4/5 - Escribir en el archivo
+    fprintf(f_initLiM, "x, y\n");
+    // quizas agrupar este for con el anterior si es que los hago así por separado
+    for (i = 0; i < NM; i++) { // ¿?
+        fprintf(f_initLiM, "%f, %f\n", ex_0[i], ey_0[i]);
+    }
+
+    fprintf(f_initLi0, "x, y\n");
+    // quizas agrupar este for con el anterior si es que los hago así por separado
+    for (i = 0; i < N0; i++) { // ¿?
+        fprintf(f_initLi0, "%f, %f\n", lix_d[i], liy_d[i]);
+    }
+
+    // 5/5 - Cierra el archivo al terminar
+    fclose(f_initLi0);
+    fclose(f_initLiM);
 
     // Comienza la evolución temporal
 
@@ -169,28 +204,48 @@ int main()
 
         if (Li_counter == N0MAX) {
             printf("Se alcanzó la cantidad máxima de Li0.\n");
-            break; // Sólo sale del loop de partículas, no del temporal
+            break; // Sale del loop temporal
         }
     }
 
     printf("Cantidad de Li0 = %d\n", Li_counter);
+
+    fprintf(f_endLiM, "x, y\n");
+    for (i = 0; i < NM; i++) { // ¿?
+        fprintf(f_endLiM, "%f, %f\n", ex[i], ey[i]);
+    }
+
+    fprintf(f_endLi0, "x, y\n");
+    for (i = 0; i < N0; i++) { // ¿?
+        fprintf(f_endLi0, "%f, %f\n", lix_0[i], liy_0[i]);
+    }
+
+    // 5/5 - Cierra el archivo al terminar
+    fclose(f_endLi0);
+    fclose(f_endLiM);
+
+    // 1/5 - Crea el puntero al archivo
+    FILE *f_params;
+
+    // 2/5 - Intenta abrir el archivo
+    f_params = fopen("Parametros.csv", "w");
+
+    // 3/5 - Corrobora que se hayan abierto los archivos
+    if (f_params == NULL) {
+        printf("No se encontró el archivo.");
+        exit(0);
+    }
+
+    // 4/5 - Escribir en el archivo
+    fprintf(f_params, "Parámetro, Valor, Unidad\n");
+    fprintf(f_params, "Paso temporal, %f, us\n", DT);
+    fprintf(f_params, "Cantidad de pasos temporales, %d, \n", NT);
+    fprintf(f_params, "Li+ siempre presente, %d, \n", NM);
+    fprintf(f_params, "Li0 inicial, %d, \n", N0);
+    fprintf(f_params, "Li0 máximo, %d, \n", N0MAX);
+    fprintf(f_params, "Li0 alcanzado, %d, \n", Li_counter);
+    fprintf(f_params, "Tiempo simulado, %f, us\n", t);
+
+    // 5/5 - Cierra el archivo al terminar
+    fclose(f_params);
 }
-
-
-// // 1/5 - Crea el puntero al archivo
-// FILE *file_dyn;
-//
-// // 2/5 - Intenta abrir el archivo
-// file_dyn = fopen("TAIL.xsf", "r");
-//
-// // 3/5 - Corrobora que se haya abierto el archivo
-// if (file_dyn == NULL) {
-//     printf("No se encontró el archivo.");
-//     exit(0);
-// }
-//
-// // 4/5 - Leer el archivo
-//
-//
-// // 5/5 - Cierra el archivo al terminar
-// fclose(file_dyn);
