@@ -12,11 +12,11 @@ import matplotlib.pyplot as plt
 # Inicialización de variables
 
 dt = 1e-6
-n0 = 77     #comienzo con este numero de li0 depositados sobre la sup
+n0 = 5#77     #comienzo con este numero de li0 depositados sobre la sup
 n0max = 600 #numero maximo de particulas li0
 rli0 = 1.67e-10  #radio atomico del li0
 rlim = 1.2e-10   #radio atomico del li+
-nm = 50          #Este numero debe mantenerse a lo largo de la ev temporal
+nm = 10#50          #Este numero debe mantenerse a lo largo de la ev temporal
 D = 1.4e-14      #coef de dif del Li+ en el electrolito
 tita = 0
 gx = 0
@@ -190,39 +190,34 @@ print('Cantidad de Li0 =', m)
 
 #%%
 
+fig, (axi, axf) = plt.subplots(1,2)
+
 #Gráfico del sistema inicial
 
-plt.figure(10)
 x = ex_init
 f = ey_init
 y = lix_d
 g = liy_d
-ax = plt.subplot(111)
-ax.plot(x,f,linestyle='', marker='.', markersize=7,color='#1f77b4', label=' Li$^+$')
-ax.plot(y,g,linestyle='', marker='.', markersize=7,color='#d62728', label=' Li$^0$')
-plt.ylim([-0.05,1.05])
-plt.xlabel('x')
-plt.ylabel('y')
-plt.title(' init ')
-ax.legend()
-ax.set_aspect('equal', adjustable='box')
+axi.plot(x,f,linestyle='', marker='.', markersize=7,color='#1f77b4', label=' Li$^+$')
+axi.plot(y,g,linestyle='', marker='.', markersize=7,color='#d62728', label=' Li$^0$')
+axi.set_ylim([-0.05,1.05])
+axi.set_xlabel('x')
+axi.set_ylabel('y')
+axi.set_title(' init ')
+axi.legend()
 
 #Gráfico del sistema final
 
-plt.figure(20)
 x = ex
 f = ey
 y = lix_0
 g = liy_0
-ax = plt.subplot(111)
-ax.plot(x,f,linestyle='', marker='.', markersize=7,color='#1f77b4', label=' Li$^+$')
-ax.plot(y,g,linestyle='', marker='.', markersize=7,color='#d62728', label=' Li$^0$')
-plt.ylim([-0.05,1.05])
-plt.xlabel('x')
-plt.ylabel('y')
-plt.title(' ')
-ax.legend()
-ax.set_aspect('equal', adjustable='box')
+axf.plot(x,f,linestyle='', marker='.', markersize=7,color='#1f77b4', label=' Li$^+$')
+axf.plot(y,g,linestyle='', marker='.', markersize=7,color='#d62728', label=' Li$^0$')
+axf.set_ylim([-0.05,1.05])
+axf.set_xlabel('x')
+axf.set_ylabel('y')
+axf.set_title(' end ')
+axf.legend()
 
-
-plt.show()
+plt.savefig('Muri')
