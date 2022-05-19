@@ -5,8 +5,19 @@ import matplotlib.pyplot as plt
 
 # core.h
 
-def pbc(coord, cell_length):
-    return coord - cell_length * int(2*coord/cell_length)
+def pbc(coord, cell_length): # se puede hacer con la función módulo - ver dps la performance
+    if (coord < 0):
+        coord += cell_length
+    elif (coord > cell_length):
+        coord -= cell_length
+    return coord
+
+def rbc(coord, cell_length):
+    if (coord < 0):
+        coord = abs(coord)
+    elif (coord > cell_length):
+        coord = 2 * cell_length - coord
+    return coord
 
 def main():
     # params.h
@@ -27,8 +38,6 @@ def main():
     e0_y = -1.7e7
     rx = mu*e0_x*dt/long
     ry = mu*e0_y*dt/long #mu+*E*dt/long es el desplazamiento debido al campo electrico
-    dx = rli0/(2*long)
-    dy = rli0/(2*long)
     seed = np.random.default_rng(2022)
 
     #dendritas.c
@@ -89,13 +98,10 @@ def main():
             #Evolución de la posición de los iones
             ex[j] = ex_0[j] + q*gx + rx
             ey[j] = ey_0[j] + q*gy + ry
-            #Meto las PBC en la caja de tamaño 1x1 (normalizada)
-            # POR ACA
-            ex[j] = ex[j] % 1
-            if (ey[j]<0):
-                ey[j] = abs(ey[j])
-            elif (ey[j]>1):
-                ey[j] = 2-ey[j]
+
+            # Meto las PBC en la caja de tamaño 1x1 (normalizada)
+            ex[j] = pbc(ex[j], 1)
+            ey[j] = rbc(ey[j], 1)
 
             #definición de la condición Li+-->Li0
             for k in range(Li0_counter):
@@ -139,20 +145,15 @@ def main():
 
                     #PBC
                     for l in range(Li0_counter):
-                        lix_0[l] = lix_0[l] % 1
-                        if (liy_0[l]<0):
-                            liy_0[l] = abs(liy_0[l])
-                        elif (liy_0[l]>1):
-                            liy_0[l] = 2-liy_0[l]
+                        lix_0[l] = pbc(lix_0[l], 1)
+                        liy_0[l] = rbc(liy_0[l], 1)
                     #Repongo el ion
                     ex[j] = seed.random()
                     ey[j] = seed.random()
                     #Las PBC
-                    ex[j] = ex[j] % 1
-                    if (ey[j]<0):
-                        ey[j] = abs(ey[j])
-                    elif (ey[j]>1):
-                        ey[j] = 2-ey[j]
+                    ex[j] = pbc(ex[j], 1)
+                    ey[j] = rbc(ey[j], 1)
+
             if break_out_of_j: break
 
         t = (i+1)*dt

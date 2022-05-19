@@ -13,13 +13,13 @@
 
 // double pbc(double coord, const double cell_length)
 // {
-//     // condiciones periodicas de contorno coordenadas entre [0,L) con L=1
-//     if (coord <= 0) {
-//         coord += cell_length;
-//     } else if (coord > cell_length) {
-//         coord -= cell_length;
-//     }
-//     return coord;
+    // condiciones periodicas de contorno coordenadas entre [0,L) con L=1
+    // if (coord < 0) {
+    //     coord += cell_length;
+    // } else if (coord > cell_length) {
+    //     coord -= cell_length;
+    // }
+    // return coord;
 // }
 
 double pbc(double coord, const double cell_length)
