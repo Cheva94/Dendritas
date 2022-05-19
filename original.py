@@ -32,6 +32,7 @@ def main():
     d = 1.4e-14      #coef de dif del Li+ en el electrolito
     long = 16.7e-9
     datt = 1.3*rli0/long     #que es rli0/(pi/4)
+    datt2 = datt**2
     q = np.sqrt(2*d*dt)/long   #desplazamiento medio debido a la difusion
     mu = 5.6e-13
     e0_x = 0
@@ -45,7 +46,7 @@ def main():
     tita = 0
     gx = 0
     gy = 0
-    modd = 0
+    # modd = 0
 
     #Inicialización de vectores
     ex = np.zeros(nm)
@@ -105,24 +106,16 @@ def main():
 
             #definición de la condición Li+-->Li0
             for k in range(Li0_counter):
-                if (Li0_counter<=n0):
-                    distx = ex[j] - lix_d[k]
-                    disty = ey[j] - liy_d[k]
-                    dist = np.sqrt(distx*distx + disty*disty)
-                elif (Li0_counter>n0):
-                    distx = ex[j] - lix_0[k]
-                    disty = ey[j] - liy_0[k]
-                    dist = np.sqrt(distx*distx + disty*disty)
+                distx = ex[j] - lix_0[k]
+                disty = ey[j] - liy_0[k]
+                #plantear como cuadrado en vez de como raíz
+                # dist = np.sqrt(distx*distx + disty*disty)
+                dist2 = distx**2 + disty**2
 
-                if (dist<datt):
-                    if (Li0_counter<=n0):
-                        modd = np.sqrt((ex[j] - lix_d[k])*(ex[j] - lix_d[k]) + (ey[j] - liy_d[k])*(ey[j] - liy_d[k]))
-                        exs = (ex[j]-lix_d[k])*datt/modd + lix_d[k]
-                        eys = (ey[j]-liy_d[k])*datt/modd + liy_d[k]
-                    elif (Li0_counter>n0):
-                        modd = np.sqrt((ex[j] - lix_0[k])*(ex[j] - lix_0[k]) + (ey[j] - liy_0[k])*(ey[j] - liy_0[k]))
-                        exs = (ex[j]-lix_0[k])*datt/modd + lix_0[k]
-                        eys = (ey[j]-liy_0[k])*datt/modd + liy_0[k]
+                if (dist2 < datt2):
+                    dist = np.sqrt(dist2)
+                    exs = distx * datt / dist + lix_0[k]
+                    eys = disty * datt / dist + liy_0[k]
 
                     Li0_counter += 1
                     if (Li0_counter==600):
@@ -130,6 +123,7 @@ def main():
                         break_out_of_j = True
                         print('Se alcanzó la cantidad máxima de Li0')
                         break
+
                     lix_0 = np.zeros(Li0_counter)
                     liy_0 = np.zeros(Li0_counter)
                     for l in range(n0):
@@ -147,18 +141,17 @@ def main():
                     for l in range(Li0_counter):
                         lix_0[l] = pbc(lix_0[l], 1)
                         liy_0[l] = rbc(liy_0[l], 1)
+
                     #Repongo el ion
                     ex[j] = seed.random()
                     ey[j] = seed.random()
-                    #Las PBC
-                    ex[j] = pbc(ex[j], 1)
-                    ey[j] = rbc(ey[j], 1)
 
             if break_out_of_j: break
 
         t = (i+1)*dt
         ex_0 = ex
         ey_0 = ey
+
         #Agrego el pocentaje de corrida del programa
         ip = int((i/nt)*100)
         if (ip > porcent):
