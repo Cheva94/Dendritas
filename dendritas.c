@@ -11,21 +11,26 @@
  * Creo que estoy escribiendo el código de campo cte no nulo (difusión + migracion)
  */
 
-// double pbc(double coord, const double cell_length)
-// {
-    // condiciones periodicas de contorno coordenadas entre [0,L) con L=1
-    // if (coord < 0) {
-    //     coord += cell_length;
-    // } else if (coord > cell_length) {
-    //     coord -= cell_length;
-    // }
-    // return coord;
-// }
-
 double pbc(double coord, const double cell_length)
 {
     // condiciones periodicas de contorno coordenadas entre [0,L) con L=1
-    return coord - cell_length * int(2*coord/cell_length);
+    if (coord < 0) {
+        coord += cell_length;
+    } else if (coord > cell_length) {
+        coord -= cell_length;
+    }
+    return coord;
+}
+
+double rbc(double coord, const double cell_length)
+{
+    // condiciones reflectivas de contorno coordenadas entre [0,L) con L=1
+    if (coord < 0) {
+        coord = fabs(coord);
+    } else if (coord > cell_length) {
+        coord = 2 * cell_length - coord;
+    }
+    return coord;
 }
 
 int main()
@@ -44,7 +49,7 @@ int main()
 
     int i, j, k, l; // Variables mudas
     double tita = 0.0, gx = 0.0, gy = 0.0; // Vector unitario aleatorio
-    double modd = 0.0; // ¿?
+    // double modd = 0.0; // ¿?
 
     double *ex, *ey, *ex_0, *ey_0; // vectores espaciales de los iones
     ex = (double*)malloc(NM * sizeof(double));
@@ -102,7 +107,7 @@ int main()
     }
 
     int percent = 9, percent_prog;
-    double distx, disty, dist; // calculo de distancias
+    double distx, disty, dist, dist2; // calculo de distancias
     double exs, eys; // escalares para las posiciones ¿?
     double t; // tiempo para la evolucion
 
@@ -119,38 +124,18 @@ int main()
 
             // PBC para la caja de tamaño 1x1 normalizada
             ex[j] = pbc(ex[j], 1);
-            ey[j] = pbc(ey[j], 1);
+            ey[j] = rbc(ey[j], 1);
 
             // Definicion de la condicion de neutralización
             for (k = 0; k < Li0_counter; k++) {
-                if (Li0_counter == N0) {
-                    distx = ex[j] - lix_d[k];
-                    disty = ey[j] - liy_d[k];
-                    dist = sqrt(distx * distx + disty * disty); // Ver si no es mejor escribirlo como potencia en el código intermedio
-                }
-                else if (Li0_counter > N0) {
-                    distx = ex[j] - lix_0[k];
-                    disty = ey[j] - liy_0[k];
-                    dist = sqrt(distx * distx + disty * disty);
-                }
+                distx = ex[j] - lix_0[k];
+                disty = ey[j] - liy_0[k];
+                dist2 = pow(distx, 2) + pow(disty, 2);
 
-                if (dist < DATT) {
-
-                    if (Li0_counter == N0) {
-                        modd = sqrt((ex[j] - lix_d[k]) * (ex[j] - lix_d[k]) + (ey[j] - liy_d[k]) * (ey[j] - liy_d[k]));
-                        exs = (ex[j] - lix_d[k]) * DATT / modd + lix_d[k];
-                        eys = (ey[j] - liy_d[k]) * DATT / modd + liy_d[k];
-                    }
-                    else if (Li0_counter > N0) {
-                        modd = sqrt((ex[j] - lix_0[k]) * (ex[j] - lix_0[k]) + (ey[j] - liy_0[k]) * (ey[j] - liy_0[k]));
-                        exs = (ex[j] - lix_0[k]) * DATT / modd + lix_0[k];
-                        eys = (ey[j] - liy_0[k]) * DATT / modd + liy_0[k];
-                    }
-
-                    if (Li0_counter == N0MAX) {
-                        printf("Se alcanzó la cantidad máxima de Li0.\n");
-                        break; // Sólo sale del loop de partículas, no del temporal
-                    }
+                if (dist2 < DATT2) {
+                    dist = sqrt(dist2);
+                    exs = distx * DATT / dist + lix_0[k];
+                    eys = disty * DATT / dist + liy_0[k];
 
                     for (l = 0; l < Li0_counter; l++) {
                         lix_0[l] = 0;
@@ -173,7 +158,7 @@ int main()
                     // PBC
                     for (l = 0; l < Li0_counter; l++) {
                         lix_0[l] = pbc(lix_0[l], 1);
-                        liy_0[l] = pbc(liy_0[l], 1);
+                        liy_0[l] = rbc(liy_0[l], 1);
                     }
 
                     // Repongo el ion
@@ -181,6 +166,10 @@ int main()
                     ey[j] = rand() / (double)RAND_MAX;
 
                     Li0_counter++;
+                    if (Li0_counter == N0MAX) {
+                        printf("Se alcanzó la cantidad máxima de Li0.\n");
+                        break; // Sólo sale del loop de partículas, no del temporal
+                    }
                 }
             }
         }
@@ -216,7 +205,7 @@ int main()
     }
 
     fprintf(f_endLi0, "x, y\n");
-    for (i = 0; i < N0; i++) { // ¿?
+    for (i = 0; i < N0MAX; i++) { // ¿?
         fprintf(f_endLi0, "%f, %f\n", lix_0[i], liy_0[i]);
     }
 

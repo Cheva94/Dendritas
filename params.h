@@ -12,19 +12,19 @@
 #endif
 
 #ifndef NT // cantidad de pasos temporales
-#define NT 2400//8000
+#define NT 8000
 #endif
 
 #ifndef N0 // cantidad inicial de Li0 depositado en superficie
-#define N0 3 //77
+#define N0 77
 #endif
 
 #ifndef NM // cantidad de Li siempre presente en la evol temp
-#define NM 5 //50
+#define NM 50
 #endif
 
 #ifndef N0MAX // cantidad máxima de Li0
-#define N0MAX 10//600
+#define N0MAX 600
 #endif
 
 #ifndef RLI0 // radio Li0
@@ -45,6 +45,10 @@
 
 #ifndef DATT // RLI0 / (pi/4)
 #define DATT (1.3 * RLI0 / LONG)
+#endif
+
+#ifndef DATT2 // RLI0 / (pi/4)
+#define DATT2 (pow(DATT, 2))
 #endif
 
 #ifndef Q // desplazamiento medio debido a la difusión

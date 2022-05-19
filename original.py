@@ -126,6 +126,7 @@ def main():
 
                     lix_0 = np.zeros(Li0_counter)
                     liy_0 = np.zeros(Li0_counter)
+                    
                     for l in range(n0):
                         lix_aux[l] = lix_d[l]
                         liy_aux[l] = liy_d[l]
