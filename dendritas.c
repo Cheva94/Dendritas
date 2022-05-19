@@ -11,6 +11,17 @@
  * Creo que estoy escribiendo el código de campo cte no nulo (difusión + migracion)
  */
 
+ double pbc(double cordi, const double cell_length)
+ {
+     // condiciones periodicas de contorno coordenadas entre [0,L) con L=1
+     if (cordi <= 0) {
+         cordi += cell_length;
+     } else if (cordi > cell_length) {
+         cordi -= cell_length;
+     }
+     return cordi;
+ }
+ 
 int main()
 {
     // 1/5 - Crea el puntero al archivo
@@ -113,13 +124,8 @@ int main()
             ey[j] = ey_0[j] + Q * gy + RX;
 
             // PBC para la caja de tamaño 1x1 normalizada
-            // modulo 1 de nuevo ¿?
-            if (ey[j]<0) {
-                ey[j] = fabs(ey[j]);
-            }
-            else if (ey[j] > 1) {
-                ey[j] = 2 - ey[j];
-            }
+            ex[j] = pbc(ex[j], 1);
+            ey[j] = pbc(ey[j], 1);
 
             // Definicion de la condicion de neutralización
             for (k = 0; k < Li_counter; k++) {
@@ -152,24 +158,28 @@ int main()
                         break; // Sólo sale del loop de partículas, no del temporal
                     }
 
-                    for (l = 0; l < N0; l++) {
+                    for (l = 0; l < Li_counter; l++) {
                         lix_0[l] = 0;
                         liy_0[l] = 0;
                     }
+
                     for (l = 0; l < N0; l++) {
                         lix_aux[l] = lix_d[l];
                         liy_aux[l] = liy_d[l];
                     }
 
+                    lix_aux[Li_counter] = exs;
+                    liy_aux[Li_counter] = eys;
+
+                    for (l = 0; l < Li_counter; l++) {
+                        lix_0[l] = lix_aux[l];
+                        liy_0[l] = liy_aux[l];
+                    }
+
                     // PBC
-                    for (l = 0; l < N0; l++) {
-                        // un modulo que no entiendo ¿?
-                        if (liy_0[l]<0) {
-                            liy_0[l] = fabs(liy_0[l]);
-                        }
-                        else if (liy_0[l] > 1) {
-                            liy_0[l] = 2 - liy_0[l];
-                        }
+                    for (l = 0; l < Li_counter; l++) {
+                        lix_0[l] = pbc(lix_0[l], 1);
+                        liy_0[l] = pbc(liy_0[l], 1);
                     }
 
                     // Repongo el ion
@@ -177,13 +187,8 @@ int main()
                     ey_0[j] = rand() / (double)RAND_MAX;
 
                     // PBC
-                    // un modulo que no entiendo ¿?
-                    if (ey[j]<0) {
-                        ey[j] = fabs(ey[j]);
-                    }
-                    else if (ey[j] > 1) {
-                        ey[j] = 2 - ey[j];
-                    }
+                    ex[j] = pbc(ex[j], 1);
+                    ey[j] = pbc(ey[j], 1);
                 }
             }
         }

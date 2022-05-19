@@ -1,13 +1,9 @@
-#!/usr/local/bin/python3.10
+#!/usr/bin/python3.10
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from cycler import cycler
-# from matplotlib.ticker import FormatStrFormatter # para determinar decimales en los ejes
-# Ejemplo con 2 decimales: ax.yaxis.set_major_formatter(FormatStrFormatter('%.2f'))
-# import matplotlib.ticker as mtick # permite hacer ejes con porcentajes
-# from mpl_toolkits.mplot3d import Axes3D # gráficos 3D
 
 plt.rcParams["font.weight"] = "bold"
 plt.rcParams["font.size"] = 35
@@ -24,52 +20,42 @@ plt.rcParams['ytick.major.width'] = 3
 plt.rcParams["legend.loc"] = 'best'
 plt.rcParams["legend.frameon"] = True
 plt.rcParams["legend.fancybox"] = True
-plt.rcParams["legend.fontsize"] = 30
+plt.rcParams["legend.fontsize"] = 20
 plt.rcParams["legend.edgecolor"] = 'black'
 
-plt.rcParams["figure.figsize"] = 12.5, 10
+plt.rcParams["figure.figsize"] = 25, 10
 plt.rcParams["figure.autolayout"] = True
 
 plt.rcParams["lines.linewidth"] = 4
-plt.rcParams["lines.markersize"] = 20
+plt.rcParams["lines.markersize"] = 8
 plt.rcParams["lines.linestyle"] = ':'
 
 def main():
 
-    fig, ax = plt.subplots()
+    Li0_init = pd.read_csv("EstadoInicial_Li0.csv").to_numpy()
+    LiM_init = pd.read_csv("EstadoInicial_LiM.csv").to_numpy()
+    Li0_end = pd.read_csv("EstadoFinal_Li0.csv").to_numpy()
+    LiM_end =  pd.read_csv("EstadoFinal_LiM.csv").to_numpy()
 
-    ax.plot([1,2,3], [5,6,7], marker='^', label='s')
-    # ax.bar(x, height, width, label=, yerr = , capsize=8, error_kw = {'elinewidth':5 , 'capthick':2})
-    # ax.errorbar(x, y, yerr = , capsize = 15, marker = '^', ls = 'None', ms = 20, label = )
-    # ax.axhline(y, c = , lw = 4, ls = '-')
-    # ax.hlines(y=0.6, xmin=0.0, xmax=1.0, color='b')
-    # ax.axvline(x, c = , lw = 4, ls = '-')
-    # ax.vlines(y=0.6, xmin=0.0, xmax=1.0, color='b')
+    fig, (axi, axf) = plt.subplots(1,2)
 
-    ax.set_xlabel('x')
-    ax.set_ylabel('y')
+    axi.scatter(LiM_init[:, 0], LiM_init[:, 1], label=' Li$^+$')
+    axi.scatter(Li0_init[:, 0], Li0_init[:, 1], label=' Li$^0$')
+    # axi.set_ylim(-0.05,1.05)
+    axi.set_xlabel('x')
+    axi.set_ylabel('y')
+    axi.legend(loc='center left', bbox_to_anchor=(1, 0.5), ncol = 1)
+    axi.set_title('Estado Inicial')
 
-    # plt.annotate(TEXT, (X_POSITION, Y_POSITION), ...
-    # plt.axhspan(Y_START, Y_END, ...)  #horizontal shading
-    # plt.axvspan(X_START, X_END, ...)  #vertical shading
-    # ax.fill_between([0, 10.56], 2.4, 7.1, color='black', alpha=0.1, zorder=1)
+    axf.scatter(LiM_end[:, 0], LiM_end[:, 1], label=' Li$^+$')
+    axf.scatter(Li0_end[:, 0], Li0_end[:, 1], label=' Li$^0$')
+    # axf.set_ylim(-0.05,1.05)
+    axf.set_xlabel('x')
+    axf.set_ylabel('y')
+    axf.legend(loc='center left', bbox_to_anchor=(1, 0.5), ncol = 1)
+    axf.set_title('Estado Final')
 
-    # plt.gca().spines['top'].set_visible(False)
-    # plt.gca().spines['right'].set_visible(False)
-
-    # ax.set_xlim(left=, right=)
-    # ax.set_ylim(bottom=, top=)
-
-    # ax.set_xticks(x)
-    # ax.set_xticklabels(x, rotation=25, ha='center')
-
-    # ax.text(0.98,0.98, 'n-alkanes', ha='right', va='top', transform=ax.transAxes)
-    # ax.legend()#ncol=, bbox_to_anchor=(, ))
-    # ax.set_title()
-
-    # plt.savefig()
-
-    plt.show()
+    plt.savefig('Dendritas')
 
 if __name__ == "__main__":
     main()
