@@ -21,7 +21,7 @@
      }
      return cordi;
  }
- 
+
 int main()
 {
     // 1/5 - Crea el puntero al archivo
@@ -56,8 +56,10 @@ int main()
     liy_d = (double*)malloc(N0 * sizeof(double));
 
     double *lix_0, *liy_0; // ¿?
-    lix_0 = (double*)malloc(N0 * sizeof(double));
-    liy_0 = (double*)malloc(N0 * sizeof(double));
+    // lix_0 = (double*)malloc(N0 * sizeof(double));
+    // liy_0 = (double*)malloc(N0 * sizeof(double));
+    lix_0 = (double*)malloc(N0MAX * sizeof(double));
+    liy_0 = (double*)malloc(N0MAX * sizeof(double));
 
     double *lix_aux, *liy_aux; // ¿?
     lix_aux = (double*)malloc(N0MAX * sizeof(double));
@@ -75,7 +77,7 @@ int main()
     for (i = 0; i < NM; i++) { // ¿?
         ex_0[i] = rand() / (double)RAND_MAX;
         ey_0[i] = rand() / (double)RAND_MAX;
-        // acá hay un operador modulo 1 que no sé por qué ¿?
+        // acá hace CC pero no son necesarias por cómo se generan ¿?
     }
 
     // Guardar coordenadas del sistema inicial. Esto es con fines de graficar
@@ -96,15 +98,35 @@ int main()
         fprintf(f_initLi0, "%f, %f\n", lix_d[i], liy_d[i]);
     }
 
+    // for (i = 0; i < N0; i++) {
+    // printf("primera vez (lix_d[%d], Liy_d[%d]) = (%f, %f)\n", i, i, lix_d[i], liy_d[i]);
+    // }
+
     // 5/5 - Cierra el archivo al terminar
     fclose(f_initLi0);
     fclose(f_initLiM);
 
     // Comienza la evolución temporal
 
-    int Li_counter = N0;
-    lix_0 = lix_d;
-    liy_0 = liy_d;
+    printf("N0 = %d\n", N0);
+
+    int Li0_counter = N0;
+    for (i = 0; i < N0; i++) {
+        lix_0[i] = lix_d[i];
+        liy_0[i] = liy_d[i];
+        // printf("2da vez (lix_d[%d], Liy_d[%d]) = (%f, %f)\n", i, i, lix_d[i], liy_d[i]);
+        // printf("2da vez (lix_0[%d], Liy_0[%d]) = (%f, %f)\n", i, i, lix_0[i], liy_0[i]);
+    }
+
+
+    // for (i = 0; i < N0; i++) {
+    // printf("segunda vez (lix_d[%d], Liy_d[%d]) = (%f, %f)\n", i, i, lix_d[i], liy_d[i]);
+    // }
+
+    // for (i = 0; i < N0MAX; i++) {
+    //     printf("(Lix_0[%d], Liy_0[%d]) = (%f, %f)\n", i, i, lix_0[i], liy_0[i]);
+    // }
+
     int percent = 9, percent_prog;
     // está definido un exys pero solo apendea y no usan
     double distx, disty, dist; // calculo de distancias
@@ -112,83 +134,146 @@ int main()
     double t; // tiempo para la evolucion
 
     for (i = 0; i < NT; i++) {
-        // tiene un break out de i
+        // printf("\n\n>>>>> Paso temporal # %d <<<<< \n\n", i);
         for (j = 0; j < NM; j++) {
-            // tiene un break out de j
             // Definición del vector unitario
             tita = 2 * M_PI * rand() / (double)RAND_MAX;
             gx = cos(tita);
             gy = sin(tita);
+
             // Evolución de la posición
             ex[j] = ex_0[j] + Q * gx + RX;
-            ey[j] = ey_0[j] + Q * gy + RX;
+            ey[j] = ey_0[j] + Q * gy + RY;
 
             // PBC para la caja de tamaño 1x1 normalizada
             ex[j] = pbc(ex[j], 1);
             ey[j] = pbc(ey[j], 1);
 
+            // for (i = 0; i < N0; i++) {
+            // printf("segunda vez (lix_d[%d], Liy_d[%d]) = (%f, %f)\n", i, i, lix_d[i], liy_d[i]);
+            // }
+            // printf(">>>>><<<<\n\n");
+
             // Definicion de la condicion de neutralización
-            for (k = 0; k < Li_counter; k++) {
-                if (Li_counter <= N0) {
+            for (k = 0; k < Li0_counter; k++) {
+                if (Li0_counter == N0) {
                     distx = ex[j] - lix_d[k];
                     disty = ey[j] - liy_d[k];
                     dist = sqrt(distx * distx + disty * disty); // Ver si no es mejor escribirlo como potencia en el código intermedio
                 }
-                else if (Li_counter > N0) {
+                else if (Li0_counter > N0) {
                     distx = ex[j] - lix_0[k];
                     disty = ey[j] - liy_0[k];
                     dist = sqrt(distx * distx + disty * disty);
                 }
+
+                // for (i = 0; i < N0; i++) {
+                // printf("primera vez (lix_d[%d], Liy_d[%d]) = (%f, %f)\n", i, i, lix_d[i], liy_d[i]);
+                // }
+                // printf(">>>>><<<<\n\n");
+
                 if (dist < DATT) {
-                    if (Li_counter <= N0) {
+
+                    // for (i = 0; i < N0; i++) {
+                    // printf("1 vez (lix_d[%d], Liy_d[%d]) = (%f, %f)\n", i, i, lix_d[i], liy_d[i]);
+                    // }
+                    // printf(">>>>><<<<\n\n");
+
+                    if (Li0_counter == N0) {
                         modd = sqrt((ex[j] - lix_d[k]) * (ex[j] - lix_d[k]) + (ey[j] - liy_d[k]) * (ey[j] - liy_d[k]));
                         exs = (ex[j] - lix_d[k]) * DATT / modd + lix_d[k];
                         eys = (ey[j] - liy_d[k]) * DATT / modd + liy_d[k];
+                        // printf("\nLix_d es %f, mientras que exs es %f\n", lix_d[k], exs);
                     }
-                    else if (Li_counter > N0) {
+                    else if (Li0_counter > N0) {
                         modd = sqrt((ex[j] - lix_0[k]) * (ex[j] - lix_0[k]) + (ey[j] - liy_0[k]) * (ey[j] - liy_0[k]));
                         exs = (ex[j] - lix_0[k]) * DATT / modd + lix_0[k];
                         eys = (ey[j] - liy_0[k]) * DATT / modd + liy_0[k];
+                        // printf("\nLix_d es %f, mientras que exs es %f\n", lix_d[k], exs);
                     }
 
-                    Li_counter++;
+                    // printf("contador = %d", Li0_counter);
+                    // printf("contador = %d\n", Li0_counter);
+                    // printf("contador = %d", Li0_counter);
 
-                    if (Li_counter == N0MAX) {
+                    if (Li0_counter == N0MAX) {
                         printf("Se alcanzó la cantidad máxima de Li0.\n");
                         break; // Sólo sale del loop de partículas, no del temporal
                     }
 
-                    for (l = 0; l < Li_counter; l++) {
+                    for (l = 0; l < Li0_counter; l++) {
                         lix_0[l] = 0;
                         liy_0[l] = 0;
                     }
+
+                    // for (i = 0; i < N0; i++) {
+                    // printf("2da vez (lix_d[%d], Liy_d[%d]) = (%f, %f)\n", i, i, lix_d[i], liy_d[i]);
+                    // printf("2da vez (lix_0[%d], Liy_0[%d]) = (%f, %f)\n", i, i, lix_0[i], liy_0[i]);
+                    // }
+                    // printf(">>>>><<<<\n\n");
+
+                    // for (i = 0; i < N0; i++) {
+                    // printf("X vez (lix_d[%d], Liy_d[%d]) = (%f, %f)\n", i, i, lix_d[i], liy_d[i]);
+                    // }
+                    //
+                    // printf("\n >>>>> ANTES DE ASIGNAR AUX A DEPOSITADO <<<<<\n");
+                    // for (i = 0; i < N0MAX; i++) {
+                    //     printf("(Lix_aux[%d], Liy_aux[%d]) = (%f, %f)\n", i, i, lix_aux[i], liy_aux[i]);
+                    // }
 
                     for (l = 0; l < N0; l++) {
                         lix_aux[l] = lix_d[l];
                         liy_aux[l] = liy_d[l];
                     }
 
-                    lix_aux[Li_counter] = exs;
-                    liy_aux[Li_counter] = eys;
+                    // printf("\n >>>>> DPS DE ASIGNAR AUX A DEPOSITADO <<<<<\n");
+                    // for (i = 0; i < N0MAX; i++) {
+                    //     printf("(Lix_aux[%d], Liy_aux[%d]) = (%f, %f)\n", i, i, lix_aux[i], liy_aux[i]);
+                    // }
 
-                    for (l = 0; l < Li_counter; l++) {
+                    // printf("contador = %d", Li0_counter);
+                    // printf("contador = %d\n", Li0_counter);
+                    lix_aux[Li0_counter] = exs;
+                    liy_aux[Li0_counter] = eys;
+
+                    printf("\n eys es %f\n\n", eys);
+
+                    // printf("\n >>>>> DPS DE ASIGNAR EXS/EYS A AUX <<<<<\n");
+                    // for (i = 0; i < N0MAX; i++) {
+                    //     printf("(Lix_aux[%d], Liy_aux[%d]) = (%f, %f)\n", i, i, lix_aux[i], liy_aux[i]);
+                    // }
+
+                    // Li0_counter++;
+                    // printf("contador = %d\n", Li0_counter);
+
+                    for (l = 0; l < Li0_counter; l++) {
                         lix_0[l] = lix_aux[l];
                         liy_0[l] = liy_aux[l];
                     }
 
+                    // for (i = 0; i < N0MAX; i++) {
+                    //     printf("(Lix_0[%d], Liy_0[%d]) = (%f, %f)\n", i, i, lix_0[i], liy_0[i]);
+                    //     printf(">>><<<");
+                    // }
+
                     // PBC
-                    for (l = 0; l < Li_counter; l++) {
+                    for (l = 0; l < Li0_counter; l++) {
                         lix_0[l] = pbc(lix_0[l], 1);
                         liy_0[l] = pbc(liy_0[l], 1);
                     }
 
                     // Repongo el ion
-                    ex_0[j] = rand() / (double)RAND_MAX;
-                    ey_0[j] = rand() / (double)RAND_MAX;
+                    ex[j] = rand() / (double)RAND_MAX;
+                    ey[j] = rand() / (double)RAND_MAX;
 
                     // PBC
-                    ex[j] = pbc(ex[j], 1);
-                    ey[j] = pbc(ey[j], 1);
+                    // ex[j] = pbc(ex[j], 1);
+                    // ey[j] = pbc(ey[j], 1);
+                    // for (i = 0; i < N0; i++) {
+                    // printf("N vez (lix_d[%d], Liy_d[%d]) = (%f, %f)\n", i, i, lix_d[i], liy_d[i]);
+                    // }
+                    // printf(">>>>><<<<\n\n");
+                    Li0_counter++;
                 }
             }
         }
@@ -203,17 +288,20 @@ int main()
             if (percent_prog % 10 == 0) {
                 printf("Avance del programa = %d\n", percent_prog);
             }
-            printf("Paso temporal = %d / %d \n", i, NT);
+            // printf("Paso temporal = %d / %d \n", i, NT);
             percent = percent_prog;
         }
 
-        if (Li_counter == N0MAX) {
+        if (Li0_counter == N0MAX) {
             printf("Se alcanzó la cantidad máxima de Li0.\n");
             break; // Sale del loop temporal
         }
+        if (i == (NT-1)) {
+            printf("Se alcanzó la cantidad máxima de pasos.\n");
+        }
     }
 
-    printf("Cantidad de Li0 = %d\n", Li_counter);
+    printf("Cantidad de Li0 = %d\n", Li0_counter);
 
     fprintf(f_endLiM, "x, y\n");
     for (i = 0; i < NM; i++) { // ¿?
@@ -248,7 +336,7 @@ int main()
     fprintf(f_params, "Li+ siempre presente, %d, \n", NM);
     fprintf(f_params, "Li0 inicial, %d, \n", N0);
     fprintf(f_params, "Li0 máximo, %d, \n", N0MAX);
-    fprintf(f_params, "Li0 alcanzado, %d, \n", Li_counter);
+    fprintf(f_params, "Li0 alcanzado, %d, \n", Li0_counter);
     fprintf(f_params, "Tiempo simulado, %f, us\n", t);
 
     // 5/5 - Cierra el archivo al terminar

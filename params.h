@@ -12,15 +12,19 @@
 #endif
 
 #ifndef NT // cantidad de pasos temporales
-#define NT 8000
+#define NT 2400//8000
 #endif
 
 #ifndef N0 // cantidad inicial de Li0 depositado en superficie
-#define N0 77
+#define N0 3 //77
+#endif
+
+#ifndef NM // cantidad de Li siempre presente en la evol temp
+#define NM 5 //50
 #endif
 
 #ifndef N0MAX // cantidad máxima de Li0
-#define N0MAX 600
+#define N0MAX 10//600
 #endif
 
 #ifndef RLI0 // radio Li0
@@ -29,10 +33,6 @@
 
 #ifndef RLIM // radio Li+
 #define RLIM 1.2E-10
-#endif
-
-#ifndef NM // cantidad de Li siempre presente en la evol temp
-#define NM 50
 #endif
 
 #ifndef D // coef de difusion de Li+ en el electrolito
