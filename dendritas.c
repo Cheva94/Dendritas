@@ -11,29 +11,32 @@
  * Creo que estoy escribiendo el código de campo cte no nulo (difusión + migracion)
  */
 
- double pbc(double cordi, const double cell_length)
- {
-     // condiciones periodicas de contorno coordenadas entre [0,L) con L=1
-     if (cordi <= 0) {
-         cordi += cell_length;
-     } else if (cordi > cell_length) {
-         cordi -= cell_length;
-     }
-     return cordi;
- }
+// double pbc(double coord, const double cell_length)
+// {
+//     // condiciones periodicas de contorno coordenadas entre [0,L) con L=1
+//     if (coord <= 0) {
+//         coord += cell_length;
+//     } else if (coord > cell_length) {
+//         coord -= cell_length;
+//     }
+//     return coord;
+// }
+
+double pbc(double coord, const double cell_length)
+{
+    // condiciones periodicas de contorno coordenadas entre [0,L) con L=1
+    return coord - cell_length * int(2*coord/cell_length);
+}
 
 int main()
 {
-    // 1/5 - Crea el puntero al archivo
     FILE *f_initLi0, *f_endLi0, *f_initLiM, *f_endLiM;
 
-    // 2/5 - Intenta abrir el archivo
     f_initLi0 = fopen("EstadoInicial_Li0.csv", "w");
     f_endLi0 = fopen("EstadoFinal_Li0.csv", "w");
     f_initLiM = fopen("EstadoInicial_LiM.csv", "w");
     f_endLiM = fopen("EstadoFinal_LiM.csv", "w");
 
-    // 3/5 - Corrobora que se hayan abierto los archivos
     if ((f_initLi0 == NULL) || (f_endLi0 == NULL) || (f_initLiM == NULL) || (f_endLiM == NULL)) {
         printf("No se encontró alguno de los archivos.");
         exit(0);
@@ -41,8 +44,6 @@ int main()
 
     int i, j, k, l; // Variables mudas
     double tita = 0.0, gx = 0.0, gy = 0.0; // Vector unitario aleatorio
-    // En .py aparecen x = y = 0, pero es para plotear ¿?
-    // En .py aparecen Rli_mx/y y Rli_0x/y = 0 pero nunca se usan ¿?
     double modd = 0.0; // ¿?
 
     double *ex, *ey, *ex_0, *ey_0; // vectores espaciales de los iones
@@ -56,8 +57,6 @@ int main()
     liy_d = (double*)malloc(N0 * sizeof(double));
 
     double *lix_0, *liy_0; // ¿?
-    // lix_0 = (double*)malloc(N0 * sizeof(double));
-    // liy_0 = (double*)malloc(N0 * sizeof(double));
     lix_0 = (double*)malloc(N0MAX * sizeof(double));
     liy_0 = (double*)malloc(N0MAX * sizeof(double));
 
@@ -77,15 +76,8 @@ int main()
     for (i = 0; i < NM; i++) { // ¿?
         ex_0[i] = rand() / (double)RAND_MAX;
         ey_0[i] = rand() / (double)RAND_MAX;
-        // acá hace CC pero no son necesarias por cómo se generan ¿?
     }
 
-    // Guardar coordenadas del sistema inicial. Esto es con fines de graficar
-    // ex_init = ex_0
-    // ey_init = ey_0
-    // ver si conviene hacer un nuevo par de variables, alojar memoria y etc solo para escribir todo de un solo sauqe en un archivo o hacer 4 archivos
-
-    // 4/5 - Escribir en el archivo
     fprintf(f_initLiM, "x, y\n");
     // quizas agrupar este for con el anterior si es que los hago así por separado
     for (i = 0; i < NM; i++) { // ¿?
@@ -98,43 +90,23 @@ int main()
         fprintf(f_initLi0, "%f, %f\n", lix_d[i], liy_d[i]);
     }
 
-    // for (i = 0; i < N0; i++) {
-    // printf("primera vez (lix_d[%d], Liy_d[%d]) = (%f, %f)\n", i, i, lix_d[i], liy_d[i]);
-    // }
-
-    // 5/5 - Cierra el archivo al terminar
     fclose(f_initLi0);
     fclose(f_initLiM);
 
     // Comienza la evolución temporal
 
-    printf("N0 = %d\n", N0);
-
     int Li0_counter = N0;
     for (i = 0; i < N0; i++) {
         lix_0[i] = lix_d[i];
         liy_0[i] = liy_d[i];
-        // printf("2da vez (lix_d[%d], Liy_d[%d]) = (%f, %f)\n", i, i, lix_d[i], liy_d[i]);
-        // printf("2da vez (lix_0[%d], Liy_0[%d]) = (%f, %f)\n", i, i, lix_0[i], liy_0[i]);
     }
 
-
-    // for (i = 0; i < N0; i++) {
-    // printf("segunda vez (lix_d[%d], Liy_d[%d]) = (%f, %f)\n", i, i, lix_d[i], liy_d[i]);
-    // }
-
-    // for (i = 0; i < N0MAX; i++) {
-    //     printf("(Lix_0[%d], Liy_0[%d]) = (%f, %f)\n", i, i, lix_0[i], liy_0[i]);
-    // }
-
     int percent = 9, percent_prog;
-    // está definido un exys pero solo apendea y no usan
     double distx, disty, dist; // calculo de distancias
     double exs, eys; // escalares para las posiciones ¿?
     double t; // tiempo para la evolucion
 
     for (i = 0; i < NT; i++) {
-        // printf("\n\n>>>>> Paso temporal # %d <<<<< \n\n", i);
         for (j = 0; j < NM; j++) {
             // Definición del vector unitario
             tita = 2 * M_PI * rand() / (double)RAND_MAX;
@@ -149,11 +121,6 @@ int main()
             ex[j] = pbc(ex[j], 1);
             ey[j] = pbc(ey[j], 1);
 
-            // for (i = 0; i < N0; i++) {
-            // printf("segunda vez (lix_d[%d], Liy_d[%d]) = (%f, %f)\n", i, i, lix_d[i], liy_d[i]);
-            // }
-            // printf(">>>>><<<<\n\n");
-
             // Definicion de la condicion de neutralización
             for (k = 0; k < Li0_counter; k++) {
                 if (Li0_counter == N0) {
@@ -167,34 +134,18 @@ int main()
                     dist = sqrt(distx * distx + disty * disty);
                 }
 
-                // for (i = 0; i < N0; i++) {
-                // printf("primera vez (lix_d[%d], Liy_d[%d]) = (%f, %f)\n", i, i, lix_d[i], liy_d[i]);
-                // }
-                // printf(">>>>><<<<\n\n");
-
                 if (dist < DATT) {
-
-                    // for (i = 0; i < N0; i++) {
-                    // printf("1 vez (lix_d[%d], Liy_d[%d]) = (%f, %f)\n", i, i, lix_d[i], liy_d[i]);
-                    // }
-                    // printf(">>>>><<<<\n\n");
 
                     if (Li0_counter == N0) {
                         modd = sqrt((ex[j] - lix_d[k]) * (ex[j] - lix_d[k]) + (ey[j] - liy_d[k]) * (ey[j] - liy_d[k]));
                         exs = (ex[j] - lix_d[k]) * DATT / modd + lix_d[k];
                         eys = (ey[j] - liy_d[k]) * DATT / modd + liy_d[k];
-                        // printf("\nLix_d es %f, mientras que exs es %f\n", lix_d[k], exs);
                     }
                     else if (Li0_counter > N0) {
                         modd = sqrt((ex[j] - lix_0[k]) * (ex[j] - lix_0[k]) + (ey[j] - liy_0[k]) * (ey[j] - liy_0[k]));
                         exs = (ex[j] - lix_0[k]) * DATT / modd + lix_0[k];
                         eys = (ey[j] - liy_0[k]) * DATT / modd + liy_0[k];
-                        // printf("\nLix_d es %f, mientras que exs es %f\n", lix_d[k], exs);
                     }
-
-                    // printf("contador = %d", Li0_counter);
-                    // printf("contador = %d\n", Li0_counter);
-                    // printf("contador = %d", Li0_counter);
 
                     if (Li0_counter == N0MAX) {
                         printf("Se alcanzó la cantidad máxima de Li0.\n");
@@ -206,55 +157,18 @@ int main()
                         liy_0[l] = 0;
                     }
 
-                    // for (i = 0; i < N0; i++) {
-                    // printf("2da vez (lix_d[%d], Liy_d[%d]) = (%f, %f)\n", i, i, lix_d[i], liy_d[i]);
-                    // printf("2da vez (lix_0[%d], Liy_0[%d]) = (%f, %f)\n", i, i, lix_0[i], liy_0[i]);
-                    // }
-                    // printf(">>>>><<<<\n\n");
-
-                    // for (i = 0; i < N0; i++) {
-                    // printf("X vez (lix_d[%d], Liy_d[%d]) = (%f, %f)\n", i, i, lix_d[i], liy_d[i]);
-                    // }
-                    //
-                    // printf("\n >>>>> ANTES DE ASIGNAR AUX A DEPOSITADO <<<<<\n");
-                    // for (i = 0; i < N0MAX; i++) {
-                    //     printf("(Lix_aux[%d], Liy_aux[%d]) = (%f, %f)\n", i, i, lix_aux[i], liy_aux[i]);
-                    // }
-
                     for (l = 0; l < N0; l++) {
                         lix_aux[l] = lix_d[l];
                         liy_aux[l] = liy_d[l];
                     }
 
-                    // printf("\n >>>>> DPS DE ASIGNAR AUX A DEPOSITADO <<<<<\n");
-                    // for (i = 0; i < N0MAX; i++) {
-                    //     printf("(Lix_aux[%d], Liy_aux[%d]) = (%f, %f)\n", i, i, lix_aux[i], liy_aux[i]);
-                    // }
-
-                    // printf("contador = %d", Li0_counter);
-                    // printf("contador = %d\n", Li0_counter);
                     lix_aux[Li0_counter] = exs;
                     liy_aux[Li0_counter] = eys;
-
-                    printf("\n eys es %f\n\n", eys);
-
-                    // printf("\n >>>>> DPS DE ASIGNAR EXS/EYS A AUX <<<<<\n");
-                    // for (i = 0; i < N0MAX; i++) {
-                    //     printf("(Lix_aux[%d], Liy_aux[%d]) = (%f, %f)\n", i, i, lix_aux[i], liy_aux[i]);
-                    // }
-
-                    // Li0_counter++;
-                    // printf("contador = %d\n", Li0_counter);
 
                     for (l = 0; l < Li0_counter; l++) {
                         lix_0[l] = lix_aux[l];
                         liy_0[l] = liy_aux[l];
                     }
-
-                    // for (i = 0; i < N0MAX; i++) {
-                    //     printf("(Lix_0[%d], Liy_0[%d]) = (%f, %f)\n", i, i, lix_0[i], liy_0[i]);
-                    //     printf(">>><<<");
-                    // }
 
                     // PBC
                     for (l = 0; l < Li0_counter; l++) {
@@ -266,13 +180,6 @@ int main()
                     ex[j] = rand() / (double)RAND_MAX;
                     ey[j] = rand() / (double)RAND_MAX;
 
-                    // PBC
-                    // ex[j] = pbc(ex[j], 1);
-                    // ey[j] = pbc(ey[j], 1);
-                    // for (i = 0; i < N0; i++) {
-                    // printf("N vez (lix_d[%d], Liy_d[%d]) = (%f, %f)\n", i, i, lix_d[i], liy_d[i]);
-                    // }
-                    // printf(">>>>><<<<\n\n");
                     Li0_counter++;
                 }
             }
@@ -313,23 +220,18 @@ int main()
         fprintf(f_endLi0, "%f, %f\n", lix_0[i], liy_0[i]);
     }
 
-    // 5/5 - Cierra el archivo al terminar
     fclose(f_endLi0);
     fclose(f_endLiM);
 
-    // 1/5 - Crea el puntero al archivo
     FILE *f_params;
 
-    // 2/5 - Intenta abrir el archivo
     f_params = fopen("Parametros.csv", "w");
 
-    // 3/5 - Corrobora que se hayan abierto los archivos
     if (f_params == NULL) {
         printf("No se encontró el archivo.");
         exit(0);
     }
 
-    // 4/5 - Escribir en el archivo
     fprintf(f_params, "Parámetro, Valor, Unidad\n");
     fprintf(f_params, "Paso temporal, %f, us\n", DT);
     fprintf(f_params, "Cantidad de pasos temporales, %d, \n", NT);
@@ -339,6 +241,5 @@ int main()
     fprintf(f_params, "Li0 alcanzado, %d, \n", Li0_counter);
     fprintf(f_params, "Tiempo simulado, %f, us\n", t);
 
-    // 5/5 - Cierra el archivo al terminar
     fclose(f_params);
 }
