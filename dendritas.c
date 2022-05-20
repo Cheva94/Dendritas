@@ -252,11 +252,11 @@ int main()
         ey_0 = ey;
 
         if (i % 500 == 0) {
-            printf(">>> Iteración # %d >>> Tiempo simulado: %f us\n", i, tSim);
+            printf(">>> Tiempo simulado: %f s >>> Li depositado: %d\n", tSim, Li0_counter);
         }
     }
 
     end( ex, ey, lix_0, liy_0, Li0_counter, tSim);
 
-    printf("Se alcanzó la cantidad máxima de Li0 (%d)\n", Li0_counter);
+    printf("Se alcanzó la cantidad máxima de Li0 (%d) simulando durante %f s\n", Li0_counter, tSim);
 }
