@@ -134,10 +134,10 @@ int main()
     f_TEST = fopen("TEST_BASE.csv", "w");
 
     i = 0;
-    // while (Li0_counter != N0MAX) {
-    while (Li0_counter != 78) {
-        // for (j = 0; j < NM; j++) {
-        for (j = 0; j < 1; j++) {
+    while (Li0_counter != N0MAX) {
+    // while (Li0_counter != 78) {
+        for (j = 0; j < NM; j++) {
+        // for (j = 0; j < 1; j++) {
             fprintf(f_TEST, "Partícula %d\n", j);
 
             // Definición del vector unitario
