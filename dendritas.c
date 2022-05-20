@@ -72,7 +72,7 @@ void init(double* ex_0, double* ey_0, double* lix_d, double* liy_d, double* lix_
     fclose(f_initLiM);
 }
 
-void end(double* ex, double* ey, double* lix_0, double* liy_0, int Li0_counter, double t)
+void end(double* ex, double* ey, double* lix_0, double* liy_0, int Li0_counter, double tSim)
 {
     int i;
 
@@ -99,7 +99,7 @@ void end(double* ex, double* ey, double* lix_0, double* liy_0, int Li0_counter, 
     fprintf(f_params, "Li0 inicial, %d, \n", N0);
     fprintf(f_params, "Li0 máximo, %d, \n", N0MAX);
     fprintf(f_params, "Li0 alcanzado, %d, \n", Li0_counter);
-    fprintf(f_params, "Tiempo simulado, %f, us\n", t);
+    fprintf(f_params, "Tiempo simulado, %f, us\n", tSim);
 
     fclose(f_endLi0);
     fclose(f_endLiM);
@@ -164,11 +164,10 @@ int main()
 {
     int i, j, k, l; // Variables mudas
     int Li0_counter = N0;
-    int percent = 0, percent_prog;
     double tita = 0.0, gx = 0.0, gy = 0.0; // Vector unitario aleatorio
     double distx, disty, dist, dist2; // calculo de distancias
     double exs, eys; // escalares para las posiciones ¿?
-    double t; // tiempo para la evolucion
+    double tSim; // tiempo para la evolucion
     double *ex, *ey, *ex_0, *ey_0; // vectores espaciales de los iones
     double *lix_d, *liy_d; // arreglo de Li depositado sobre al ánodo
     double *lix_0, *liy_0; // ¿?
@@ -189,7 +188,8 @@ int main()
 
     init(ex_0, ey_0, lix_d, liy_d, lix_0, liy_0);
 
-    for (i = 0; i < NT; i++) {
+    i = 0;
+    while (Li0_counter != N0MAX) {
         for (j = 0; j < NM; j++) {
             // Definición del vector unitario
             tita = 2 * M_PI * rand() / (double)RAND_MAX;
@@ -242,39 +242,21 @@ int main()
                     ey[j] = rand() / (double)RAND_MAX;
 
                     Li0_counter++;
-
-                    if (Li0_counter == N0MAX) {
-                        printf("Se alcanzó la cantidad máxima de Li0.\n");
-                        break; // Sólo sale del loop de partículas, no del temporal
-                    }
                 }
             }
         }
 
-        t = (i+1) * DT;
+        i++;
+        tSim = i * DT;
         ex_0 = ex;
         ey_0 = ey;
 
-        // Agrego el pocentaje de corrida del programa
-        percent_prog = 100 * i / NT;
-        if (percent_prog > percent) {
-            if (percent_prog % 10 == 0) {
-                printf("Avance del programa = %d\n", percent_prog);
-            }
-            // printf("Paso temporal = %d / %d \n", i, NT);
-            percent = percent_prog;
-        }
-
-        if (Li0_counter == N0MAX) {
-            printf("Se alcanzó la cantidad máxima de Li0.\n");
-            break; // Sale del loop temporal
-        }
-        if (i == (NT-1)) {
-            printf("Se alcanzó la cantidad máxima de pasos.\n");
+        if (i % 500 == 0) {
+            printf(">>> Iteración # %d >>> Tiempo simulado: %f us\n", i, tSim);
         }
     }
 
-    end( ex, ey, lix_0, liy_0, Li0_counter, t);
-    
-    printf("Cantidad de Li0 = %d\n", Li0_counter);
+    end( ex, ey, lix_0, liy_0, Li0_counter, tSim);
+
+    printf("Se alcanzó la cantidad máxima de Li0 (%d)\n", Li0_counter);
 }
