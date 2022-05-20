@@ -131,8 +131,11 @@ int main()
     init(ex_0, ey_0, lix_d, liy_d, lix_0, liy_0);
 
     i = 0;
-    while (Li0_counter != N0MAX) {
-        for (j = 0; j < NM; j++) {
+    // while (Li0_counter != N0MAX) {
+    while (Li0_counter != 78) {
+        // for (j = 0; j < NM; j++) {
+        for (j = 0; j < 1; j++) {
+            printf("Partícula %d\n", j);
             // Definición del vector unitario
             tita = 2 * M_PI * rand() / (double)RAND_MAX;
             gx = cos(tita);
@@ -146,6 +149,9 @@ int main()
             ex[j] = pbc(ex[j], 1);
             ey[j] = rbc(ey[j], 1);
 
+            printf("tita = %f || gx = %f || gy = %f \n", tita, gx, gy);
+            printf("exy_0 = (%f, %f) || exy = (%f, %f) \n", ex_0[j], ey_0[j], ex[j], ey[j]);
+            printf("Acá terminé \n\n");
             // Definicion de la condicion de neutralización
             for (k = 0; k < Li0_counter; k++) {
                 distx = ex[j] - lix_0[k];
