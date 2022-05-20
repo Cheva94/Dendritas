@@ -7,10 +7,6 @@
 #include <string.h>
 #include <math.h>
 
-/*
- * Creo que estoy escribiendo el código de campo cte no nulo (difusión + migracion)
- */
-
 double pbc(double coord, const double cell_length)
 {
     // condiciones periodicas de contorno coordenadas entre [0,L) con L=1
@@ -106,60 +102,6 @@ void end(double* ex, double* ey, double* lix_0, double* liy_0, int Li0_counter, 
     fclose(f_params);
 }
 
-// void forces(double tita, double gx, double gy, const double ex_0, const double ey_0, double ex, double ey)
-// {
-//     // Definición del vector unitario
-//     tita = 2 * M_PI * rand() / (double)RAND_MAX;
-//     gx = cos(tita);
-//     gy = sin(tita);
-//
-//     // Evolución de la posición
-//     ex = ex_0 + Q * gx + RX;
-//     ey = ey_0 + Q * gy + RY;
-//
-//     // PBC para la caja de tamaño 1x1 normalizada
-//     ex = pbc(ex, 1);
-//     ey = rbc(ey, 1);
-// }
-//
-// void neutral()
-// {
-//     for (k = 0; k < Li0_counter; k++) {
-//         distx = ex[j] - lix_0[k];
-//         disty = ey[j] - liy_0[k];
-//         dist2 = pow(distx, 2) + pow(disty, 2);
-//
-//         if (dist2 < DATT2) {
-//             dist = sqrt(dist2);
-//             exs = distx * DATT / dist + lix_0[k];
-//             eys = disty * DATT / dist + liy_0[k];
-//
-//             for (l = 0; l < N0; l++) {
-//                 lix_aux[l] = lix_d[l];
-//                 liy_aux[l] = liy_d[l];
-//             }
-//
-//             lix_aux[Li0_counter] = exs;
-//             liy_aux[Li0_counter] = eys;
-//
-//             for (l = 0; l < Li0_counter; l++) {
-//                 lix_0[l] = lix_aux[l];
-//                 liy_0[l] = liy_aux[l];
-//             }
-//
-//             // PBC
-//             for (l = 0; l < Li0_counter; l++) {
-//                 lix_0[l] = pbc(lix_0[l], 1);
-//                 liy_0[l] = rbc(liy_0[l], 1);
-//             }
-//
-//             // Repongo el ion
-//             ex[j] = rand() / (double)RAND_MAX;
-//             ey[j] = rand() / (double)RAND_MAX;
-//
-//             Li0_counter++;
-// }
-
 int main()
 {
     int i, j, k, l; // Variables mudas
@@ -204,10 +146,7 @@ int main()
             ex[j] = pbc(ex[j], 1);
             ey[j] = rbc(ey[j], 1);
 
-            // forces(tita, gx, gy, ex_0[j], ey_0[j], ex[j], ey[j]);
-
             // Definicion de la condicion de neutralización
-            // neutral()
             for (k = 0; k < Li0_counter; k++) {
                 distx = ex[j] - lix_0[k];
                 disty = ey[j] - liy_0[k];
