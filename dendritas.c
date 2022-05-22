@@ -131,11 +131,12 @@ int main()
     init(ex_0, ey_0, lix_d, liy_d, lix_0, liy_0);
 
     FILE *f_TEST;
-    f_TEST = fopen("TEST_BASE.csv", "w");
+    f_TEST = fopen("TEST.csv", "w");
 
     i = 0;
     while (Li0_counter != N0MAX) {
         for (j = 0; j < NM; j++) {
+            fprintf(f_TEST, "Particula %d en la iteracion del while # %d \n", j, i);
             // Definición del vector unitario
             tita = 2 * M_PI * rand() / (double)RAND_MAX;
             gx = cos(tita);
