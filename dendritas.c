@@ -104,7 +104,7 @@ void end(double* ex, double* ey, double* lix_0, double* liy_0, int Li0_counter, 
 
 int main()
 {
-    int i, j, k, l; // Variables mudas
+    int i = 0, j, k, l; // Variables mudas
     int Li0_counter = N0;
     double tita = 0.0, gx = 0.0, gy = 0.0; // Vector unitario aleatorio
     double distx, disty, dist, dist2; // calculo de distancias
@@ -133,7 +133,6 @@ int main()
     FILE *f_TEST;
     f_TEST = fopen("TEST.csv", "w");
 
-    i = 0;
     while (Li0_counter != N0MAX) {
         for (j = 0; j < NM; j++) {
             fprintf(f_TEST, "Particula %d en la iteracion del while # %d \n", j, i);

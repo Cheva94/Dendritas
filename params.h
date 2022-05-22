@@ -24,7 +24,7 @@
 #endif
 
 #ifndef N0MAX // cantidad máxima de Li0
-#define N0MAX 80//600
+#define N0MAX 600
 #endif
 
 #ifndef RLI0 // radio Li0
