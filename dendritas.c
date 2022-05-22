@@ -96,12 +96,10 @@ int main()
 {
     int i = 0, j, k;
     int counter = N0;
-    double tita = 0.0, gx = 0.0, gy = 0.0;
+    double tita, gx, gy;
     double distx, disty, dist, dist2;
     double tSim;
-    double es_x, es_y;
-    double *lib_x, *lib_y;
-    double *dep_x, *dep_y;
+    double *lib_x, *lib_y, *dep_x, *dep_y;
 
     lib_x = (double*)malloc(NM * sizeof(double));
     lib_y = (double*)malloc(NM * sizeof(double));
@@ -130,11 +128,9 @@ int main()
 
                 if (dist2 < DATT2) {
                     dist = sqrt(dist2);
-                    es_x = distx * DATT / dist + dep_x[k];
-                    es_y = disty * DATT / dist + dep_y[k];
 
-                    dep_x[counter] = pbc(es_x, 1);
-                    dep_y[counter] = pbc(es_y, 1);
+                    dep_x[counter] = pbc(distx * DATT / dist + dep_x[k], 1);
+                    dep_y[counter] = pbc(disty * DATT / dist + dep_y[k], 1);
 
                     lib_x[j] = rand() / (double)RAND_MAX;
                     lib_y[j] = rand() / (double)RAND_MAX;
