@@ -148,6 +148,6 @@ int main()
         }
     }
 
-    end( lib_x, lib_y, dep_x, dep_y, counter, tSim);
+    end(lib_x, lib_y, dep_x, dep_y, counter, tSim);
     printf("Se alcanzó la cantidad máxima de Li0 (%d) simulando durante %f s\n", counter, tSim);
 }
