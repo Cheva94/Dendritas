@@ -17,7 +17,7 @@ dendritas: $(OBJS)
 	$(CC) $(WFLAGS) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(PROG) *.o .depend *.temp #Dendritas.png #forces.h *.csv
+	rm -f $(PROG) *.o .depend *.temp Dendritas.png *.csv #forces.h 
 
 .depend: $(SRCS)
 	$(CC) -MM $^ > $@

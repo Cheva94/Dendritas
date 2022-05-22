@@ -130,16 +130,12 @@ int main()
 
     init(ex_0, ey_0, lix_d, liy_d, lix_0, liy_0);
 
-    FILE *f_TEST;
-    f_TEST = fopen("TEST_BASE.csv", "w");
+    // FILE *f_TEST;
+    // f_TEST = fopen("TEST_BASE.csv", "w");
 
     i = 0;
     while (Li0_counter != N0MAX) {
-    // while (Li0_counter != 78) {
         for (j = 0; j < NM; j++) {
-        // for (j = 0; j < 1; j++) {
-            fprintf(f_TEST, "Partícula %d\n", j);
-
             // Definición del vector unitario
             tita = 2 * M_PI * rand() / (double)RAND_MAX;
             gx = cos(tita);
@@ -153,22 +149,22 @@ int main()
             ex[j] = pbc(ex[j], 1);
             ey[j] = rbc(ey[j], 1);
 
-            fprintf(f_TEST, "tita = %f || gx = %f || gy = %f \n", tita, gx, gy);
-            fprintf(f_TEST, "exy_0 = (%f, %f) || exy = (%f, %f) \n", ex_0[j], ey_0[j], ex[j], ey[j]);
+            // fprintf(f_TEST, "tita = %f || gx = %f || gy = %f \n", tita, gx, gy);
+            // fprintf(f_TEST, "exy_0 = (%f, %f) || exy = (%f, %f) \n", ex_0[j], ey_0[j], ex[j], ey[j]);
             // Definicion de la condicion de neutralización
             for (k = 0; k < Li0_counter; k++) {
                 distx = ex[j] - lix_0[k];
                 disty = ey[j] - liy_0[k];
                 dist2 = pow(distx, 2) + pow(disty, 2);
 
-                fprintf(f_TEST, "distx = %f || disty = %f || dist2 = %f \n", distx, disty, dist2);
+                // fprintf(f_TEST, "distx = %f || disty = %f || dist2 = %f \n", distx, disty, dist2);
 
                 if (dist2 < DATT2) {
                     dist = sqrt(dist2);
                     exs = distx * DATT / dist + lix_0[k];
                     eys = disty * DATT / dist + liy_0[k];
 
-                    fprintf(f_TEST, "exs = %f || exs = %f \n", exs, eys);
+                    // fprintf(f_TEST, "exs = %f || exs = %f \n", exs, eys);
 
                     for (l = 0; l < N0; l++) {
                         lix_aux[l] = lix_d[l];
@@ -204,11 +200,11 @@ int main()
         ey_0 = ey;
 
         if (i % 500 == 0) {
-            printf(">>> Tiempo simulado: %f s >>> Li depositado: %d\n", tSim, Li0_counter);
+            // printf(">>> Tiempo simulado: %f s >>> Li depositado: %d\n", tSim, Li0_counter);
         }
     }
 
-    fclose(f_TEST);
+    // fclose(f_TEST);
 
     end( ex, ey, lix_0, liy_0, Li0_counter, tSim);
 
