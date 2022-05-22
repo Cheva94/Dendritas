@@ -27,7 +27,7 @@ double rbc(double coord, const double cell_length)
     return coord;
 }
 
-void init(double* ex_0, double* ey_0, double* lix_d, double* liy_d)
+void init(double* ex_0, double* ey_0, double* dep_x, double* dep_y)
 {
     int i;
 
@@ -37,8 +37,8 @@ void init(double* ex_0, double* ey_0, double* lix_d, double* liy_d)
     }
 
     for (i = 0; i < N0; i++) {
-        lix_d[i] = 1.3 * RLI0 * i / LONG;
-        liy_d[i] = 0.0 / LONG;
+        dep_x[i] = 1.3 * RLI0 * i / LONG;
+        dep_y[i] = 0.0 / LONG;
     }
 
     FILE *f_initLi0, *f_initLiM;
@@ -47,7 +47,7 @@ void init(double* ex_0, double* ey_0, double* lix_d, double* liy_d)
 
     fprintf(f_initLi0, "x, y\n");
     for (i = 0; i < N0; i++) {
-        fprintf(f_initLi0, "%f, %f\n", lix_d[i], liy_d[i]);
+        fprintf(f_initLi0, "%f, %f\n", dep_x[i], dep_y[i]);
     }
 
     fprintf(f_initLiM, "x, y\n");
@@ -59,7 +59,7 @@ void init(double* ex_0, double* ey_0, double* lix_d, double* liy_d)
     fclose(f_initLiM);
 }
 
-void end(double* ex, double* ey, double* lix_d, double* liy_d, int counter, double tSim)
+void end(double* ex, double* ey, double* dep_x, double* dep_y, int counter, double tSim)
 {
     int i;
 
@@ -71,7 +71,7 @@ void end(double* ex, double* ey, double* lix_d, double* liy_d, int counter, doub
 
     fprintf(f_endLi0, "x, y\n");
     for (i = 0; i < N0MAX; i++) {
-        fprintf(f_endLi0, "%f, %f\n", lix_d[i], liy_d[i]);
+        fprintf(f_endLi0, "%f, %f\n", dep_x[i], dep_y[i]);
     }
 
     fprintf(f_endLiM, "x, y\n");
@@ -95,25 +95,25 @@ void end(double* ex, double* ey, double* lix_d, double* liy_d, int counter, doub
 
 int main()
 {
-    int i = 0, j, k; // Variables mudas
+    int i = 0, j, k;
     int counter = N0;
-    double tita = 0.0, gx = 0.0, gy = 0.0; // Vector unitario aleatorio
-    double distx, disty, dist, dist2; // calculo de distancias
-    double exs, eys; // escalares para las posiciones ¿?
-    double tSim; // tiempo para la evolucion
+    double tita = 0.0, gx = 0.0, gy = 0.0;
+    double distx, disty, dist, dist2;
+    double tSim;
+    double exs, eys;
     double *ex, *ey, *ex_0, *ey_0; // vectores espaciales de los iones
-    double *lix_d, *liy_d; // arreglo de Li depositado sobre al ánodo
+    double *dep_x, *dep_y;
 
     ex = (double*)malloc(NM * sizeof(double));
     ey = (double*)malloc(NM * sizeof(double));
     ex_0 = (double*)malloc(NM * sizeof(double));
     ey_0 = (double*)malloc(NM * sizeof(double));
-    lix_d = (double*)malloc(N0MAX * sizeof(double));
-    liy_d = (double*)malloc(N0MAX * sizeof(double));
+    dep_x = (double*)malloc(N0MAX * sizeof(double));
+    dep_y = (double*)malloc(N0MAX * sizeof(double));
 
     srand(SEED); // Punto inicial fijo para rand() - reproducibildiad
 
-    init(ex_0, ey_0, lix_d, liy_d);
+    init(ex_0, ey_0, dep_x, dep_y);
 
     while (counter != N0MAX) {
         for (j = 0; j < NM; j++) {
@@ -128,17 +128,17 @@ int main()
             ey[j] = rbc(ey[j], 1);
 
             for (k = 0; k < counter; k++) {
-                distx = ex[j] - lix_d[k];
-                disty = ey[j] - liy_d[k];
+                distx = ex[j] - dep_x[k];
+                disty = ey[j] - dep_y[k];
                 dist2 = pow(distx, 2) + pow(disty, 2);
 
                 if (dist2 < DATT2) {
                     dist = sqrt(dist2);
-                    exs = distx * DATT / dist + lix_d[k];
-                    eys = disty * DATT / dist + liy_d[k];
+                    exs = distx * DATT / dist + dep_x[k];
+                    eys = disty * DATT / dist + dep_y[k];
 
-                    lix_d[counter] = pbc(exs, 1);
-                    liy_d[counter] = pbc(eys, 1);
+                    dep_x[counter] = pbc(exs, 1);
+                    dep_y[counter] = pbc(eys, 1);
 
                     // Repongo el ion
                     ex[j] = rand() / (double)RAND_MAX;
@@ -159,6 +159,6 @@ int main()
         }
     }
 
-    end( ex, ey, lix_d, liy_d, counter, tSim);
+    end( ex, ey, dep_x, dep_y, counter, tSim);
     printf("Se alcanzó la cantidad máxima de Li0 (%d) simulando durante %f s\n", counter, tSim);
 }
