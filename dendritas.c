@@ -81,7 +81,6 @@ void end(double* ex, double* ey, double* dep_x, double* dep_y, int counter, doub
 
     fprintf(f_params, "Parámetro, Valor, Unidad\n");
     fprintf(f_params, "Paso temporal, %f, us\n", DT);
-    fprintf(f_params, "Cantidad de pasos temporales, %d, \n", NT);
     fprintf(f_params, "Li+ siempre presente, %d, \n", NM);
     fprintf(f_params, "Li0 inicial, %d, \n", N0);
     fprintf(f_params, "Li0 máximo, %d, \n", N0MAX);
@@ -121,7 +120,7 @@ int main()
             gx = cos(tita);
             gy = sin(tita);
 
-            ex[j] = ex_0[j] + Q * gx + RX;
+            ex[j] = ex_0[j] + Q * gx;
             ey[j] = ey_0[j] + Q * gy + RY;
 
             ex[j] = pbc(ex[j], 1);
