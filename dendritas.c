@@ -29,11 +29,11 @@ int main()
         i++;
         tSim = i * DT;
         if (i % 2000 == 0) {
-            printf(">>> Tiempo simulado: %f s >>> Li depositado: %d\n", tSim, *count);
+            printf(">>> Tiempo simulado: %.0f ms >>> Li depositado: %d\n", tSim, *count);
         }
     }
 
     end(lib, dep, count, tSim);
     double elapsed = wtime() - start;
-    printf("Se alcanzó la cantidad máxima de Li0 (%d) simulando durante %f s. Tiempo transcrurrido %f s.\n", *count, tSim, elapsed);
+    printf("Se alcanzó la cantidad máxima de Li0 (%d) simulando durante %.2f ms. Tiempo transcrurrido %.2f s.\n", *count, tSim, elapsed);
 }
