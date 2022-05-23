@@ -129,12 +129,14 @@ int main()
                 if (dist2 < DATT2) {
                     printf("En la iteracion %d entro con la libre %d y el depositado %d al if\n", i, j, k);
                     dist = sqrt(dist2);
-
+                    printf("SIN PBC - Depositado %d en (x;y) = (%f ; %f)\n", k, dep_x[k], dep_y[k]);
+                    printf("CON PBC - Depositado %d en (x;y) = (%f ; %f)\n", k, pbc(distx * DATT / dist + dep_x[k], 1), pbc(disty * DATT / dist + dep_y[k], 1));
+                    printf("0 - Depositado %d en (x;y) = (%f ; %f)\n", counter, dep_x[counter], dep_y[counter]);
                     dep_x[counter] = pbc(distx * DATT / dist + dep_x[k], 1);
                     dep_y[counter] = pbc(disty * DATT / dist + dep_y[k], 1);
-
+                    printf("1 - Depositado %d en (x;y) = (%f ; %f)\n", counter, dep_x[counter], dep_y[counter]);
                     counter++;
-
+                    printf("Counter = %d\n", counter);
                     lib_x[j] = rand() / (double)RAND_MAX;
                     lib_y[j] = rand() / (double)RAND_MAX;
                 }
