@@ -1,3 +1,6 @@
 #pragma once
 
-double pbc(double cordi, const double cell_length);
+double pbc(double coord, const double cell_length);
+double rbc(double coord, const double cell_length);
+void init(double* lib, double* dep);
+void end(double* lib, double* dep, int count, double tSim);
