@@ -58,7 +58,7 @@ void init(double* lib, double* dep)
     fclose(f_initLib);
 }
 
-void end(double* lib, double* dep, int count, double tSim)
+void end(double* lib, double* dep, int* count, double tSim)
 {
     int i;
 
@@ -87,7 +87,7 @@ void end(double* lib, double* dep, int count, double tSim)
     fprintf(f_params, "Li0 inicial >>> %d \n", N0);
     fprintf(f_params, "Li+ siempre presente >>> %d, \n", NM);
     fprintf(f_params, "Li0 máximo >>> %d \n", N0MAX);
-    fprintf(f_params, "Li0 alcanzado >>> %d \n", count);
+    fprintf(f_params, "Li0 alcanzado >>> %d \n", *count);
     fprintf(f_params, "Tiempo simulado >>> %f s\n", tSim);
 
     fclose(f_endDep);

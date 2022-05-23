@@ -33,7 +33,7 @@ int main()
         }
     }
 
-    end(lib, dep, *count, tSim);
+    end(lib, dep, count, tSim);
     double elapsed = wtime() - start;
-    printf("Se alcanzó la cantidad máxima de Li0 (%d) simulando durante %f s. Tiempo transcrurrido %f\n", *count, tSim, elapsed);
+    printf("Se alcanzó la cantidad máxima de Li0 (%d) simulando durante %f s. Tiempo transcrurrido %f s.\n", *count, tSim, elapsed);
 }

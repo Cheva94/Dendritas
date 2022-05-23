@@ -1,8 +1,8 @@
-#pragma once
-
 /*
  * Unidades: MKS - dist: m - tiempo: s
  */
+
+#pragma once
 
 #include <math.h>
 #include <time.h>
@@ -40,8 +40,10 @@
 #define Q sqrt(2.0 * D * DT) / LONG
 #endif
 
+static int m = ceil(1/DATT);
+
 #ifndef N0 // cantidad inicial de Li0 depositado en superficie COMPARAR CON lixy_d[idx + 0] = i * 1.3 * RLI0 / LONG; usar el DATT
-#define N0 77//(ceil(1/DATT))// 77
+#define N0 m
 #endif
 
 #ifndef NM // cantidad de Li siempre presente en la evol temp
