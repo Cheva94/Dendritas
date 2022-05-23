@@ -107,8 +107,8 @@ void neutral(double* lib, double* dep, int* count, const int j)
         if (dist2 < DATT2) {
             dist = sqrt(dist2);
 
-            *(dep + 2 * (*count) + 0) = pbc(distx * DATT / dist + *(dep + k + 0), 1);
-            *(dep + 2 * (*count) + 1) = pbc(disty * DATT / dist + *(dep + k + 1), 1);
+            *(dep + 2 * (*count) + 0) = pbc(distx * DATT / dist + *(dep + k + 0), LONG);
+            *(dep + 2 * (*count) + 1) = rbc(disty * DATT / dist + *(dep + k + 1), LONG);
 
             *count += 1;
 
@@ -128,10 +128,10 @@ void move(double* lib, double* dep, int* count)
         gy = sin(tita);
 
         *(lib + j + 0) += Q * gx;
-        *(lib + j + 1) += Q * gy + RY;
+        *(lib + j + 1) += Q * gy;
 
-        *(lib + j + 0) = pbc(*(lib + j + 0), 1);
-        *(lib + j + 1) = rbc(*(lib + j + 1), 1);
+        *(lib + j + 0) = pbc(*(lib + j + 0), LONG);
+        *(lib + j + 1) = rbc(*(lib + j + 1), LONG);
 
         neutral(lib, dep, count, j);
     }
