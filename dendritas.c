@@ -59,7 +59,7 @@ void init(double* lib, double* dep)
     fclose(f_initLib);
 }
 
-void end(double* lib, double* dep, int counter, double tSim)
+void end(double* lib, double* dep, int count, double tSim)
 {
     int i;
 
@@ -88,7 +88,7 @@ void end(double* lib, double* dep, int counter, double tSim)
     fprintf(f_params, "Li0 inicial >>> %d \n", N0);
     fprintf(f_params, "Li+ siempre presente >>> %d, \n", NM);
     fprintf(f_params, "Li0 máximo >>> %d \n", N0MAX);
-    fprintf(f_params, "Li0 alcanzado >>> %d \n", counter);
+    fprintf(f_params, "Li0 alcanzado >>> %d \n", count);
     fprintf(f_params, "Tiempo simulado >>> %f s\n", tSim);
 
     fclose(f_endDep);
@@ -100,7 +100,7 @@ int main()
 {
     int i = 0, j, k;
     // int n0 = ceil(1/DATT);
-    int counter = N0;
+    int count = N0;
     double tita, gx, gy;
     double distx, disty, dist, dist2;
     double tSim;
@@ -113,7 +113,7 @@ int main()
 
     init(lib, dep);
 
-    while (counter != N0MAX) {
+    while (count != N0MAX) {
         for (j = 0; j < 2 * NM; j += 2) {
             tita = 2 * M_PI * rand() / (double)RAND_MAX;
             gx = cos(tita);
@@ -125,7 +125,7 @@ int main()
             *(lib + j + 0) = pbc(*(lib + j + 0), 1);
             *(lib + j + 1) = rbc(*(lib + j + 1), 1);
 
-            for (k = 0; k < 2 * counter; k += 2) {
+            for (k = 0; k < 2 * count; k += 2) {
                 distx = *(lib + j + 0) - *(dep + k + 0);
                 disty = *(lib + j + 1) - *(dep + k + 1);
                 dist2 = pow(distx, 2) + pow(disty, 2);
@@ -133,10 +133,10 @@ int main()
                 if (dist2 < DATT2) {
                     dist = sqrt(dist2);
 
-                    *(dep + 2 * counter + 0) = pbc(distx * DATT / dist + *(dep + k + 0), 1);
-                    *(dep + 2 * counter + 1) = pbc(disty * DATT / dist + *(dep + k + 1), 1);
+                    *(dep + 2 * count + 0) = pbc(distx * DATT / dist + *(dep + k + 0), 1);
+                    *(dep + 2 * count + 1) = pbc(disty * DATT / dist + *(dep + k + 1), 1);
 
-                    counter++;
+                    count++;
 
                     *(lib + j + 0) = rand() / (double)RAND_MAX;
                     *(lib + j + 1) = rand() / (double)RAND_MAX;
@@ -148,10 +148,10 @@ int main()
         tSim = i * DT;
 
         if (i % 2000 == 0) {
-            printf(">>> Tiempo simulado: %f s >>> Li depositado: %d\n", tSim, counter);
+            printf(">>> Tiempo simulado: %f s >>> Li depositado: %d\n", tSim, count);
         }
     }
 
-    end(lib, dep, counter, tSim);
-    printf("Se alcanzó la cantidad máxima de Li0 (%d) simulando durante %f s\n", counter, tSim);
+    end(lib, dep, count, tSim);
+    printf("Se alcanzó la cantidad máxima de Li0 (%d) simulando durante %f s\n", count, tSim);
 }
