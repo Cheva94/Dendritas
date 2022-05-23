@@ -9,21 +9,19 @@
 
 int main()
 {
-    double start = wtime();
     int i = 0;
     double tSim;
-    double *lib, *dep;
-    int* count;
-
-    count = (int*)malloc(sizeof(int));
-    lib = (double*)malloc(2 * NM * sizeof(double));
-    dep = (double*)malloc(2 * N0MAX * sizeof(double));
+    double start = wtime();
+    double* lib = (double*)malloc(2 * NM * sizeof(double));
+    double* dep = (double*)malloc(2 * N0MAX * sizeof(double));
+    int* count = (int*)malloc(sizeof(int));
 
     srand(SEED);
 
     init(lib, dep);
 
-    *count = N0;
+    *count = N0; // ver de poner en la definicion en vez del malloc
+
     while (*(count) != N0MAX) {
         move(lib, dep, count);
         i++;
