@@ -108,7 +108,7 @@ void neutral(double* lib, double* dep, int* count, const int j)
             dist = sqrt(dist2);
 
             *(dep + 2 * (*count) + 0) = pbc(distx * DATT / dist + *(dep + k + 0), 1);
-            *(dep + 2 * (*count) + 1) = pbc(disty * DATT / dist + *(dep + k + 1), 1);
+            *(dep + 2 * (*count) + 1) = rbc(disty * DATT / dist + *(dep + k + 1), 1);
 
             *count += 1;
 
