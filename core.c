@@ -1,10 +1,9 @@
 #include "core.h"
 #include "params.h"
-// #include "wtime.h"
 
 #include <stdio.h>
 #include <math.h>
-#include <stdlib.h> // rand()
+#include <stdlib.h>
 
 double pbc(double coord, const double cell_length)
 {
@@ -31,8 +30,8 @@ void init(double* lib, double* dep)
     int i, idx = 0;
 
     for (i = 0; i < 2 * NM; i += 2) {
-        *(lib + i + 0) = rand() / (double)RAND_MAX;
-        *(lib + i + 1) = rand() / (double)RAND_MAX;
+        *(lib + i + 0) = LONG * rand() / (double)RAND_MAX;
+        *(lib + i + 1) = LONG * rand() / (double)RAND_MAX;
     }
 
     for (i = 0; i < N0; i++) {
@@ -79,7 +78,7 @@ void end(double* lib, double* dep, int* count, double tSim)
     }
 
     fprintf(f_params, "Parámetro >>> Valor\n");
-    fprintf(f_params, "Radio del Li >>> %f m\n", RLI0);
+    fprintf(f_params, "Radio del Li >>> %f m\n", RLI);
     fprintf(f_params, "Longitud de celda >>> %f m\n", LONG);
     fprintf(f_params, "Separación interLi (norm) >>> %f \n", DATT);
     fprintf(f_params, "Paso temporal >>> %f s\n", DT);
@@ -107,13 +106,13 @@ void neutral(double* lib, double* dep, int* count, const int j)
         if (dist2 < DATT2) {
             dist = sqrt(dist2);
 
-            *(dep + 2 * (*count) + 0) = pbc(distx * DATT / dist + *(dep + k + 0), 1);
-            *(dep + 2 * (*count) + 1) = rbc(disty * DATT / dist + *(dep + k + 1), 1);
+            *(dep + 2 * (*count) + 0) = pbc(distx * DATT / dist + *(dep + k + 0), LONG);
+            *(dep + 2 * (*count) + 1) = rbc(disty * DATT / dist + *(dep + k + 1), LONG);
 
             *count += 1;
 
-            *(lib + j + 0) = rand() / (double)RAND_MAX;
-            *(lib + j + 1) = rand() / (double)RAND_MAX;
+            *(lib + j + 0) = LONG * rand() / (double)RAND_MAX;
+            *(lib + j + 1) = LONG * rand() / (double)RAND_MAX;
         }
     }
 }
@@ -128,10 +127,10 @@ void move(double* lib, double* dep, int* count)
         gy = sin(tita);
 
         *(lib + j + 0) += Q * gx;
-        *(lib + j + 1) += Q * gy;// + RY;
+        *(lib + j + 1) += Q * gy;
 
-        *(lib + j + 0) = pbc(*(lib + j + 0), 1);
-        *(lib + j + 1) = rbc(*(lib + j + 1), 1);
+        *(lib + j + 0) = pbc(*(lib + j + 0), LONG);
+        *(lib + j + 1) = rbc(*(lib + j + 1), LONG);
 
         neutral(lib, dep, count, j);
     }
