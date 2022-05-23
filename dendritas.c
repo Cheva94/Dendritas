@@ -41,42 +41,42 @@ void init(double* lib_x, double* lib_y, double* dep_x, double* dep_y)
         dep_y[i] = 0.0 / LONG;
     }
 
-    FILE *f_initLi0, *f_initLiM;
-    f_initLi0 = fopen("EstadoInicial_Li0.csv", "w");
-    f_initLiM = fopen("EstadoInicial_LiM.csv", "w");
+    FILE *f_initDep, *f_initLib;
+    f_initDep = fopen("Est0_Dep.csv", "w");
+    f_initLib = fopen("Est0_Lib.csv", "w");
 
-    fprintf(f_initLi0, "x, y\n");
+    fprintf(f_initDep, "x, y\n");
     for (i = 0; i < N0; i++) {
-        fprintf(f_initLi0, "%f, %f\n", dep_x[i], dep_y[i]);
+        fprintf(f_initDep, "%f, %f\n", dep_x[i], dep_y[i]);
     }
 
-    fprintf(f_initLiM, "x, y\n");
+    fprintf(f_initLib, "x, y\n");
     for (i = 0; i < NM; i++) {
-        fprintf(f_initLiM, "%f, %f\n", lib_x[i], lib_y[i]);
+        fprintf(f_initLib, "%f, %f\n", lib_x[i], lib_y[i]);
     }
 
-    fclose(f_initLi0);
-    fclose(f_initLiM);
+    fclose(f_initDep);
+    fclose(f_initLib);
 }
 
 void end(double* lib_x, double* lib_y, double* dep_x, double* dep_y, int counter, double tSim)
 {
     int i;
 
-    FILE *f_endLi0, *f_endLiM, *f_params;
+    FILE *f_endDep, *f_endLib, *f_params;
 
-    f_endLi0 = fopen("EstadoFinal_Li0.csv", "w");
-    f_endLiM = fopen("EstadoFinal_LiM.csv", "w");
+    f_endDep = fopen("Est1_Dep.csv", "w");
+    f_endLib = fopen("Est1_Lib.csv", "w");
     f_params = fopen("Parametros.csv", "w");
 
-    fprintf(f_endLi0, "x, y\n");
+    fprintf(f_endDep, "x, y\n");
     for (i = 0; i < N0MAX; i++) {
-        fprintf(f_endLi0, "%f, %f\n", dep_x[i], dep_y[i]);
+        fprintf(f_endDep, "%f, %f\n", dep_x[i], dep_y[i]);
     }
 
-    fprintf(f_endLiM, "x, y\n");
+    fprintf(f_endLib, "x, y\n");
     for (i = 0; i < NM; i++) {
-        fprintf(f_endLiM, "%f, %f\n", lib_x[i], lib_y[i]);
+        fprintf(f_endLib, "%f, %f\n", lib_x[i], lib_y[i]);
     }
 
     fprintf(f_params, "Parámetro, Valor, Unidad\n");
@@ -87,8 +87,8 @@ void end(double* lib_x, double* lib_y, double* dep_x, double* dep_y, int counter
     fprintf(f_params, "Li0 alcanzado, %d, \n", counter);
     fprintf(f_params, "Tiempo simulado, %f, us\n", tSim);
 
-    fclose(f_endLi0);
-    fclose(f_endLiM);
+    fclose(f_endDep);
+    fclose(f_endLib);
     fclose(f_params);
 }
 
@@ -132,10 +132,10 @@ int main()
                     dep_x[counter] = pbc(distx * DATT / dist + dep_x[k], 1);
                     dep_y[counter] = pbc(disty * DATT / dist + dep_y[k], 1);
 
+                    counter++;
+
                     lib_x[j] = rand() / (double)RAND_MAX;
                     lib_y[j] = rand() / (double)RAND_MAX;
-
-                    counter++;
                 }
             }
         }
