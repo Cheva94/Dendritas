@@ -5,7 +5,7 @@ CPPFLAGS =
 LDFLAGS	 = -lm
 
 PROG	= dendritas
-OBJS    = dendritas.o core.o #wtime.o
+OBJS    = dendritas.o core.o wtime.o
 SRCS    = $(shell echo *.c)
 
 all: $(PROG)

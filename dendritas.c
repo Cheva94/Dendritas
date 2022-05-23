@@ -1,6 +1,6 @@
 #include "core.h"
 #include "params.h"
-// #include "wtime.h"
+#include "wtime.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,6 +9,7 @@
 
 int main()
 {
+    double start = wtime();
     int i = 0;
     double tSim;
     double *lib, *dep;
@@ -33,5 +34,6 @@ int main()
     }
 
     end(lib, dep, *count, tSim);
-    printf("Se alcanzó la cantidad máxima de Li0 (%d) simulando durante %f s\n", *count, tSim);
+    double elapsed = wtime() - start;
+    printf("Se alcanzó la cantidad máxima de Li0 (%d) simulando durante %f s. Tiempo transcrurrido %f\n", *count, tSim, elapsed);
 }
