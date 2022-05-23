@@ -32,16 +32,15 @@ plt.rcParams["lines.linestyle"] = ':'
 
 def main():
 
-    Li0_init = pd.read_csv("EstadoInicial_Li0.csv").to_numpy()
-    LiM_init = pd.read_csv("EstadoInicial_LiM.csv").to_numpy()
-    Li0_end = pd.read_csv("EstadoFinal_Li0.csv").to_numpy()
-    LiM_end =  pd.read_csv("EstadoFinal_LiM.csv").to_numpy()
+    Li0_init = pd.read_csv("Est0_Dep.csv").to_numpy()
+    LiM_init = pd.read_csv("Est0_Lib.csv").to_numpy()
+    Li0_end = pd.read_csv("Est1_Dep.csv").to_numpy()
+    LiM_end =  pd.read_csv("Est1_Lib.csv").to_numpy()
 
     fig, (axi, axf) = plt.subplots(1,2)
 
     axi.scatter(LiM_init[:, 0], LiM_init[:, 1], label='Li$^+$')
     axi.scatter(Li0_init[:, 0], Li0_init[:, 1], label='Li$^0$')
-    # axi.set_ylim(-0.05,1.05)
     axi.set_xlabel('x')
     axi.set_ylabel('y')
     axi.legend(loc='center left', bbox_to_anchor=(1, 0.5), ncol = 1)
@@ -49,7 +48,6 @@ def main():
 
     axf.scatter(LiM_end[:, 0], LiM_end[:, 1], label='Li$^+$')
     axf.scatter(Li0_end[:, 0], Li0_end[:, 1], label='Li$^0$')
-    # axf.set_ylim(-0.05,1.05)
     axf.set_xlabel('x')
     axf.set_ylabel('y')
     axf.legend(loc='center left', bbox_to_anchor=(1, 0.5), ncol = 1)
