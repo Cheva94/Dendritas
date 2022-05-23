@@ -1,8 +1,8 @@
+#pragma once
+
 /*
  * Unidades: MKS - dist: m - tiempo: s
  */
-
-#pragma once
 
 #include <math.h>
 #include <time.h>

@@ -2,6 +2,7 @@
 #include "params.h"
 // #include "wtime.h"
 
+#include <stdio.h>
 #include <math.h>
 #include <stdlib.h> // rand()
 
@@ -92,4 +93,46 @@ void end(double* lib, double* dep, int count, double tSim)
     fclose(f_endDep);
     fclose(f_endLib);
     fclose(f_params);
+}
+
+void neutral(double* lib, double* dep, int* count, const int j)
+{
+    double distx, disty, dist, dist2;
+
+    for (int k = 0; k < 2 * (*count); k += 2) {
+        distx = *(lib + j + 0) - *(dep + k + 0);
+        disty = *(lib + j + 1) - *(dep + k + 1);
+        dist2 = pow(distx, 2) + pow(disty, 2);
+
+        if (dist2 < DATT2) {
+            dist = sqrt(dist2);
+
+            *(dep + 2 * (*count) + 0) = pbc(distx * DATT / dist + *(dep + k + 0), 1);
+            *(dep + 2 * (*count) + 1) = pbc(disty * DATT / dist + *(dep + k + 1), 1);
+
+            *count += 1;
+
+            *(lib + j + 0) = rand() / (double)RAND_MAX;
+            *(lib + j + 1) = rand() / (double)RAND_MAX;
+        }
+    }
+}
+
+void move(double* lib, double* dep, int* count)
+{
+    double tita, gx, gy;
+
+    for (int j = 0; j < 2 * NM; j += 2) {
+        tita = 2 * M_PI * rand() / (double)RAND_MAX;
+        gx = cos(tita);
+        gy = sin(tita);
+
+        *(lib + j + 0) += Q * gx;
+        *(lib + j + 1) += Q * gy + RY;
+
+        *(lib + j + 0) = pbc(*(lib + j + 0), 1);
+        *(lib + j + 1) = rbc(*(lib + j + 1), 1);
+
+        neutral(lib, dep, count, j);
+    }
 }
