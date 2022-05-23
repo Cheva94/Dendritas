@@ -130,13 +130,18 @@ int main()
                     printf("En la iteracion %d entro con la libre %d y el depositado %d al if\n", i, j/2, k/2);
                     dist = sqrt(dist2);
 
+                    printf("SIN PBC - Depositado %d en (x;y) = (%f ; %f)\n", k/2, dep[k + 0], dep[k + 1]);
+                    printf("CON PBC - Depositado %d en (x;y) = (%f ; %f)\n", k/2, pbc(distx * DATT / dist + dep[k + 0], 1), pbc(disty * DATT / dist + dep[k + 1], 1));
+                    printf("0 - Depositado %d en (x;y) = (%f ; %f)\n", counter, dep[counter + 0], dep[counter + 1]);
+
                     dep[counter + 0] = pbc(distx * DATT / dist + dep[k + 0], 1);
                     dep[counter + 1] = pbc(disty * DATT / dist + dep[k + 1], 1);
+                    printf("1 - Depositado %d en (x;y) = (%f ; %f)\n", counter, dep[counter + 0], dep[counter + 1]);
+                    counter++;
+                    printf("Counter = %d\n", counter);
 
                     lib[j + 0] = rand() / (double)RAND_MAX;
                     lib[j + 1] = rand() / (double)RAND_MAX;
-
-                    counter++;
                 }
             }
         }
