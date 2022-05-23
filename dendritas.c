@@ -96,7 +96,7 @@ void end(double* lib, double* dep, int count, double tSim)
     fclose(f_params);
 }
 
-int neutral(double* lib, double* dep, int* count, const int j)
+void neutral(double* lib, double* dep, int* count, const int j)
 {
     double distx, disty, dist, dist2;
 
@@ -117,15 +117,12 @@ int neutral(double* lib, double* dep, int* count, const int j)
             *(lib + j + 1) = rand() / (double)RAND_MAX;
         }
     }
-
-    return (*count);
 }
 
 int main()
 {
     int i = 0, j;
     // int n0 = ceil(1/DATT);
-    // int count = N0;
     double tita, gx, gy;
     double tSim;
     double *lib, *dep;
