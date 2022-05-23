@@ -32,12 +32,12 @@ void init(double* lib, double* dep)
     int i, idx = 0;
 
     for (i = 0; i < 2 * NM; i += 2) {
-        lib[i + 0] = rand() / (double)RAND_MAX;
-        lib[i + 1] = rand() / (double)RAND_MAX;
+        *(lib + i + 0) = rand() / (double)RAND_MAX;
+        *(lib + i + 1) = rand() / (double)RAND_MAX;
     }
 
     for (i = 0; i < N0; i++) {
-        dep[idx + 0] = i * DATT;
+        *(dep + idx + 0) = i * DATT;
         idx += 2;
     }
 
@@ -47,12 +47,12 @@ void init(double* lib, double* dep)
 
     fprintf(f_initDep, "x, y\n");
     for (i = 0; i < 2 * N0; i += 2) {
-        fprintf(f_initDep, "%f, %f\n", dep[i + 0], dep[i + 1]);
+        fprintf(f_initDep, "%f, %f\n", *(dep + i + 0), *(dep + i + 1));
     }
 
     fprintf(f_initLib, "x, y\n");
     for (i = 0; i < 2 * NM; i += 2) {
-        fprintf(f_initLib, "%f, %f\n", lib[i + 0], lib[i + 1]);
+        fprintf(f_initLib, "%f, %f\n", *(lib + i + 0), *(lib + i + 1));
     }
 
     fclose(f_initDep);
@@ -71,12 +71,12 @@ void end(double* lib, double* dep, int counter, double tSim)
 
     fprintf(f_endDep, "x, y\n");
     for (i = 0; i < 2 * N0MAX; i += 2) {
-        fprintf(f_endDep, "%f, %f\n", dep[i + 0], dep[i + 1]);
+        fprintf(f_endDep, "%f, %f\n", *(dep + i + 0), *(dep + i + 1));
     }
 
     fprintf(f_endLib, "x, y\n");
     for (i = 0; i < 2 * NM; i += 2) {
-        fprintf(f_endLib, "%f, %f\n", lib[i + 0], lib[i + 1]);
+        fprintf(f_endLib, "%f, %f\n", *(lib + i + 0), *(lib + i + 1));
     }
 
     fprintf(f_params, "Parámetro >>> Valor\n");
@@ -112,34 +112,34 @@ int main()
     srand(SEED);
 
     init(lib, dep);
-    
+
     while (counter != N0MAX) {
         for (j = 0; j < 2 * NM; j += 2) {
             tita = 2 * M_PI * rand() / (double)RAND_MAX;
             gx = cos(tita);
             gy = sin(tita);
 
-            lib[j + 0] += Q * gx;
-            lib[j + 1] += Q * gy + RY;
+            *(lib + j + 0) += Q * gx;
+            *(lib + j + 1) += Q * gy + RY;
 
-            lib[j + 0] = pbc(lib[j + 0], 1);
-            lib[j + 1] = rbc(lib[j + 1], 1);
+            *(lib + j + 0) = pbc(*(lib + j + 0), 1);
+            *(lib + j + 1) = rbc(*(lib + j + 1), 1);
 
             for (k = 0; k < 2 * counter; k += 2) {
-                distx = lib[j + 0] - dep[k + 0];
-                disty = lib[j + 1] - dep[k + 1];
+                distx = *(lib + j + 0) - *(dep + k + 0);
+                disty = *(lib + j + 1) - *(dep + k + 1);
                 dist2 = pow(distx, 2) + pow(disty, 2);
 
                 if (dist2 < DATT2) {
                     dist = sqrt(dist2);
 
-                    dep[2 * counter + 0] = pbc(distx * DATT / dist + dep[k + 0], 1);
-                    dep[2 * counter + 1] = pbc(disty * DATT / dist + dep[k + 1], 1);
+                    *(dep + 2 * counter + 0) = pbc(distx * DATT / dist + *(dep + k + 0), 1);
+                    *(dep + 2 * counter + 1) = pbc(disty * DATT / dist + *(dep + k + 1), 1);
 
                     counter++;
 
-                    lib[j + 0] = rand() / (double)RAND_MAX;
-                    lib[j + 1] = rand() / (double)RAND_MAX;
+                    *(lib + j + 0) = rand() / (double)RAND_MAX;
+                    *(lib + j + 1) = rand() / (double)RAND_MAX;
                 }
             }
         }
