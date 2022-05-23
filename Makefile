@@ -1,11 +1,11 @@
 CC       = gcc
+CFLAGS	 = -O0
 WFLAGS	 = -std=gnu11 -Wall -Wextra -g
-# CFLAGS	 = -Ofast -march=native -ffast-math -funroll-loops -floop-block -ftree-vectorize #-fopt-info-vec-missed -fopt-info-vec
 CPPFLAGS =
 LDFLAGS	 = -lm
 
 PROG	= dendritas
-OBJS    = dendritas.o core.o
+OBJS    = dendritas.o core.o #wtime.o
 SRCS    = $(shell echo *.c)
 
 all: $(PROG)
