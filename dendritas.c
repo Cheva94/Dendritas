@@ -37,7 +37,7 @@ void init(double* lib, double* dep)
     }
 
     for (i = 0; i < N0; i++) {
-        dep[idx + 0] = 1.3 * RLI0 * i / LONG;
+        dep[idx + 0] = i * DATT;
         idx += 2;
     }
 
@@ -79,13 +79,17 @@ void end(double* lib, double* dep, int counter, double tSim)
         fprintf(f_endLib, "%f, %f\n", lib[i + 0], lib[i + 1]);
     }
 
-    fprintf(f_params, "Parámetro, Valor, Unidad\n");
-    fprintf(f_params, "Paso temporal, %f, us\n", DT);
-    fprintf(f_params, "Li+ siempre presente, %d, \n", NM);
-    fprintf(f_params, "Li0 inicial, %d, \n", N0);
-    fprintf(f_params, "Li0 máximo, %d, \n", N0MAX);
-    fprintf(f_params, "Li0 alcanzado, %d, \n", counter);
-    fprintf(f_params, "Tiempo simulado, %f, us\n", tSim);
+    fprintf(f_params, "Parámetro >>> Valor\n");
+    fprintf(f_params, "Radio del Li >>> %f m\n", RLI0);
+    fprintf(f_params, "Longitud de celda >>> %f m\n", LONG);
+    fprintf(f_params, "Separación interLi (norm) >>> %f \n", DATT);
+    fprintf(f_params, "Paso temporal >>> %f s\n", DT);
+    fprintf(f_params, "Coef Dif >>> %f \n", D);
+    fprintf(f_params, "Li0 inicial >>> %d \n", N0);
+    fprintf(f_params, "Li+ siempre presente >>> %d, \n", NM);
+    fprintf(f_params, "Li0 máximo >>> %d \n", N0MAX);
+    fprintf(f_params, "Li0 alcanzado >>> %d \n", counter);
+    fprintf(f_params, "Tiempo simulado >>> %f s\n", tSim);
 
     fclose(f_endDep);
     fclose(f_endLib);
@@ -95,6 +99,7 @@ void end(double* lib, double* dep, int counter, double tSim)
 int main()
 {
     int i = 0, j, k;
+    // int n0 = ceil(1/DATT);
     int counter = N0;
     double tita, gx, gy;
     double distx, disty, dist, dist2;
@@ -107,7 +112,7 @@ int main()
     srand(SEED);
 
     init(lib, dep);
-
+    
     while (counter != N0MAX) {
         for (j = 0; j < 2 * NM; j += 2) {
             tita = 2 * M_PI * rand() / (double)RAND_MAX;
