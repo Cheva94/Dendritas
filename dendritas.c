@@ -125,10 +125,14 @@ int main()
 {
     int i = 0, j;
     // int n0 = ceil(1/DATT);
-    int count = N0;
+    // int count = N0;
     double tita, gx, gy;
     double tSim;
     double *lib, *dep;
+
+    int* count;
+    count = (int*)malloc(sizeof(int));
+    *count = N0;
 
     lib = (double*)malloc(2 * NM * sizeof(double));
     dep = (double*)malloc(2 * N0MAX * sizeof(double));
@@ -137,7 +141,7 @@ int main()
 
     init(lib, dep);
 
-    while (count != N0MAX) {
+    while (*(count) != N0MAX) {
         for (j = 0; j < 2 * NM; j += 2) {
             tita = 2 * M_PI * rand() / (double)RAND_MAX;
             gx = cos(tita);
@@ -149,17 +153,17 @@ int main()
             *(lib + j + 0) = pbc(*(lib + j + 0), 1);
             *(lib + j + 1) = rbc(*(lib + j + 1), 1);
 
-            neutral(lib, dep, &count, j);
+            neutral(lib, dep, count, j);
         }
 
         i++;
         tSim = i * DT;
 
         if (i % 2000 == 0) {
-            printf(">>> Tiempo simulado: %f s >>> Li depositado: %d\n", tSim, count);
+            printf(">>> Tiempo simulado: %f s >>> Li depositado: %d\n", tSim, *count);
         }
     }
 
-    end(lib, dep, count, tSim);
-    printf("Se alcanzó la cantidad máxima de Li0 (%d) simulando durante %f s\n", count, tSim);
+    end(lib, dep, *count, tSim);
+    printf("Se alcanzó la cantidad máxima de Li0 (%d) simulando durante %f s\n", *count, tSim);
 }
