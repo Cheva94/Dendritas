@@ -41,7 +41,7 @@
 #endif
 
 #ifndef N0 // cantidad inicial de Li0 depositado en superficie COMPARAR CON lixy_d[idx + 0] = i * 1.3 * RLI0 / LONG; usar el DATT
-#define NM 77
+#define N0 77
 #endif
 
 #ifndef NM // cantidad de Li siempre presente en la evol temp

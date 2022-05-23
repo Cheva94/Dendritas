@@ -128,7 +128,7 @@ void move(double* lib, double* dep, int* count)
         gy = sin(tita);
 
         *(lib + j + 0) += Q * gx;
-        *(lib + j + 1) += Q * gy + RY;
+        *(lib + j + 1) += Q * gy;// + RY;
 
         *(lib + j + 0) = pbc(*(lib + j + 0), 1);
         *(lib + j + 1) = rbc(*(lib + j + 1), 1);
