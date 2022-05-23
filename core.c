@@ -79,7 +79,7 @@ void end(double* lib, double* dep, int* count, double tSim)
     }
 
     fprintf(f_params, "Parámetro >>> Valor\n");
-    fprintf(f_params, "Radio del Li >>> %f m\n", RLI0);
+    fprintf(f_params, "Radio del Li >>> %f m\n", RLI);
     fprintf(f_params, "Longitud de celda >>> %f m\n", LONG);
     fprintf(f_params, "Separación interLi (norm) >>> %f \n", DATT);
     fprintf(f_params, "Paso temporal >>> %f s\n", DT);
