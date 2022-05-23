@@ -96,13 +96,37 @@ void end(double* lib, double* dep, int count, double tSim)
     fclose(f_params);
 }
 
+int neutral(double* lib, double* dep, int* count, const int j)
+{
+    double distx, disty, dist, dist2;
+
+    for (int k = 0; k < 2 * (*count); k += 2) {
+        distx = *(lib + j + 0) - *(dep + k + 0);
+        disty = *(lib + j + 1) - *(dep + k + 1);
+        dist2 = pow(distx, 2) + pow(disty, 2);
+
+        if (dist2 < DATT2) {
+            dist = sqrt(dist2);
+
+            *(dep + 2 * (*count) + 0) = pbc(distx * DATT / dist + *(dep + k + 0), 1);
+            *(dep + 2 * (*count) + 1) = pbc(disty * DATT / dist + *(dep + k + 1), 1);
+
+            *count += 1;
+
+            *(lib + j + 0) = rand() / (double)RAND_MAX;
+            *(lib + j + 1) = rand() / (double)RAND_MAX;
+        }
+    }
+
+    return (*count);
+}
+
 int main()
 {
-    int i = 0, j, k;
+    int i = 0, j;
     // int n0 = ceil(1/DATT);
     int count = N0;
     double tita, gx, gy;
-    double distx, disty, dist, dist2;
     double tSim;
     double *lib, *dep;
 
@@ -125,23 +149,7 @@ int main()
             *(lib + j + 0) = pbc(*(lib + j + 0), 1);
             *(lib + j + 1) = rbc(*(lib + j + 1), 1);
 
-            for (k = 0; k < 2 * count; k += 2) {
-                distx = *(lib + j + 0) - *(dep + k + 0);
-                disty = *(lib + j + 1) - *(dep + k + 1);
-                dist2 = pow(distx, 2) + pow(disty, 2);
-
-                if (dist2 < DATT2) {
-                    dist = sqrt(dist2);
-
-                    *(dep + 2 * count + 0) = pbc(distx * DATT / dist + *(dep + k + 0), 1);
-                    *(dep + 2 * count + 1) = pbc(disty * DATT / dist + *(dep + k + 1), 1);
-
-                    count++;
-
-                    *(lib + j + 0) = rand() / (double)RAND_MAX;
-                    *(lib + j + 1) = rand() / (double)RAND_MAX;
-                }
-            }
+            neutral(lib, dep, &count, j);
         }
 
         i++;
