@@ -1,10 +1,9 @@
 #include "core.h"
 #include "params.h"
-// #include "wtime.h"
 
 #include <stdio.h>
 #include <math.h>
-#include <stdlib.h> // rand()
+#include <stdlib.h>
 
 double pbc(double coord, const double cell_length)
 {
@@ -31,8 +30,8 @@ void init(double* lib, double* dep)
     int i, idx = 0;
 
     for (i = 0; i < 2 * NM; i += 2) {
-        *(lib + i + 0) = rand() / (double)RAND_MAX;
-        *(lib + i + 1) = rand() / (double)RAND_MAX;
+        *(lib + i + 0) = LONG * rand() / (double)RAND_MAX;
+        *(lib + i + 1) = LONG * rand() / (double)RAND_MAX;
     }
 
     for (i = 0; i < N0; i++) {
@@ -112,8 +111,8 @@ void neutral(double* lib, double* dep, int* count, const int j)
 
             *count += 1;
 
-            *(lib + j + 0) = rand() / (double)RAND_MAX;
-            *(lib + j + 1) = rand() / (double)RAND_MAX;
+            *(lib + j + 0) = LONG * rand() / (double)RAND_MAX;
+            *(lib + j + 1) = LONG * rand() / (double)RAND_MAX;
         }
     }
 }
