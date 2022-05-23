@@ -28,7 +28,7 @@ int main()
         move(lib, dep, count);
         i++;
         tSim = i * DT;
-        if (i % 2000 == 0) {
+        if (i % 10000 == 0) {
             printf(">>> Tiempo simulado: %.0f ms >>> Li depositado: %d\n", tSim, *count);
         }
     }
