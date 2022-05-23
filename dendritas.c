@@ -127,6 +127,7 @@ int main()
                 dist2 = pow(distx, 2) + pow(disty, 2);
 
                 if (dist2 < DATT2) {
+                    printf("En la iteracion %d entro con la libre %d y el depositado %d al if\n", i, j, k);
                     dist = sqrt(dist2);
 
                     dep_x[counter] = pbc(distx * DATT / dist + dep_x[k], 1);
