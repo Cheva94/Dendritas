@@ -119,18 +119,33 @@ void neutral(double* lib, double* dep, int* count, const int j)
     }
 }
 
+void move(double* lib, double* dep, int* count)
+{
+    double tita, gx, gy;
+
+    for (int j = 0; j < 2 * NM; j += 2) {
+        tita = 2 * M_PI * rand() / (double)RAND_MAX;
+        gx = cos(tita);
+        gy = sin(tita);
+
+        *(lib + j + 0) += Q * gx;
+        *(lib + j + 1) += Q * gy + RY;
+
+        *(lib + j + 0) = pbc(*(lib + j + 0), 1);
+        *(lib + j + 1) = rbc(*(lib + j + 1), 1);
+
+        neutral(lib, dep, count, j);
+    }
+}
+
 int main()
 {
-    int i = 0, j;
-    // int n0 = ceil(1/DATT);
-    double tita, gx, gy;
+    int i = 0;
     double tSim;
     double *lib, *dep;
-
     int* count;
-    count = (int*)malloc(sizeof(int));
-    *count = N0;
 
+    count = (int*)malloc(sizeof(int));
     lib = (double*)malloc(2 * NM * sizeof(double));
     dep = (double*)malloc(2 * N0MAX * sizeof(double));
 
@@ -138,24 +153,11 @@ int main()
 
     init(lib, dep);
 
+    *count = N0;
     while (*(count) != N0MAX) {
-        for (j = 0; j < 2 * NM; j += 2) {
-            tita = 2 * M_PI * rand() / (double)RAND_MAX;
-            gx = cos(tita);
-            gy = sin(tita);
-
-            *(lib + j + 0) += Q * gx;
-            *(lib + j + 1) += Q * gy + RY;
-
-            *(lib + j + 0) = pbc(*(lib + j + 0), 1);
-            *(lib + j + 1) = rbc(*(lib + j + 1), 1);
-
-            neutral(lib, dep, count, j);
-        }
-
+        move(lib, dep, count);
         i++;
         tSim = i * DT;
-
         if (i % 2000 == 0) {
             printf(">>> Tiempo simulado: %f s >>> Li depositado: %d\n", tSim, *count);
         }
