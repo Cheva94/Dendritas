@@ -37,13 +37,13 @@
 #endif
 
 #ifndef N0 // cantidad inicial de Li depositado
-#define N0 77
+#define N0 77//5929 //77
 #endif
 
 #ifndef NM // cantidad de Li+ siempre presente
-#define NM 50
+#define NM 50//2500 //50
 #endif
 
 #ifndef N0MAX // cantidad máxima de Li a depositar
-#define N0MAX 600
+#define N0MAX 600//360000 //600
 #endif
