@@ -1,5 +1,5 @@
 CC       = gcc-11
-CFLAGS	 =
+CFLAGS	 = -O0
 WFLAGS	 = -std=gnu11 -Wall -Wextra -g
 CPPFLAGS =
 LDFLAGS	 = -lm
