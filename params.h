@@ -13,7 +13,7 @@
 #endif
 
 #ifndef LONG // largo de la caja en um
-#define LONG 1.67E-2
+#define LONG 1.0855E-1//1.67E-2
 #endif
 
 #ifndef DATT // separación entre litios contiguos en um
@@ -37,11 +37,11 @@
 #endif
 
 #ifndef N0 // cantidad inicial de Li depositado
-#define N0 77
+#define N0 500 //77
 #endif
 
 #ifndef NM // cantidad de Li+ siempre presente
-#define NM 50
+#define NM 100//50
 #endif
 
 #ifndef N0MAX // cantidad máxima de Li a depositar
