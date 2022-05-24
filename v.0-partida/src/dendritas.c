@@ -20,8 +20,7 @@ int main()
     srand(SEED);
     init(lib, dep);
 
-    while (*(count) != N0MAX) {
-        printf("Entre %d veces y el contador vale %d \n", i, *count);
+    while (*(count) != N0MAX2) {
         move(lib, dep, count);
         i++;
         tSim = i * DT;

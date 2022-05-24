@@ -1,0 +1,11 @@
+Parámetro >>> Valor
+Radio del Li >>> 0.000167 m
+Longitud de celda >>> 0.002170 m
+Separación interLi (norm) >>> 0.000217 
+Paso temporal >>> 0.001000 s
+Coef Dif >>> 0.000014 
+Li0 inicial >>> 16 
+Li+ siempre presente >>> 49, 
+Li0 máximo >>> 400 
+Li0 alcanzado >>> 20 
+Tiempo simulado >>> 0.015000 s

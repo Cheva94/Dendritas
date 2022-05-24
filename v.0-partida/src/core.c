@@ -111,19 +111,15 @@ void neutral(double* lib, double* dep, int* count, const int j)
         if (dist2 < DATT2) {
             dist = sqrt(dist2);
 
-            *(dep + 3 * (*count) + 0) = pbc(distx * DATT / dist + *(dep + k + 0), LONG);
-            *(dep + 3 * (*count) + 1) = pbc(disty * DATT / dist + *(dep + k + 1), LONG);
-            *(dep + 3 * (*count) + 2) = rbc(distz * DATT / dist + *(dep + k + 2), LONG);
+            *(dep + (*count) + 0) = pbc(distx * DATT / dist + *(dep + k + 0), LONG);
+            *(dep + (*count) + 1) = pbc(disty * DATT / dist + *(dep + k + 1), LONG);
+            *(dep + (*count) + 2) = rbc(distz * DATT / dist + *(dep + k + 2), LONG);
 
             *count += 1;
 
             *(lib + j + 0) = LONG * rand() / (double)RAND_MAX;
             *(lib + j + 1) = LONG * rand() / (double)RAND_MAX;
             *(lib + j + 2) = LONG * rand() / (double)RAND_MAX;
-
-            if (*(count) == N0MAX){
-                break;
-            }
         }
     }
 }
@@ -148,5 +144,6 @@ void move(double* lib, double* dep, int* count)
         *(lib + j + 2) = rbc(*(lib + j + 2), LONG);
 
         neutral(lib, dep, count, j);
+        printf("Al salir del %d-esimo neutral el contador vale %d \n\n", j, *count);
     }
 }
