@@ -49,13 +49,13 @@
 #endif
 
 #ifndef N02 // cantidad inicial de Li depositado sobre la longtiud LONG
-#define N02 pow(N0, 2)
+#define N02 N0 * N0
 #endif
 
 #ifndef N0MAX2 // cantidad inicial de Li depositado sobre la longtiud LONG
-#define N0MAX2 pow(N0MAX, 2)
+#define N0MAX2 N0MAX * N0MAX
 #endif
 
 #ifndef NM2 // cantidad inicial de Li depositado sobre la longtiud LONG
-#define NM2 pow(NM, 2)
+#define NM2 NM * NM
 #endif
