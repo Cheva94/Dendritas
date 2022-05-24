@@ -35,11 +35,10 @@ def main():
 
     Dep_init = pd.read_csv("Est0_Dep.csv").to_numpy()
     Lib_init = pd.read_csv("Est0_Lib.csv").to_numpy()
-    # Dep_end = pd.read_csv("Est1_Dep.csv").to_numpy()
-    # Lib_end =  pd.read_csv("Est1_Lib.csv").to_numpy()
+    Dep_end = pd.read_csv("Est1_Dep.csv").to_numpy()
+    Lib_end =  pd.read_csv("Est1_Lib.csv").to_numpy()
 
     fig = plt.figure()
-    # fig.set_size_inches(6, 6)
     ax = fig.add_subplot(projection='3d')
     ax.scatter(Dep_init[:, 0], Dep_init[:, 1], Dep_init[:, 2], label='Li$^0$')
     ax.scatter(Lib_init[:, 0], Lib_init[:, 1], Lib_init[:, 2], label='Li$^+$')
@@ -58,7 +57,22 @@ def main():
     # axf.legend(loc='center left', bbox_to_anchor=(1, 0.5), ncol = 1)
     # axf.set_title('Estado Final')
 
-    plt.savefig('Dendritas')
+    plt.savefig('Dendritas0')
+
+    fig = plt.figure()
+    ax = fig.add_subplot(projection='3d')
+    ax.scatter(Dep_end[:, 0], Dep_end[:, 1], Dep_end[:, 2], label='Li$^0$')
+    ax.scatter(Lib_end[:, 0], Lib_end[:, 1], Lib_end[:, 2], label='Li$^+$')
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_zlabel('z')
+    ax.legend()#loc='center left', bbox_to_anchor=(1, 0.5), ncol = 1)
+    ax.grid(False)
+    ax.set_title('Estado Final')
+    fig.set_size_inches(10, 10)
+
+    plt.savefig('Dendritas1')
+
     plt.show()
 
 if __name__ == "__main__":

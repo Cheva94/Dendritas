@@ -12,9 +12,9 @@
 #define RLI 1.67E-4
 #endif
 
-#ifndef LONG // largo de la caja en um
-#define LONG 1.67E-2
-#endif
+// #ifndef LONG // largo de la caja en um
+// #define LONG 1.67E-2
+// #endif
 
 #ifndef DATT // separación entre litios contiguos en um
 #define DATT 1.3 * RLI
@@ -37,11 +37,11 @@
 #endif
 
 #ifndef N0 // cantidad inicial de Li depositado sobre la longtiud LONG
-#define N0 77
+#define N0 20
 #endif
 
 #ifndef NM // cantidad de Li+ siempre presente sobre la longtiud LONG
-#define NM 50
+#define NM 10
 #endif
 
 #ifndef N0MAX // cantidad máxima de Li a depositar sobre la longtiud LONG
@@ -53,9 +53,13 @@
 #endif
 
 #ifndef N0MAX2 // cantidad inicial de Li depositado sobre la longtiud LONG
-#define N0MAX2 N0MAX * N0MAX
+#define N0MAX2 500//N0MAX * N0MAX
 #endif
 
 #ifndef NM2 // cantidad inicial de Li depositado sobre la longtiud LONG
 #define NM2 NM * NM
+#endif
+
+#ifndef LONG // largo de la caja en um
+#define LONG N0 * DATT
 #endif

@@ -21,6 +21,7 @@ int main()
     init(lib, dep);
 
     while (*(count) != N0MAX) {
+        printf("Entre %d veces y el contador vale %d \n", i, *count);
         move(lib, dep, count);
         i++;
         tSim = i * DT;
