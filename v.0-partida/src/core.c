@@ -29,15 +29,14 @@ void init(double* lib, double* dep)
 {
     int i, j, idx = 0;
 
-    for (i = 0; i < 3 * NM; i += 3) {
+    for (i = 0; i < 3 * NM2; i += 3) {
         *(lib + i + 0) = LONG * rand() / (double)RAND_MAX;
         *(lib + i + 1) = LONG * rand() / (double)RAND_MAX;
         *(lib + i + 2) = LONG * rand() / (double)RAND_MAX;
     }
 
-    int raaa = sqrt(N0);
-    for (i = 0; i < raaa; i++) {
-        for (j = 0; j < raaa; j++) {
+    for (i = 0; i < N0; i++) {
+        for (j = 0; j < N0; j++) {
             *(dep + idx + 0) = i * DATT;
             *(dep + idx + 1) = j * DATT;
             idx += 3;
@@ -49,12 +48,12 @@ void init(double* lib, double* dep)
     f_initLib = fopen("Est0_Lib.csv", "w");
 
     fprintf(f_initDep, "x, y, z\n");
-    for (i = 0; i < 3 * N0; i += 3) {
+    for (i = 0; i < 3 * N02; i += 3) {
         fprintf(f_initDep, "%f, %f, %f\n", *(dep + i + 0), *(dep + i + 1), *(dep + i + 2));
     }
 
     fprintf(f_initLib, "x, y, z\n");
-    for (i = 0; i < 3 * NM; i += 3) {
+    for (i = 0; i < 3 * NM2; i += 3) {
         fprintf(f_initLib, "%f, %f, %f\n", *(lib + i + 0), *(lib + i + 1), *(lib + i + 2));
     }
 
@@ -73,12 +72,12 @@ void end(double* lib, double* dep, int* count, double tSim)
     f_params = fopen("Parametros.csv", "w");
 
     fprintf(f_endDep, "x, y, z\n");
-    for (i = 0; i < 3 * N0MAX; i += 3) {
+    for (i = 0; i < 3 * N0MAX2; i += 3) {
         fprintf(f_endDep, "%f, %f, %f\n", *(dep + i + 0), *(dep + i + 1), *(dep + i + 2));
     }
 
     fprintf(f_endLib, "x, y, z\n");
-    for (i = 0; i < 3 * NM; i += 3) {
+    for (i = 0; i < 3 * NM2; i += 3) {
         fprintf(f_endLib, "%f, %f, %f\n", *(lib + i + 0), *(lib + i + 1), *(lib + i + 2));
     }
 
@@ -88,9 +87,9 @@ void end(double* lib, double* dep, int* count, double tSim)
     fprintf(f_params, "Separación interLi (norm) >>> %f \n", DATT);
     fprintf(f_params, "Paso temporal >>> %f s\n", DT);
     fprintf(f_params, "Coef Dif >>> %f \n", D);
-    fprintf(f_params, "Li0 inicial >>> %d \n", N0);
-    fprintf(f_params, "Li+ siempre presente >>> %d, \n", NM);
-    fprintf(f_params, "Li0 máximo >>> %d \n", N0MAX);
+    fprintf(f_params, "Li0 inicial >>> %d \n", N02);
+    fprintf(f_params, "Li+ siempre presente >>> %d, \n", NM2);
+    fprintf(f_params, "Li0 máximo >>> %d \n", N0MAX2);
     fprintf(f_params, "Li0 alcanzado >>> %d \n", *count);
     fprintf(f_params, "Tiempo simulado >>> %f s\n", tSim);
 
@@ -129,7 +128,7 @@ void move(double* lib, double* dep, int* count)
 {
     double tita, phi, gx, gy, gz;
 
-    for (int j = 0; j < 2 * NM; j += 2) {
+    for (int j = 0; j < 3 * NM2; j += 3) {
         tita = 2 * M_PI * rand() / (double)RAND_MAX;
         phi = M_PI * rand() / (double)RAND_MAX;
         gx = sin(phi) * cos(tita);

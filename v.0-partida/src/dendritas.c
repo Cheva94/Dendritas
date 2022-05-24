@@ -13,10 +13,10 @@ int main()
     int i = 0;
     double tSim = 0.0;
     int* count = (int*)malloc(sizeof(int));
-    double* lib = (double*)malloc(3 * NM * sizeof(double));
-    double* dep = (double*)malloc(3 * N0MAX * sizeof(double));
+    double* lib = (double*)malloc(3 * NM2 * sizeof(double));
+    double* dep = (double*)malloc(3 * N0MAX2 * sizeof(double));
 
-    *count = N0;
+    *count = N02;
     srand(SEED);
     init(lib, dep);
 

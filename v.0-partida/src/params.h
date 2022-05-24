@@ -36,14 +36,26 @@
 #define Q sqrt(2.0 * D * DT)
 #endif
 
-#ifndef N0 // cantidad inicial de Li depositado
-#define N0 77//5929 //77
+#ifndef N0 // cantidad inicial de Li depositado sobre la longtiud LONG
+#define N0 77
 #endif
 
-#ifndef NM // cantidad de Li+ siempre presente
-#define NM 50//2500 //50
+#ifndef NM // cantidad de Li+ siempre presente sobre la longtiud LONG
+#define NM 50
 #endif
 
-#ifndef N0MAX // cantidad máxima de Li a depositar
-#define N0MAX 600//360000 //600
+#ifndef N0MAX // cantidad máxima de Li a depositar sobre la longtiud LONG
+#define N0MAX 600
+#endif
+
+#ifndef N02 // cantidad inicial de Li depositado sobre la longtiud LONG
+#define N02 pow(N0, 2)
+#endif
+
+#ifndef N0MAX2 // cantidad inicial de Li depositado sobre la longtiud LONG
+#define N0MAX2 pow(N0MAX, 2)
+#endif
+
+#ifndef NM2 // cantidad inicial de Li depositado sobre la longtiud LONG
+#define NM2 pow(NM, 2)
 #endif
