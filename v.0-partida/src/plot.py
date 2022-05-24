@@ -39,15 +39,15 @@ def main():
 
     fig, (axi, axf) = plt.subplots(1,2)
 
-    axi.scatter(LiM_init[:, 0], LiM_init[:, 1], label='Li$^+$')
-    axi.scatter(Li0_init[:, 0], Li0_init[:, 1], label='Li$^0$')
+    axi.scatter(LiM_init[:, 0], LiM_init[:, 1], label='Li$^+$', zorder=5)
+    axi.scatter(Li0_init[:, 0], Li0_init[:, 1], label='Li$^0$', zorder=0)
     axi.set_xlabel('x')
     axi.set_ylabel('y')
     axi.legend(loc='center left', bbox_to_anchor=(1, 0.5), ncol = 1)
     axi.set_title('Estado Inicial')
 
-    axf.scatter(LiM_end[:, 0], LiM_end[:, 1], label='Li$^+$')
-    axf.scatter(Li0_end[:, 0], Li0_end[:, 1], label='Li$^0$')
+    axf.scatter(LiM_end[:, 0], LiM_end[:, 1], label='Li$^+$', zorder=5)
+    axf.scatter(Li0_end[:, 0], Li0_end[:, 1], label='Li$^0$', zorder=0)
     axf.set_xlabel('x')
     axf.set_ylabel('y')
     axf.legend(loc='center left', bbox_to_anchor=(1, 0.5), ncol = 1)
