@@ -39,8 +39,8 @@ void init(double* lib, double* dep)
         for (j = 0; j < N0; j++) {
             *(dep + idx + 0) = i * DATT;
             *(dep + idx + 1) = j * DATT;
-            idx += 3;
         }
+        idx += 3;
     }
 
     FILE *f_initDep, *f_initLib;
