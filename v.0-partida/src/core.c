@@ -35,12 +35,13 @@ void init(double* lib, double* dep)
         *(lib + i + 2) = LONG * rand() / (double)RAND_MAX;
     }
 
-    for (i = 0; i < N0; i++) {
-        for (j = 0; j < N0; j++) {
+    int raaa = sqrt(N0);
+    for (i = 0; i < raaa; i++) {
+        for (j = 0; j < raaa; j++) {
             *(dep + idx + 0) = i * DATT;
             *(dep + idx + 1) = j * DATT;
+            idx += 3;
         }
-        idx += 3;
     }
 
     FILE *f_initDep, *f_initLib;
