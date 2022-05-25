@@ -5,26 +5,6 @@
 #include <math.h>
 #include <stdlib.h>
 
-double pbc(double coord, const double cell_length)
-{
-    if (coord < 0) {
-        coord += cell_length;
-    } else if (coord > cell_length) {
-        coord -= cell_length;
-    }
-    return coord;
-}
-
-double rbc(double coord, const double cell_length)
-{
-    if (coord < 0) {
-        coord = fabs(coord);
-    } else if (coord > cell_length) {
-        coord = 2 * cell_length - coord;
-    }
-    return coord;
-}
-
 void init(double* lib, double* dep)
 {
     int i, idx = 0;
@@ -57,41 +37,24 @@ void init(double* lib, double* dep)
     fclose(f_initLib);
 }
 
-void end(double* lib, double* dep, int* count, double tSim)
+double pbc(double coord, const double cell_length)
 {
-    int i;
-
-    FILE *f_endDep, *f_endLib, *f_params;
-
-    f_endDep = fopen("Est1_Dep.csv", "w");
-    f_endLib = fopen("Est1_Lib.csv", "w");
-    f_params = fopen("Parametros.csv", "w");
-
-    fprintf(f_endDep, "x, y\n");
-    for (i = 0; i < 2 * N0MAX; i += 2) {
-        fprintf(f_endDep, "%f, %f\n", *(dep + i + 0), *(dep + i + 1));
+    if (coord < 0) {
+        coord += cell_length;
+    } else if (coord > cell_length) {
+        coord -= cell_length;
     }
+    return coord;
+}
 
-    fprintf(f_endLib, "x, y\n");
-    for (i = 0; i < 2 * NM; i += 2) {
-        fprintf(f_endLib, "%f, %f\n", *(lib + i + 0), *(lib + i + 1));
+double rbc(double coord, const double cell_length)
+{
+    if (coord < 0) {
+        coord = fabs(coord);
+    } else if (coord > cell_length) {
+        coord = 2 * cell_length - coord;
     }
-
-    fprintf(f_params, "Parámetro >>> Valor\n");
-    fprintf(f_params, "Radio del Li >>> %f m\n", RLI);
-    fprintf(f_params, "Longitud de celda >>> %f m\n", LONG);
-    fprintf(f_params, "Separación interLi (norm) >>> %f \n", DATT);
-    fprintf(f_params, "Paso temporal >>> %f s\n", DT);
-    fprintf(f_params, "Coef Dif >>> %f \n", D);
-    fprintf(f_params, "Li0 inicial >>> %d \n", N0);
-    fprintf(f_params, "Li+ siempre presente >>> %d, \n", NM);
-    fprintf(f_params, "Li0 máximo >>> %d \n", N0MAX);
-    fprintf(f_params, "Li0 alcanzado >>> %d \n", *count);
-    fprintf(f_params, "Tiempo simulado >>> %f s\n", tSim);
-
-    fclose(f_endDep);
-    fclose(f_endLib);
-    fclose(f_params);
+    return coord;
 }
 
 void neutral(double* lib, double* dep, int* count, const int j)
@@ -134,4 +97,41 @@ void move(double* lib, double* dep, int* count)
 
         neutral(lib, dep, count, j);
     }
+}
+
+void end(double* lib, double* dep, int* count, double tSim)
+{
+    int i;
+
+    FILE *f_endDep, *f_endLib, *f_params;
+
+    f_endDep = fopen("Est1_Dep.csv", "w");
+    f_endLib = fopen("Est1_Lib.csv", "w");
+    f_params = fopen("Parametros.csv", "w");
+
+    fprintf(f_endDep, "x, y\n");
+    for (i = 0; i < 2 * N0MAX; i += 2) {
+        fprintf(f_endDep, "%f, %f\n", *(dep + i + 0), *(dep + i + 1));
+    }
+
+    fprintf(f_endLib, "x, y\n");
+    for (i = 0; i < 2 * NM; i += 2) {
+        fprintf(f_endLib, "%f, %f\n", *(lib + i + 0), *(lib + i + 1));
+    }
+
+    fprintf(f_params, "Parámetro >>> Valor\n");
+    fprintf(f_params, "Radio del Li >>> %f m\n", RLI);
+    fprintf(f_params, "Longitud de celda >>> %f m\n", LONG);
+    fprintf(f_params, "Separación interLi (norm) >>> %f \n", DATT);
+    fprintf(f_params, "Paso temporal >>> %f s\n", DT);
+    fprintf(f_params, "Coef Dif >>> %f \n", D);
+    fprintf(f_params, "Li0 inicial >>> %d \n", N0);
+    fprintf(f_params, "Li+ siempre presente >>> %d, \n", NM);
+    fprintf(f_params, "Li0 máximo >>> %d \n", N0MAX);
+    fprintf(f_params, "Li0 alcanzado >>> %d \n", *count);
+    fprintf(f_params, "Tiempo simulado >>> %f s\n", tSim);
+
+    fclose(f_endDep);
+    fclose(f_endLib);
+    fclose(f_params);
 }
