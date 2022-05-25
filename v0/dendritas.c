@@ -9,8 +9,8 @@
 
 int main()
 {
-    int flopGral = 0, flopNeu = 0;
     int prog = 0;
+    double flopGral = 0.0, flopNeu = 0.0;
     double tSim = 0.0;
     double* lib = (double*)malloc(2 * NM * sizeof(double));
     double* dep = (double*)malloc(2 * N0MAX * sizeof(double));
@@ -34,11 +34,9 @@ int main()
     }
     double wall = wtime() - start; // res >> 1
 
-    double gFlopNeu = flopNeu * 1E-9 / wall;
-    double gFlopGral = flopGral * 1E-9 / wall;
-
     end(lib, dep, tSim, wall, gFlopNeu, gFlopGral);
-    printf("Hay un total de %d Li depositados. Tiempo simulando = %.2f ms --- WALL TIME = %.2f s.\n", N0MAX, tSim, wall);
+    printf("Hay un total de %d Li depositados.\n", N0MAX);
+    printf("Tiempo simulando = %.2f ms --- WALL TIME = %.2f s.\n", tSim, wall);
     printf("GFLOPS neutral() = %f\n", gFlopNeu);
     printf("GFLOPS ./dendritas = %f\n\n\n\n\n", gFlopGral);
 
