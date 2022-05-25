@@ -139,12 +139,12 @@ void end(double* lib, double* dep, double tSim, double wall, double gFlopNeu, do
     fprintf(f_params, "Longitud de celda >>> %f um\n", LONG);
     fprintf(f_params, "Paso temporal >>> %f ms\n", DT);
     fprintf(f_params, "Coeficiente de difusión >>> %f um^2/s\n", D);
-    fprintf(f_params, "Li libre siempre presente >>> %d, \n", NM);
-    fprintf(f_params, "Li depositado inicial >>> %d \n", N0);
-    fprintf(f_params, "Li depositado final >>> %d \n", N0MAX);
+    fprintf(f_params, "Li libre siempre presente >>> %d\n", NM);
+    fprintf(f_params, "Li depositado inicial >>> %d\n", N0);
+    fprintf(f_params, "Li depositado final >>> %d\n", N0MAX);
     fprintf(f_params, "Tiempo simulado >>> %f ms\n", tSim);
     fprintf(f_params, "WALL TIME >>> %f s\n", wall);
-    fprintf(f_params, "GFLOPS nuetral() >>> %f \n", gFlopNeu);
-    fprintf(f_params, "GFLOPS ./dendritas >>> %f \n\n\n\n\n", gFlopGral);
+    fprintf(f_params, "GFLOPS nuetral() >>> %f\n", gFlopNeu);
+    fprintf(f_params, "GFLOPS ./dendritas >>> %f\n", gFlopGral);
     fclose(f_params);
 }

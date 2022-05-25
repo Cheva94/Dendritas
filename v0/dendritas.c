@@ -39,4 +39,7 @@ int main()
 
     end(lib, dep, tSim, wall, gFlopNeu, gFlopGral);
     printf("Hay un total de %d Li depositados. Tiempo simulando = %.2f ms --- WALL TIME = %.2f s.\n", N0MAX, tSim, wall);
+    printf("GFLOPS neutral() = %f\n", gFlopNeu);
+    printf("GFLOPS ./dendritas = %f\n\n\n\n\n", gFlopGral);
+
 }
