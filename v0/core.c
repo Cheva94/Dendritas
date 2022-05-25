@@ -108,7 +108,7 @@ void move(double* lib, double* dep, int* count, int* flopGral, int* flopNeu)
     }
 } // flop = NM * (14 + count * 6 + if * 17)
 
-void end(double* lib, double* dep, int* count, double tSim)
+void end(double* lib, double* dep, double tSim, double wall, double gFlopNeu, double gFlopGral)
 {
     int i;
 
@@ -134,15 +134,17 @@ void end(double* lib, double* dep, int* count, double tSim)
     f_params = fopen("Parametros.csv", "w");
 
     fprintf(f_params, "Parámetro >>> Valor\n");
-    fprintf(f_params, "Radio del Li >>> %f m\n", RLI);
-    fprintf(f_params, "Longitud de celda >>> %f m\n", LONG);
-    fprintf(f_params, "Separación interLi (norm) >>> %f \n", DATT);
-    fprintf(f_params, "Paso temporal >>> %f s\n", DT);
-    fprintf(f_params, "Coef Dif >>> %f \n", D);
-    fprintf(f_params, "Li0 inicial >>> %d \n", N0);
-    fprintf(f_params, "Li+ siempre presente >>> %d, \n", NM);
-    fprintf(f_params, "Li0 máximo >>> %d \n", N0MAX);
-    fprintf(f_params, "Li0 alcanzado >>> %d \n", *count);
-    fprintf(f_params, "Tiempo simulado >>> %f s\n", tSim);
+    fprintf(f_params, "Radio del Li >>> %f um\n", RLI);
+    fprintf(f_params, "Separación entre Li >>> %f um\n", DATT);
+    fprintf(f_params, "Longitud de celda >>> %f um\n", LONG);
+    fprintf(f_params, "Paso temporal >>> %f ms\n", DT);
+    fprintf(f_params, "Coeficiente de difusión >>> %f um^2/s\n", D);
+    fprintf(f_params, "Li libre siempre presente >>> %d, \n", NM);
+    fprintf(f_params, "Li depositado inicial >>> %d \n", N0);
+    fprintf(f_params, "Li depositado final >>> %d \n", N0MAX);
+    fprintf(f_params, "Tiempo simulado >>> %f ms\n", tSim);
+    fprintf(f_params, "WALL TIME >>> %f s\n", wall);
+    fprintf(f_params, "GFLOPS nuetral() >>> %f \n", gFlopNeu);
+    fprintf(f_params, "GFLOPS ./dendritas >>> %f \n\n\n\n\n", gFlopGral);
     fclose(f_params);
 }

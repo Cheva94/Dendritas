@@ -9,7 +9,6 @@
 
 int main()
 {
-    double start = wtime();
     int flopGral = 0, flopNeu = 0;
     int prog = 0;
     double tSim = 0.0;
@@ -20,23 +19,23 @@ int main()
     *count = N0;
 
     init(lib, dep);
-    flopGral = 4 * NM + 2 * N0;
 
+    double start = wtime();
     while (*(count) != N0MAX) {
         move(lib, dep, count, &flopGral, &flopNeu);
         tSim += DT; // sum >> 1
-        flopGral += 1 + flopNeu;
+        flopGral += flopNeu;
 
         prog++;
         if (prog % 10000 == 0) {
             printf(">>> Hay %d Li depositados. Progreso = %d %%.\n", (*count), 100 * ((*count) - N0) / (N0MAX - N0));
-            printf("Flop Gral = %d \n", flopGral);
-            printf("Flop Neu = %d \n", flopNeu);
         }
     }
-
-    end(lib, dep, count, tSim);
     double wall = wtime() - start; // res >> 1
-    flopGral++;
+
+    double gFlopNeu = flopNeu * 1E-9 / wall;
+    double gFlopGral = flopGral * 1E-9 / wall;
+
+    end(lib, dep, tSim, wall, gFlopNeu, gFlopGral);
     printf("Hay un total de %d Li depositados. Tiempo simulando = %.2f ms --- WALL TIME = %.2f s.\n", N0MAX, tSim, wall);
 }
