@@ -58,7 +58,7 @@ double rbc(double coord, const double cell_length)
     return coord;
 } // flop = 3
 
-void neutral(double* lib, double* dep, int* count, const int j, int* flopGral, int* flopNeu)
+void neutral(double* lib, double* dep, int* count, const int j)
 {
     double distx, disty, dist, dist2;
 
@@ -67,8 +67,8 @@ void neutral(double* lib, double* dep, int* count, const int j, int* flopGral, i
         disty = *(lib + j + 1) - *(dep + k + 1); // res >> 1
         dist2 = pow(distx, 2) + pow(disty, 2); // pow sum >> 3
 
-        (*flopGral) += 6;
-        (*flopNeu) += 6;
+        // (*flopGral) += 6;
+        // (*flopNeu) += 6;
 
         if (dist2 < DATT2) { // comp >> 1
             dist = sqrt(dist2); // sqrt >> 1
@@ -81,8 +81,8 @@ void neutral(double* lib, double* dep, int* count, const int j, int* flopGral, i
             *(lib + j + 0) = LONG * rand() / (double)RAND_MAX; // prod div >> 2
             *(lib + j + 1) = LONG * rand() / (double)RAND_MAX; // prod div >> 2
 
-            (*flopGral) += 17;
-            (*flopNeu) += 17;
+            // (*flopGral) += 17;
+            // (*flopNeu) += 17;
         } // flop dentro del if = 17
     } // flop hasta el if (incluido) = count * 6
 } // flop = count * 6 + if * 17
@@ -104,8 +104,7 @@ void move(double* lib, double* dep, int* count, int* flopGral, int* flopNeu)
 
         (*flopGral) += 14;
 
-        // neutral(lib, dep, count, j); // count * 6 + if * 17
-        neutral(lib, dep, count, j, flopGral, flopNeu); // count * 6 + if * 17
+        neutral(lib, dep, count, j); // count * 6 + if * 17
     }
 } // flop = NM * (14 + count * 6 + if * 17)
 
