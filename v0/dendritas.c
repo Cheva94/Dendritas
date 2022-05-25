@@ -9,29 +9,27 @@
 
 int main()
 {
-    int i = 0;
-    double tSim;
     double start = wtime();
+    double tSim = 0.0;
     double* lib = (double*)malloc(2 * NM * sizeof(double));
     double* dep = (double*)malloc(2 * N0MAX * sizeof(double));
     int* count = (int*)malloc(sizeof(int));
-
     srand(SEED);
+    *count = N0;
 
     init(lib, dep);
 
-    *count = N0; // ver de poner en la definicion en vez del malloc
-
     while (*(count) != N0MAX) {
         move(lib, dep, count);
-        i++;
-        tSim = i * DT;
-        if (i % 10000 == 0) {
-            printf(">>> Tiempo simulado: %.0f ms >>> Li depositado: %d\n", tSim, *count);
+        tSim += DT; // sum >> 1
+        if (tSim % 10000 == 0) {
+            printf(">>> Contador %d.\n", (*count));
+            printf(">>> Progreso del %f %.\n", ((*count) - N0) / (N0MAX - N0));
+            printf(">>> Progreso del %f %.\n", ((*count)) / (N0MAX));
         }
     }
 
     end(lib, dep, count, tSim);
-    double elapsed = wtime() - start;
-    printf("Se alcanzó la cantidad máxima de Li0 (%d) simulando durante %.2f ms. Tiempo transcrurrido %.2f s.\n", *count, tSim, elapsed);
+    double wall = wtime() - start; // res >> 1
+    printf("Hay un total de %d Li depositados. Tiempo simulando = %.2f ms --- WALL TIME = %.2f s.\n", N0MAX, tSim, wall);
 }
