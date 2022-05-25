@@ -81,7 +81,7 @@ void neutral(double* lib, double* dep, int* count, const int j)
     } // flop hasta el if (incluido) = count * 6
 } // flop = count * 6 + if * 17
 
-void move(double* lib, double* dep, int* count)
+void move(double* lib, double* dep, int* count, int* flopGral, int* flopNeu)
 {
     double tita, gx, gy;
 
@@ -98,6 +98,8 @@ void move(double* lib, double* dep, int* count)
 
         neutral(lib, dep, count, j); // count * 6 + if * 17
     }
+    (*flopGral)++;
+    (*flopNeu)++;
 } // flop = NM * (14 + count * 6 + if * 17)
 
 void end(double* lib, double* dep, int* count, double tSim)
