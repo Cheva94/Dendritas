@@ -25,7 +25,7 @@ int main()
     while (*(count) != N0MAX) {
         move(lib, dep, count, &flopGral, &flopNeu);
         tSim += DT; // sum >> 1
-        flopGral++;
+        flopGral += 1 + flopNeu;
 
         prog++;
         if (prog % 10000 == 0) {
