@@ -5,10 +5,8 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=1
 
+echo ">>>>> Corriendo con GCC-11 <<<<<"
 cat flags-gcc.txt | while read p
 do
-    make clean && make CFLAGS="${p}"
-    ./dendritas
+    echo ">>>>> Flags >>>>> ${p}" && make clean && make CFLAGS="${p}" && ./dendritas
 done
-
-srun ./dendritas
