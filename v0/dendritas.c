@@ -25,13 +25,14 @@ int main()
     while (*(count) != N0MAX) {
         move(lib, dep, count, &flopGral, &flopNeu);
         tSim += DT; // sum >> 1
+        flopGral++;
+
         prog++;
         if (prog % 10000 == 0) {
-            printf(">>> Hay %d Li depositados. Porcentaje de avance = %d.\n", (*count), 100 * ((*count) - N0) / (N0MAX - N0));
+            printf(">>> Hay %d Li depositados. Progreso = %d %%.\n", (*count), 100 * ((*count) - N0) / (N0MAX - N0));
+            printf("Flop Gral = %d \n", flopGral);
+            printf("Flop Neu = %d \n", flopNeu);
         }
-        flopGral++;
-        printf("Flop Gral = %d \n", flopGral);
-        printf("Flop Neu = %d \n", flopNeu);
     }
 
     end(lib, dep, count, tSim);
