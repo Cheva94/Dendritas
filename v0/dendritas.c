@@ -19,6 +19,7 @@ int main()
     *count = N0;
 
     init(lib, dep);
+    printf(">>> Hay %d Li depositados. Progreso = 0 %%.\n", N0;
 
     double start = wtime();
     while (*(count) != N0MAX) {
