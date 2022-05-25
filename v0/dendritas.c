@@ -34,10 +34,15 @@ int main()
     }
     double wall = wtime() - start; // res >> 1
 
-    end(lib, dep, tSim, wall, gFlopNeu, gFlopGral);
+    // double gFlopNeu = 0.000000001 * flopNeu / wall;
+    // double gFlopGral = 0.000000001 * flopGral / wall;
+    flopNeu *= 0.000000001 / wall;
+    flopGral *= 0.000000001 / wall;
+
+    end(lib, dep, tSim, wall, flopNeu, flopGral);
     printf("Hay un total de %d Li depositados.\n", N0MAX);
     printf("Tiempo simulando = %.2f ms --- WALL TIME = %.2f s.\n", tSim, wall);
-    printf("GFLOPS neutral() = %f\n", gFlopNeu);
-    printf("GFLOPS ./dendritas = %f\n\n\n\n\n", gFlopGral);
+    printf("GFLOPS neutral() = %f\n", flopNeu);
+    printf("GFLOPS ./dendritas = %f\n\n\n\n\n", flopGral);
 
 }
