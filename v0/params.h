@@ -12,8 +12,12 @@
 #define RLI 1.67E-4
 #endif
 
-#ifndef LONG // largo de la caja en um
-#define LONG 1.0855E-1//1.67E-2
+#ifndef LONGX // largo de la caja en x, en um
+#define LONGX 1.0855E-1
+#endif
+
+#ifndef LONGY // largo de la caja en y, en um
+#define LONGY 1.7368E-2
 #endif
 
 #ifndef DATT // separación entre litios contiguos en um
@@ -45,5 +49,5 @@
 #endif
 
 #ifndef N0MAX // cantidad máxima de Li a depositar
-#define N0MAX 520//1500//600
+#define N0MAX 1500//600
 #endif

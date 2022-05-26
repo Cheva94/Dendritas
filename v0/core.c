@@ -13,8 +13,8 @@ void init(double* lib, double* dep)
     f_initLib = fopen("Est0_Lib.csv", "w");
 
     for (i = 0; i < 2 * NM; i += 2) { // NM it
-        *(lib + i + 0) = LONG * rand() / (double)RAND_MAX; // prod div >> 2
-        *(lib + i + 1) = LONG * rand() / (double)RAND_MAX; // prod div >> 2
+        *(lib + i + 0) = LONGX * rand() / (double)RAND_MAX; // prod div >> 2
+        *(lib + i + 1) = LONGY * rand() / (double)RAND_MAX; // prod div >> 2
     } // flop = 4 * NM
 
     fprintf(f_initLib, "x, y\n");
@@ -73,13 +73,13 @@ double neutral(double* lib, double* dep, int* count, const int j)
         if (dist2 < DATT2) { // comp >> 1
             dist = sqrt(dist2); // sqrt >> 1
 
-            *(dep + 2 * (*count) + 0) = pbc(distx * DATT / dist + *(dep + k + 0), LONG); // mul div sum pbc >> 5
-            *(dep + 2 * (*count) + 1) = rbc(disty * DATT / dist + *(dep + k + 1), LONG); // mul div sum rbc >> 6
+            *(dep + 2 * (*count) + 0) = pbc(distx * DATT / dist + *(dep + k + 0), LONGX); // mul div sum pbc >> 5
+            *(dep + 2 * (*count) + 1) = rbc(disty * DATT / dist + *(dep + k + 1), LONGY); // mul div sum rbc >> 6
 
             *count += 1; // sum >> 1
 
-            *(lib + j + 0) = LONG * rand() / (double)RAND_MAX; // prod div >> 2
-            *(lib + j + 1) = LONG * rand() / (double)RAND_MAX; // prod div >> 2
+            *(lib + j + 0) = LONGX * rand() / (double)RAND_MAX; // prod div >> 2
+            *(lib + j + 1) = LONGY * rand() / (double)RAND_MAX; // prod div >> 2
 
             flop += 17;
         } // flop dentro del if = 17
@@ -99,8 +99,8 @@ void move(double* lib, double* dep, int* count, double* flopGral)//, double* flo
         *(lib + j + 0) += Q * gx; // prod sum >> 2
         *(lib + j + 1) += Q * gy; // prod sum >> 2
 
-        *(lib + j + 0) = pbc(*(lib + j + 0), LONG); // pbc >> 2
-        *(lib + j + 1) = rbc(*(lib + j + 1), LONG); // rbc >> 3
+        *(lib + j + 0) = pbc(*(lib + j + 0), LONGX); // pbc >> 2
+        *(lib + j + 1) = rbc(*(lib + j + 1), LONGY); // rbc >> 3
 
         (*flopGral) += 14;
 
@@ -136,7 +136,8 @@ void end(double* lib, double* dep, double tSim, double wall, double* flopGral)//
     fprintf(f_params, "Parámetro >>> Valor\n");
     fprintf(f_params, "Radio del Li >>> %f um\n", RLI);
     fprintf(f_params, "Separación entre Li >>> %f um\n", DATT);
-    fprintf(f_params, "Longitud de celda >>> %f um\n", LONG);
+    fprintf(f_params, "Longitud de celda en x >>> %f um\n", LONGX);
+    fprintf(f_params, "Longitud de celda en y >>> %f um\n", LONGY);
     fprintf(f_params, "Paso temporal >>> %f ms\n", DT);
     fprintf(f_params, "Coeficiente de difusión >>> %f um^2/s\n", D);
     fprintf(f_params, "Li libre siempre presente >>> %d\n", NM);
