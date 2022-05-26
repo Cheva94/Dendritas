@@ -87,7 +87,7 @@ double neutral(double* lib, double* dep, int* count, const int j)
     return flop;
 } // flop = count * 6 + if * 17
 
-void move(double* lib, double* dep, int* count, double* flopGral, double* flopNeu)
+void move(double* lib, double* dep, int* count, double* flopGral)//, double* flopNeu)
 {
     double tita, gx, gy;
 
@@ -104,11 +104,11 @@ void move(double* lib, double* dep, int* count, double* flopGral, double* flopNe
 
         (*flopGral) += 14;
 
-        (*flopNeu) += neutral(lib, dep, count, j); // count * 6 + if * 17
+        (*flopGral) += neutral(lib, dep, count, j); // count * 6 + if * 17
     }
 } // flop = NM * (14 + count * 6 + if * 17)
 
-void end(double* lib, double* dep, double tSim, double wall, double* flopGral, double* flopNeu)
+void end(double* lib, double* dep, double tSim, double wall, double* flopGral)//, double* flopNeu)
 {
     int i;
 
@@ -144,7 +144,7 @@ void end(double* lib, double* dep, double tSim, double wall, double* flopGral, d
     fprintf(f_params, "Li depositado final >>> %d\n", N0MAX);
     fprintf(f_params, "Tiempo simulado >>> %f ms\n", tSim);
     fprintf(f_params, "WALL TIME >>> %f s\n", wall);
-    fprintf(f_params, "GFLOPS nuetral() >>> %f\n", *flopNeu);
+    // fprintf(f_params, "GFLOPS nuetral() >>> %f\n", *flopNeu);
     fprintf(f_params, "GFLOPS ./dendritas >>> %f\n", *flopGral);
     fclose(f_params);
 }

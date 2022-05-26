@@ -45,5 +45,5 @@
 #endif
 
 #ifndef N0MAX // cantidad máxima de Li a depositar
-#define N0MAX 1500//600
+#define N0MAX 520//1500//600
 #endif
