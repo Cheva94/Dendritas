@@ -50,7 +50,7 @@ def main():
     axf.scatter(Li0_end[:, 0], Li0_end[:, 1], label='Dep.', zorder=0)
     axf.set_xlabel('x')
     axf.set_ylabel('y')
-    # axf.set_ylim(-0.000001, 0.002)
+    # axf.set_ylim(-0.02, 0.01)
     axf.legend(loc='center left', bbox_to_anchor=(1, 0.5), ncol = 1)
     axf.set_title('Estado Final')
 

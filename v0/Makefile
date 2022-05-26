@@ -1,5 +1,5 @@
 CC       = gcc-11
-CFLAGS	 = 
+CFLAGS	 =
 WFLAGS	 = -std=gnu11 -Wall -Wextra -g
 CPPFLAGS =
 LDFLAGS	 = -lm
@@ -17,7 +17,7 @@ dendritas: $(OBJS)
 	$(CC) $(WFLAGS) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(PROG) *.o .depend #Dendritas.png *.csv
+	rm -f $(PROG) *.o .depend
 
 .depend: $(SRCS)
 	$(CC) -MM $^ > $@
