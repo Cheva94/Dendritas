@@ -38,7 +38,7 @@ int main()
     *flopNeu *= 0.000000001 / wall;
     *flopGral *= 0.000000001 / wall;
 
-    end(lib, dep, tSim, wall, flopNeu, flopGral);
+    end(lib, dep, tSim, wall, flopGral, flopNeu);
     printf("Hay un total de %d Li depositados.\n", N0MAX);
     printf("Tiempo simulando = %.2f ms\n", tSim);
     printf("WALL TIME = %.2f s\n", wall);

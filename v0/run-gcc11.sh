@@ -8,5 +8,6 @@
 echo "Corriendo con GCC-11"
 cat flags-gcc.txt | while read p
 do
-    echo ">>>>> INICIO FLAGS ${p}" && make clean && make CFLAGS="${p}" && ./dendritas && echo "<<<<< FIN FLAGS ${p}"
+    echo ">>>>> INICIO FLAGS ${p}" && make clean && make CFLAGS="${p}" dendritas && ./dendritas && echo "<<<<< FIN FLAGS ${p}"
 done
+make clean
