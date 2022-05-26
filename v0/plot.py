@@ -10,7 +10,7 @@ plt.rcParams["font.size"] = 35
 
 plt.rcParams["axes.labelweight"] = "bold"
 plt.rcParams["axes.linewidth"] = 3
-plt.rcParams["axes.prop_cycle"] = cycler('color', ['tab:orange', 'mediumseagreen', 'm', 'y', 'k'])
+plt.rcParams["axes.prop_cycle"] = cycler('color', ['k', 'tab:orange', 'mediumseagreen'])
 
 plt.rcParams['xtick.major.size'] = 10
 plt.rcParams['xtick.major.width'] = 3
@@ -39,17 +39,19 @@ def main():
 
     fig, (axi, axf) = plt.subplots(1,2)
 
+    axi.scatter(Li0_init[:, 0], Li0_init[:, 2], label='"Ánodo"', zorder=0)
     axi.scatter(LiM_init[:, 0], LiM_init[:, 1], label='Libre', zorder=5)
-    axi.scatter(Li0_init[:, 0], Li0_init[:, 1], label='Dep.', zorder=0)
-    axi.set_xlabel('x')
-    axi.set_ylabel('y')
+    axi.scatter(Li0_init[:, 0], Li0_init[:, 1], label='Cátodo', zorder=0)
+    axi.set_xlabel('Ancho de pila [um]')
+    axi.set_ylabel('Alto de celda [um]')
     axi.legend(loc='center left', bbox_to_anchor=(1, 0.5), ncol = 1)
     axi.set_title('Estado Inicial')
 
+    axf.scatter(Li0_init[:, 0], Li0_init[:, 2], label='"Ánodo"', zorder=0)
     axf.scatter(LiM_end[:, 0], LiM_end[:, 1], label='Libre', zorder=5)
-    axf.scatter(Li0_end[:, 0], Li0_end[:, 1], label='Dep.', zorder=0)
-    axf.set_xlabel('x')
-    axf.set_ylabel('y')
+    axf.scatter(Li0_end[:, 0], Li0_end[:, 1], label='Cátodo', zorder=0)
+    axf.set_xlabel('Ancho de pila [um]')
+    axf.set_ylabel('Alto de celda [um]')
     # axf.set_ylim(-0.02, 0.01)
     axf.legend(loc='center left', bbox_to_anchor=(1, 0.5), ncol = 1)
     axf.set_title('Estado Final')

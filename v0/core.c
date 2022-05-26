@@ -31,9 +31,9 @@ void init(double* lib, double* dep)
         idx += 2; // sum >> 1
     } // flop = 2 * N0
 
-    fprintf(f_initDep, "x, y\n");
+    fprintf(f_initDep, "x, yCat, yAn\n");
     for (i = 0; i < 2 * N0; i += 2) {
-        fprintf(f_initDep, "%f, %f\n", *(dep + i + 0), *(dep + i + 1));
+        fprintf(f_initDep, "%f, %f, %f\n", *(dep + i + 0), *(dep + i + 1), *(dep + i + 1) + LONGY);
     }
     fclose(f_initDep);
 } // flop = 4 * NM + 2 * N0
