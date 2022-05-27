@@ -14,7 +14,8 @@ void init(double* lib, double* dep)
 
     for (i = 0; i < 2 * NL; i += 2) { // NL it
         *(lib + i + 0) = LX * rand() / (double)RAND_MAX; // prod div >> 2
-        *(lib + i + 1) = LY * rand() / (double)RAND_MAX; // prod div >> 2
+        // *(lib + i + 1) = LY * rand() / (double)RAND_MAX; // prod div >> 2
+        *(lib + i + 1) = 2.0E-3 - (2.0E-3 - LY) * rand() / (double)RAND_MAX; // ops flot >> 3
     } // flop = 4 * NL
 
     fprintf(f_initLib, "x, y\n");
@@ -58,36 +59,7 @@ double rbc(double coord, const double cell_length)
     return coord;
 } // flop = 3
 
-double neutral(double* lib, double* dep, int* count, const int j)
-{
-    double distx, disty, dist, dist2;
-    double flop = 0.0;
-
-    for (int k = 0; k < 2 * (*count); k += 2) { // count it
-        distx = *(lib + j + 0) - *(dep + k + 0); // res >> 1
-        disty = *(lib + j + 1) - *(dep + k + 1); // res >> 1
-        dist2 = pow(distx, 2) + pow(disty, 2); // pow sum >> 3
-
-        flop += 6;
-
-        if (dist2 < DAT2) { // comp >> 1
-            dist = sqrt(dist2); // sqrt >> 1
-
-            *(dep + 2 * (*count) + 0) = pbc(distx * DAT / dist + *(dep + k + 0), LX); // mul div sum pbc >> 5
-            *(dep + 2 * (*count) + 1) = rbc(disty * DAT / dist + *(dep + k + 1), LY); // mul div sum rbc >> 6
-
-            *count += 1; // sum >> 1
-
-            *(lib + j + 0) = LX * rand() / (double)RAND_MAX; // prod div >> 2
-            *(lib + j + 1) = LY * rand() / (double)RAND_MAX; // prod div >> 2
-
-            flop += 17;
-        } // flop dentro del if = 17
-    } // flop hasta el if (incluido) = count * 6
-    return flop;
-} // flop = count * 6 + if * 17
-
-void move(double* lib, double* dep, int* count, double* flopGral)//, double* flopNeu)
+void move(double* lib)
 {
     double tita, gx, gy;
 
@@ -101,12 +73,39 @@ void move(double* lib, double* dep, int* count, double* flopGral)//, double* flo
 
         *(lib + j + 0) = pbc(*(lib + j + 0), LX); // pbc >> 2
         *(lib + j + 1) = rbc(*(lib + j + 1), LY); // rbc >> 3
-
-        (*flopGral) += 14;
-
-        (*flopGral) += neutral(lib, dep, count, j); // count * 6 + if * 17
     }
-} // flop = NL * (14 + count * 6 + if * 17)
+} // flop = NL * 14
+
+double update(double* lib, double* dep, int* count)
+{
+    double distx, disty, dist, dist2;
+    double flop = 0.0;
+
+    for (int j = 0; j < 2 * NL; j += 2) { // NL it
+        for (int k = 0; k < 2 * (*count); k += 2) { // count it
+            distx = *(lib + j + 0) - *(dep + k + 0); // res >> 1
+            disty = *(lib + j + 1) - *(dep + k + 1); // res >> 1
+            dist2 = pow(distx, 2) + pow(disty, 2); // pow sum >> 3
+
+            if (dist2 < DAT2) { // comp >> 1
+                dist = sqrt(dist2); // sqrt >> 1
+
+                *(dep + 2 * (*count) + 0) = pbc(distx * DAT / dist + *(dep + k + 0), LX); // mul div sum pbc >> 5
+                *(dep + 2 * (*count) + 1) = rbc(disty * DAT / dist + *(dep + k + 1), LY); // mul div sum rbc >> 6
+
+                *(lib + j + 0) = LX * rand() / (double)RAND_MAX; // prod div >> 2
+                // *(lib + j + 1) = LY * rand() / (double)RAND_MAX; // prod div >> 2
+                *(lib + j + 1) = LY * (0.1 * rand() / (double)RAND_MAX + 0.9); // 4 operaciones flotantes
+
+                *count += 1; // sum >> 1
+                // flop += 17;
+                flop += 19;
+                break;
+            }// flop dentro del if = 17
+        } // flop hasta el if (incluido) = count * 6
+    }
+    return flop;
+} // flop = count * 6 + if * 17
 
 void end(double* lib, double* dep, double tSim, double wall, double* flopGral)//, double* flopNeu)
 {

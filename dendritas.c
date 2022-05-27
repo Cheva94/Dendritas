@@ -24,10 +24,11 @@ int main()
 
     double start = wtime();
     while (*(count) != NMAX) {
-        move(lib, dep, count, flopGral);//, flopNeu);
-        tSim += DT; // sum >> 1
-        // *flopGral += *flopNeu;
+        move(lib);
+        *flopGral += NL * (14 + 6 * (*count));
+        *flopGral += update(lib, dep, count);
 
+        tSim += DT; // sum >> 1
         prog++;
         if (prog % 10000 == 0) {
             printf(">>> Hay %d Li depositados. Progreso = %d %%.\n", (*count), 100 * ((*count) - ND) / (NMAX - ND));
@@ -44,5 +45,4 @@ int main()
     printf("WALL TIME = %.2f s\n", wall);
     // printf("GFLOPS neutral() = %f\n", *flopNeu);
     printf("GFLOPS ./dendritas = %f\n\n", *flopGral);
-
 }
