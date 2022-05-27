@@ -1,5 +1,5 @@
-CC       = gcc-11
-CFLAGS	 = 
+CC       = clang-13
+CFLAGS	 = -O2 -march=native -ffast-math -funroll-loops
 WFLAGS	 = -std=gnu11 -Wall -Wextra -g
 CPPFLAGS =
 LDFLAGS	 = -lm
