@@ -1,11 +1,12 @@
-CC       = clang-13
-CFLAGS	 = -O2 -march=native -ffast-math -funroll-loops
+CC       = clang-11
+EXTRACFLAGS =
+CFLAGS	 = -O2 -march=native -funroll-loops -fopenmp $(EXTRACFLAGS)
 WFLAGS	 = -std=gnu11 -Wall -Wextra -g
 CPPFLAGS =
 LDFLAGS	 = -lm
 
 PROG	= dendritas
-OBJS    = dendritas.o core.o wtime.o
+OBJS    = xoshiro.o core.o dendritas.o
 SRCS    = $(shell echo *.c)
 
 all: $(PROG)

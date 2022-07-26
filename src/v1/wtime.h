@@ -2,8 +2,7 @@
 
 #include <time.h>
 
-// Graba la hora actual de la computadora al momento de la llamada.
-
+// Graba la hora actual de la computadora al momento de la llamada. 
 static double wtime(void)
 {
 	struct timespec ts;
