@@ -36,7 +36,6 @@ int main()
             printf(">>> Hay %d Li depositados. Progreso = %d %%.\n", (*count), 100 * ((*count) - ND) / (NMAX - ND));
         }
     }
-
     double wall = wtime() - start;
 
     *pflops *= 1E-15;
