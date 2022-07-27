@@ -85,7 +85,6 @@ float update(float* lib, float* dep, unsigned int* count, unsigned int* countAux
     float partialFlop = 0.0f;
 
     #pragma omp parallel for firstprivate(partialFlop) reduction(+:flop)
-
     for (unsigned int j = 0; j < 2 * NL; j += 2) {
         float xj = *(lib + j);
         float yj = *(lib + j + 1);
