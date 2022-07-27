@@ -1,0 +1,41 @@
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+rm -f dendritas *.o .depend
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp   -c xoshiro.c -o xoshiro.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp   -c core.c -o core.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp   -c dendritas.c -o dendritas.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1205 Li depositados. Progreso = 6 %.
+>>> Hay 1304 Li depositados. Progreso = 10 %.
+>>> Hay 1413 Li depositados. Progreso = 13 %.
+>>> Hay 1514 Li depositados. Progreso = 17 %.
+>>> Hay 1621 Li depositados. Progreso = 20 %.
+>>> Hay 1724 Li depositados. Progreso = 24 %.
+>>> Hay 1840 Li depositados. Progreso = 28 %.
+>>> Hay 1959 Li depositados. Progreso = 31 %.
+>>> Hay 2054 Li depositados. Progreso = 35 %.
+>>> Hay 2167 Li depositados. Progreso = 38 %.
+>>> Hay 2278 Li depositados. Progreso = 42 %.
+>>> Hay 2375 Li depositados. Progreso = 45 %.
+>>> Hay 2473 Li depositados. Progreso = 49 %.
+>>> Hay 2564 Li depositados. Progreso = 52 %.
+>>> Hay 2667 Li depositados. Progreso = 55 %.
+>>> Hay 2773 Li depositados. Progreso = 59 %.
+>>> Hay 2881 Li depositados. Progreso = 62 %.
+>>> Hay 2981 Li depositados. Progreso = 66 %.
+>>> Hay 3076 Li depositados. Progreso = 69 %.
+>>> Hay 3176 Li depositados. Progreso = 72 %.
+>>> Hay 3269 Li depositados. Progreso = 75 %.
+>>> Hay 3373 Li depositados. Progreso = 79 %.
+>>> Hay 3484 Li depositados. Progreso = 82 %.
+>>> Hay 3587 Li depositados. Progreso = 86 %.
+>>> Hay 3698 Li depositados. Progreso = 89 %.
+>>> Hay 3807 Li depositados. Progreso = 93 %.
+>>> Hay 3914 Li depositados. Progreso = 97 %.
+Hay un total de 4001 Li depositados (100 %).
+Tiempo simulando = 278.069 ms
+WALL TIME = 51.952350 s
+PFLOPS = 336.907410
+
+rm -f dendritas *.o .depend

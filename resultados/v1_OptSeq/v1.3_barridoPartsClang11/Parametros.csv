@@ -1,0 +1,12 @@
+Parámetro >>> Valor
+Li libre siempre presente >>> 758
+Li depositado inicial >>> 1000
+Li depositado final >>> 40000
+Paso temporal >>> 0.001000 ms
+Separación entre Li >>> 0.217100 nm
+Longitud de celda en x >>> 217.100000 nm
+Longitud de celda en y >>> 34.736000 nm
+Coeficiente de difusión >>> 14 nm^2/s
+Tiempo simulado >>> 976.766 ms
+WALL TIME >>> 8119.282256 s
+PFLOPS >>> 4.626491

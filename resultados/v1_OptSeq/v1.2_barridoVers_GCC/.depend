@@ -1,0 +1,3 @@
+core.o: core.c params.h xoshiro.h core.h wtime.h
+dendritas.o: dendritas.c params.h xoshiro.h core.h wtime.h
+xoshiro.o: xoshiro.c

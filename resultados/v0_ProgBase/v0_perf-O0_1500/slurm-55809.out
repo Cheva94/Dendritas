@@ -1,0 +1,20 @@
+gcc-11 -MM core.c dendritas.c xoshiro.c > .depend
+rm -f dendritas *.o .depend
+gcc-11 -MM core.c dendritas.c xoshiro.c > .depend
+gcc-11 -std=gnu11 -Wall -Wextra -g -O0  -c xoshiro.c -o xoshiro.o
+gcc-11 -std=gnu11 -Wall -Wextra -g -O0  -c core.c -o core.o
+gcc-11 -std=gnu11 -Wall -Wextra -g -O0  -c dendritas.c -o dendritas.o
+gcc-11 -std=gnu11 -Wall -Wextra -g -O0 xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1180 Li depositados. Progreso = 36 %.
+>>> Hay 1271 Li depositados. Progreso = 54 %.
+>>> Hay 1341 Li depositados. Progreso = 68 %.
+>>> Hay 1450 Li depositados. Progreso = 90 %.
+Hay un total de 1501 Li depositados (100 %).
+Tiempo simulando = 45.589 ms
+WALL TIME = 215.335608 s
+GFLOPS update() = 57023.343750
+
+[ perf record: Woken up 132 times to write data ]
+[ perf record: Captured and wrote 32.875 MB perf.data (861222 samples) ]
+rm -f dendritas *.o .depend

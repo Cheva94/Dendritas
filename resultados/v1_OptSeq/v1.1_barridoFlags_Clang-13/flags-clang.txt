@@ -1,0 +1,20 @@
+-O1
+-O1 -march=native
+-O1 -march=native -ffast-math
+-O1 -march=native -funroll-loops
+-O1 -march=native -ffast-math -funroll-loops
+-O2
+-O2 -march=native
+-O2 -march=native -ffast-math
+-O2 -march=native -funroll-loops
+-O2 -march=native -ffast-math -funroll-loops
+-O3
+-O3 -march=native
+-O3 -march=native -ffast-math
+-O3 -march=native -funroll-loops
+-O3 -march=native -ffast-math -funroll-loops
+-Ofast
+-Ofast -march=native
+-Ofast -march=native -ffast-math
+-Ofast -march=native -funroll-loops
+-Ofast -march=native -ffast-math -funroll-loops

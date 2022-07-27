@@ -1,0 +1,956 @@
+#----- 21 hilos -----#
+>>>>> INICIO CON 1500 PARTÍCULAS
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+rm -f dendritas *.o .depend
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=1500 -c xoshiro.c -o xoshiro.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=1500 -c core.c -o core.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=1500 -c dendritas.c -o dendritas.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1205 Li depositados. Progreso = 41 %.
+>>> Hay 1304 Li depositados. Progreso = 60 %.
+>>> Hay 1413 Li depositados. Progreso = 82 %.
+Hay un total de 1501 Li depositados (100 %).
+Tiempo simulando = 39.164 ms
+WALL TIME = 5.642073 s
+PFLOPS = 43.527748
+
+<<<<< FIN CON 1500 PARTÍCULAS
+>>>>> INICIO CON 2000 PARTÍCULAS
+rm -f dendritas *.o .depend
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=2000 -c xoshiro.c -o xoshiro.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=2000 -c core.c -o core.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=2000 -c dendritas.c -o dendritas.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1205 Li depositados. Progreso = 20 %.
+>>> Hay 1304 Li depositados. Progreso = 30 %.
+>>> Hay 1413 Li depositados. Progreso = 41 %.
+>>> Hay 1514 Li depositados. Progreso = 51 %.
+>>> Hay 1621 Li depositados. Progreso = 62 %.
+>>> Hay 1724 Li depositados. Progreso = 72 %.
+>>> Hay 1844 Li depositados. Progreso = 84 %.
+>>> Hay 1941 Li depositados. Progreso = 94 %.
+Hay un total de 2001 Li depositados (100 %).
+Tiempo simulando = 86.011 ms
+WALL TIME = 13.747761 s
+PFLOPS = 100.018158
+
+<<<<< FIN CON 2000 PARTÍCULAS
+>>>>> INICIO CON 2500 PARTÍCULAS
+rm -f dendritas *.o .depend
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=2500 -c xoshiro.c -o xoshiro.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=2500 -c core.c -o core.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=2500 -c dendritas.c -o dendritas.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1205 Li depositados. Progreso = 13 %.
+>>> Hay 1304 Li depositados. Progreso = 20 %.
+>>> Hay 1413 Li depositados. Progreso = 27 %.
+>>> Hay 1514 Li depositados. Progreso = 34 %.
+>>> Hay 1621 Li depositados. Progreso = 41 %.
+>>> Hay 1724 Li depositados. Progreso = 48 %.
+>>> Hay 1844 Li depositados. Progreso = 56 %.
+>>> Hay 1941 Li depositados. Progreso = 62 %.
+>>> Hay 2045 Li depositados. Progreso = 69 %.
+>>> Hay 2152 Li depositados. Progreso = 76 %.
+>>> Hay 2271 Li depositados. Progreso = 84 %.
+>>> Hay 2375 Li depositados. Progreso = 91 %.
+>>> Hay 2478 Li depositados. Progreso = 98 %.
+Hay un total de 2501 Li depositados (100 %).
+Tiempo simulando = 133.015 ms
+WALL TIME = 21.456343 s
+PFLOPS = 167.671738
+
+<<<<< FIN CON 2500 PARTÍCULAS
+>>>>> INICIO CON 3000 PARTÍCULAS
+rm -f dendritas *.o .depend
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=3000 -c xoshiro.c -o xoshiro.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=3000 -c core.c -o core.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=3000 -c dendritas.c -o dendritas.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1205 Li depositados. Progreso = 10 %.
+>>> Hay 1304 Li depositados. Progreso = 15 %.
+>>> Hay 1413 Li depositados. Progreso = 20 %.
+>>> Hay 1514 Li depositados. Progreso = 25 %.
+>>> Hay 1621 Li depositados. Progreso = 31 %.
+>>> Hay 1724 Li depositados. Progreso = 36 %.
+>>> Hay 1844 Li depositados. Progreso = 42 %.
+>>> Hay 1941 Li depositados. Progreso = 47 %.
+>>> Hay 2045 Li depositados. Progreso = 52 %.
+>>> Hay 2152 Li depositados. Progreso = 57 %.
+>>> Hay 2271 Li depositados. Progreso = 63 %.
+>>> Hay 2375 Li depositados. Progreso = 68 %.
+>>> Hay 2478 Li depositados. Progreso = 73 %.
+>>> Hay 2576 Li depositados. Progreso = 78 %.
+>>> Hay 2666 Li depositados. Progreso = 83 %.
+>>> Hay 2767 Li depositados. Progreso = 88 %.
+>>> Hay 2888 Li depositados. Progreso = 94 %.
+Hay un total de 3001 Li depositados (100 %).
+Tiempo simulando = 179.745 ms
+WALL TIME = 31.222495 s
+PFLOPS = 231.326035
+
+<<<<< FIN CON 3000 PARTÍCULAS
+>>>>> INICIO CON 3500 PARTÍCULAS
+rm -f dendritas *.o .depend
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=3500 -c xoshiro.c -o xoshiro.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=3500 -c core.c -o core.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=3500 -c dendritas.c -o dendritas.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1205 Li depositados. Progreso = 8 %.
+>>> Hay 1304 Li depositados. Progreso = 12 %.
+>>> Hay 1413 Li depositados. Progreso = 16 %.
+>>> Hay 1514 Li depositados. Progreso = 20 %.
+>>> Hay 1621 Li depositados. Progreso = 24 %.
+>>> Hay 1724 Li depositados. Progreso = 28 %.
+>>> Hay 1844 Li depositados. Progreso = 33 %.
+>>> Hay 1941 Li depositados. Progreso = 37 %.
+>>> Hay 2045 Li depositados. Progreso = 41 %.
+>>> Hay 2152 Li depositados. Progreso = 46 %.
+>>> Hay 2271 Li depositados. Progreso = 50 %.
+>>> Hay 2375 Li depositados. Progreso = 55 %.
+>>> Hay 2478 Li depositados. Progreso = 59 %.
+>>> Hay 2571 Li depositados. Progreso = 62 %.
+>>> Hay 2677 Li depositados. Progreso = 67 %.
+>>> Hay 2787 Li depositados. Progreso = 71 %.
+>>> Hay 2885 Li depositados. Progreso = 75 %.
+>>> Hay 2971 Li depositados. Progreso = 78 %.
+>>> Hay 3063 Li depositados. Progreso = 82 %.
+>>> Hay 3188 Li depositados. Progreso = 87 %.
+>>> Hay 3309 Li depositados. Progreso = 92 %.
+>>> Hay 3390 Li depositados. Progreso = 95 %.
+>>> Hay 3486 Li depositados. Progreso = 99 %.
+Hay un total de 3501 Li depositados (100 %).
+Tiempo simulando = 231.891 ms
+WALL TIME = 43.944440 s
+PFLOPS = 300.153778
+
+<<<<< FIN CON 3500 PARTÍCULAS
+>>>>> INICIO CON 4000 PARTÍCULAS
+rm -f dendritas *.o .depend
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=4000 -c xoshiro.c -o xoshiro.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=4000 -c core.c -o core.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=4000 -c dendritas.c -o dendritas.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1205 Li depositados. Progreso = 6 %.
+>>> Hay 1304 Li depositados. Progreso = 10 %.
+>>> Hay 1413 Li depositados. Progreso = 13 %.
+>>> Hay 1514 Li depositados. Progreso = 17 %.
+>>> Hay 1621 Li depositados. Progreso = 20 %.
+>>> Hay 1724 Li depositados. Progreso = 24 %.
+>>> Hay 1844 Li depositados. Progreso = 28 %.
+>>> Hay 1941 Li depositados. Progreso = 31 %.
+>>> Hay 2045 Li depositados. Progreso = 34 %.
+>>> Hay 2152 Li depositados. Progreso = 38 %.
+>>> Hay 2271 Li depositados. Progreso = 42 %.
+>>> Hay 2375 Li depositados. Progreso = 45 %.
+>>> Hay 2478 Li depositados. Progreso = 49 %.
+>>> Hay 2576 Li depositados. Progreso = 52 %.
+>>> Hay 2666 Li depositados. Progreso = 55 %.
+>>> Hay 2767 Li depositados. Progreso = 58 %.
+>>> Hay 2879 Li depositados. Progreso = 62 %.
+>>> Hay 2958 Li depositados. Progreso = 65 %.
+>>> Hay 3067 Li depositados. Progreso = 68 %.
+>>> Hay 3171 Li depositados. Progreso = 72 %.
+>>> Hay 3289 Li depositados. Progreso = 76 %.
+>>> Hay 3387 Li depositados. Progreso = 79 %.
+>>> Hay 3500 Li depositados. Progreso = 83 %.
+>>> Hay 3609 Li depositados. Progreso = 86 %.
+>>> Hay 3722 Li depositados. Progreso = 90 %.
+>>> Hay 3846 Li depositados. Progreso = 94 %.
+>>> Hay 3976 Li depositados. Progreso = 99 %.
+Hay un total de 4002 Li depositados (100 %).
+Tiempo simulando = 273.641 ms
+WALL TIME = 55.157223 s
+PFLOPS = 356.688812
+
+<<<<< FIN CON 4000 PARTÍCULAS
+>>>>> INICIO CON 4500 PARTÍCULAS
+rm -f dendritas *.o .depend
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=4500 -c xoshiro.c -o xoshiro.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=4500 -c core.c -o core.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=4500 -c dendritas.c -o dendritas.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1205 Li depositados. Progreso = 5 %.
+>>> Hay 1304 Li depositados. Progreso = 8 %.
+>>> Hay 1413 Li depositados. Progreso = 11 %.
+>>> Hay 1514 Li depositados. Progreso = 14 %.
+>>> Hay 1621 Li depositados. Progreso = 17 %.
+>>> Hay 1724 Li depositados. Progreso = 20 %.
+>>> Hay 1844 Li depositados. Progreso = 24 %.
+>>> Hay 1941 Li depositados. Progreso = 26 %.
+>>> Hay 2045 Li depositados. Progreso = 29 %.
+>>> Hay 2152 Li depositados. Progreso = 32 %.
+>>> Hay 2271 Li depositados. Progreso = 36 %.
+>>> Hay 2375 Li depositados. Progreso = 39 %.
+>>> Hay 2478 Li depositados. Progreso = 42 %.
+>>> Hay 2589 Li depositados. Progreso = 45 %.
+>>> Hay 2697 Li depositados. Progreso = 48 %.
+>>> Hay 2809 Li depositados. Progreso = 51 %.
+>>> Hay 2904 Li depositados. Progreso = 54 %.
+>>> Hay 3012 Li depositados. Progreso = 57 %.
+>>> Hay 3124 Li depositados. Progreso = 60 %.
+>>> Hay 3234 Li depositados. Progreso = 63 %.
+>>> Hay 3338 Li depositados. Progreso = 66 %.
+>>> Hay 3448 Li depositados. Progreso = 69 %.
+>>> Hay 3543 Li depositados. Progreso = 72 %.
+>>> Hay 3658 Li depositados. Progreso = 75 %.
+>>> Hay 3782 Li depositados. Progreso = 79 %.
+>>> Hay 3909 Li depositados. Progreso = 83 %.
+>>> Hay 4031 Li depositados. Progreso = 86 %.
+>>> Hay 4155 Li depositados. Progreso = 90 %.
+>>> Hay 4277 Li depositados. Progreso = 93 %.
+>>> Hay 4414 Li depositados. Progreso = 97 %.
+Hay un total de 4501 Li depositados (100 %).
+Tiempo simulando = 308.260 ms
+WALL TIME = 65.899310 s
+PFLOPS = 404.029572
+
+<<<<< FIN CON 4500 PARTÍCULAS
+>>>>> INICIO CON 5000 PARTÍCULAS
+rm -f dendritas *.o .depend
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=5000 -c xoshiro.c -o xoshiro.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=5000 -c core.c -o core.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=5000 -c dendritas.c -o dendritas.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1205 Li depositados. Progreso = 5 %.
+>>> Hay 1304 Li depositados. Progreso = 7 %.
+>>> Hay 1413 Li depositados. Progreso = 10 %.
+>>> Hay 1514 Li depositados. Progreso = 12 %.
+>>> Hay 1621 Li depositados. Progreso = 15 %.
+>>> Hay 1724 Li depositados. Progreso = 18 %.
+>>> Hay 1844 Li depositados. Progreso = 21 %.
+>>> Hay 1941 Li depositados. Progreso = 23 %.
+>>> Hay 2045 Li depositados. Progreso = 26 %.
+>>> Hay 2152 Li depositados. Progreso = 28 %.
+>>> Hay 2271 Li depositados. Progreso = 31 %.
+>>> Hay 2375 Li depositados. Progreso = 34 %.
+>>> Hay 2478 Li depositados. Progreso = 36 %.
+>>> Hay 2572 Li depositados. Progreso = 39 %.
+>>> Hay 2674 Li depositados. Progreso = 41 %.
+>>> Hay 2809 Li depositados. Progreso = 45 %.
+>>> Hay 2902 Li depositados. Progreso = 47 %.
+>>> Hay 3004 Li depositados. Progreso = 50 %.
+>>> Hay 3108 Li depositados. Progreso = 52 %.
+>>> Hay 3233 Li depositados. Progreso = 55 %.
+>>> Hay 3335 Li depositados. Progreso = 58 %.
+>>> Hay 3441 Li depositados. Progreso = 61 %.
+>>> Hay 3526 Li depositados. Progreso = 63 %.
+>>> Hay 3632 Li depositados. Progreso = 65 %.
+>>> Hay 3753 Li depositados. Progreso = 68 %.
+>>> Hay 3870 Li depositados. Progreso = 71 %.
+>>> Hay 4001 Li depositados. Progreso = 75 %.
+>>> Hay 4121 Li depositados. Progreso = 78 %.
+>>> Hay 4243 Li depositados. Progreso = 81 %.
+>>> Hay 4385 Li depositados. Progreso = 84 %.
+>>> Hay 4499 Li depositados. Progreso = 87 %.
+>>> Hay 4621 Li depositados. Progreso = 90 %.
+>>> Hay 4744 Li depositados. Progreso = 93 %.
+>>> Hay 4859 Li depositados. Progreso = 96 %.
+>>> Hay 4988 Li depositados. Progreso = 99 %.
+Hay un total de 5001 Li depositados (100 %).
+Tiempo simulando = 352.375 ms
+WALL TIME = 80.968710 s
+PFLOPS = 460.254913
+
+<<<<< FIN CON 5000 PARTÍCULAS
+>>>>> INICIO CON 5500 PARTÍCULAS
+rm -f dendritas *.o .depend
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=5500 -c xoshiro.c -o xoshiro.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=5500 -c core.c -o core.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=5500 -c dendritas.c -o dendritas.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1205 Li depositados. Progreso = 4 %.
+>>> Hay 1304 Li depositados. Progreso = 6 %.
+>>> Hay 1413 Li depositados. Progreso = 9 %.
+>>> Hay 1514 Li depositados. Progreso = 11 %.
+>>> Hay 1621 Li depositados. Progreso = 13 %.
+>>> Hay 1724 Li depositados. Progreso = 16 %.
+>>> Hay 1844 Li depositados. Progreso = 18 %.
+>>> Hay 1941 Li depositados. Progreso = 20 %.
+>>> Hay 2045 Li depositados. Progreso = 23 %.
+>>> Hay 2152 Li depositados. Progreso = 25 %.
+>>> Hay 2271 Li depositados. Progreso = 28 %.
+>>> Hay 2375 Li depositados. Progreso = 30 %.
+>>> Hay 2478 Li depositados. Progreso = 32 %.
+>>> Hay 2571 Li depositados. Progreso = 34 %.
+>>> Hay 2677 Li depositados. Progreso = 37 %.
+>>> Hay 2787 Li depositados. Progreso = 39 %.
+>>> Hay 2885 Li depositados. Progreso = 41 %.
+>>> Hay 2971 Li depositados. Progreso = 43 %.
+>>> Hay 3063 Li depositados. Progreso = 45 %.
+>>> Hay 3188 Li depositados. Progreso = 48 %.
+>>> Hay 3309 Li depositados. Progreso = 51 %.
+>>> Hay 3390 Li depositados. Progreso = 53 %.
+>>> Hay 3486 Li depositados. Progreso = 55 %.
+>>> Hay 3590 Li depositados. Progreso = 57 %.
+>>> Hay 3728 Li depositados. Progreso = 60 %.
+>>> Hay 3828 Li depositados. Progreso = 62 %.
+>>> Hay 3947 Li depositados. Progreso = 65 %.
+>>> Hay 4056 Li depositados. Progreso = 67 %.
+>>> Hay 4191 Li depositados. Progreso = 70 %.
+>>> Hay 4305 Li depositados. Progreso = 73 %.
+>>> Hay 4410 Li depositados. Progreso = 75 %.
+>>> Hay 4543 Li depositados. Progreso = 78 %.
+>>> Hay 4644 Li depositados. Progreso = 80 %.
+>>> Hay 4776 Li depositados. Progreso = 83 %.
+>>> Hay 4904 Li depositados. Progreso = 86 %.
+>>> Hay 5044 Li depositados. Progreso = 89 %.
+>>> Hay 5159 Li depositados. Progreso = 92 %.
+>>> Hay 5292 Li depositados. Progreso = 95 %.
+>>> Hay 5428 Li depositados. Progreso = 98 %.
+Hay un total de 5501 Li depositados (100 %).
+Tiempo simulando = 398.049 ms
+WALL TIME = 95.761847 s
+PFLOPS = 528.163391
+
+<<<<< FIN CON 5500 PARTÍCULAS
+>>>>> INICIO CON 6000 PARTÍCULAS
+rm -f dendritas *.o .depend
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=6000 -c xoshiro.c -o xoshiro.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=6000 -c core.c -o core.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=6000 -c dendritas.c -o dendritas.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1205 Li depositados. Progreso = 4 %.
+>>> Hay 1304 Li depositados. Progreso = 6 %.
+>>> Hay 1413 Li depositados. Progreso = 8 %.
+>>> Hay 1514 Li depositados. Progreso = 10 %.
+>>> Hay 1621 Li depositados. Progreso = 12 %.
+>>> Hay 1724 Li depositados. Progreso = 14 %.
+>>> Hay 1844 Li depositados. Progreso = 16 %.
+>>> Hay 1941 Li depositados. Progreso = 18 %.
+>>> Hay 2045 Li depositados. Progreso = 20 %.
+>>> Hay 2152 Li depositados. Progreso = 23 %.
+>>> Hay 2271 Li depositados. Progreso = 25 %.
+>>> Hay 2375 Li depositados. Progreso = 27 %.
+>>> Hay 2478 Li depositados. Progreso = 29 %.
+>>> Hay 2571 Li depositados. Progreso = 31 %.
+>>> Hay 2677 Li depositados. Progreso = 33 %.
+>>> Hay 2787 Li depositados. Progreso = 35 %.
+>>> Hay 2885 Li depositados. Progreso = 37 %.
+>>> Hay 2971 Li depositados. Progreso = 39 %.
+>>> Hay 3063 Li depositados. Progreso = 41 %.
+>>> Hay 3188 Li depositados. Progreso = 43 %.
+>>> Hay 3309 Li depositados. Progreso = 46 %.
+>>> Hay 3397 Li depositados. Progreso = 47 %.
+>>> Hay 3515 Li depositados. Progreso = 50 %.
+>>> Hay 3625 Li depositados. Progreso = 52 %.
+>>> Hay 3751 Li depositados. Progreso = 55 %.
+>>> Hay 3864 Li depositados. Progreso = 57 %.
+>>> Hay 3974 Li depositados. Progreso = 59 %.
+>>> Hay 4079 Li depositados. Progreso = 61 %.
+>>> Hay 4202 Li depositados. Progreso = 64 %.
+>>> Hay 4320 Li depositados. Progreso = 66 %.
+>>> Hay 4440 Li depositados. Progreso = 68 %.
+>>> Hay 4551 Li depositados. Progreso = 71 %.
+>>> Hay 4661 Li depositados. Progreso = 73 %.
+>>> Hay 4781 Li depositados. Progreso = 75 %.
+>>> Hay 4892 Li depositados. Progreso = 77 %.
+>>> Hay 5031 Li depositados. Progreso = 80 %.
+>>> Hay 5160 Li depositados. Progreso = 83 %.
+>>> Hay 5297 Li depositados. Progreso = 85 %.
+>>> Hay 5408 Li depositados. Progreso = 88 %.
+>>> Hay 5533 Li depositados. Progreso = 90 %.
+>>> Hay 5686 Li depositados. Progreso = 93 %.
+>>> Hay 5807 Li depositados. Progreso = 96 %.
+>>> Hay 5942 Li depositados. Progreso = 98 %.
+Hay un total de 6001 Li depositados (100 %).
+Tiempo simulando = 436.291 ms
+WALL TIME = 112.636698 s
+PFLOPS = 570.526917
+
+<<<<< FIN CON 6000 PARTÍCULAS
+>>>>> INICIO CON 6500 PARTÍCULAS
+rm -f dendritas *.o .depend
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=6500 -c xoshiro.c -o xoshiro.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=6500 -c core.c -o core.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=6500 -c dendritas.c -o dendritas.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1205 Li depositados. Progreso = 3 %.
+>>> Hay 1304 Li depositados. Progreso = 5 %.
+>>> Hay 1413 Li depositados. Progreso = 7 %.
+>>> Hay 1514 Li depositados. Progreso = 9 %.
+>>> Hay 1621 Li depositados. Progreso = 11 %.
+>>> Hay 1724 Li depositados. Progreso = 13 %.
+>>> Hay 1844 Li depositados. Progreso = 15 %.
+>>> Hay 1941 Li depositados. Progreso = 17 %.
+>>> Hay 2045 Li depositados. Progreso = 19 %.
+>>> Hay 2152 Li depositados. Progreso = 20 %.
+>>> Hay 2271 Li depositados. Progreso = 23 %.
+>>> Hay 2375 Li depositados. Progreso = 25 %.
+>>> Hay 2479 Li depositados. Progreso = 26 %.
+>>> Hay 2574 Li depositados. Progreso = 28 %.
+>>> Hay 2682 Li depositados. Progreso = 30 %.
+>>> Hay 2795 Li depositados. Progreso = 32 %.
+>>> Hay 2903 Li depositados. Progreso = 34 %.
+>>> Hay 2994 Li depositados. Progreso = 36 %.
+>>> Hay 3095 Li depositados. Progreso = 38 %.
+>>> Hay 3197 Li depositados. Progreso = 39 %.
+>>> Hay 3298 Li depositados. Progreso = 41 %.
+>>> Hay 3412 Li depositados. Progreso = 43 %.
+>>> Hay 3524 Li depositados. Progreso = 45 %.
+>>> Hay 3619 Li depositados. Progreso = 47 %.
+>>> Hay 3747 Li depositados. Progreso = 49 %.
+>>> Hay 3859 Li depositados. Progreso = 51 %.
+>>> Hay 3995 Li depositados. Progreso = 54 %.
+>>> Hay 4110 Li depositados. Progreso = 56 %.
+>>> Hay 4228 Li depositados. Progreso = 58 %.
+>>> Hay 4350 Li depositados. Progreso = 60 %.
+>>> Hay 4448 Li depositados. Progreso = 62 %.
+>>> Hay 4572 Li depositados. Progreso = 64 %.
+>>> Hay 4699 Li depositados. Progreso = 67 %.
+>>> Hay 4825 Li depositados. Progreso = 69 %.
+>>> Hay 4933 Li depositados. Progreso = 71 %.
+>>> Hay 5049 Li depositados. Progreso = 73 %.
+>>> Hay 5167 Li depositados. Progreso = 75 %.
+>>> Hay 5316 Li depositados. Progreso = 78 %.
+>>> Hay 5451 Li depositados. Progreso = 80 %.
+>>> Hay 5573 Li depositados. Progreso = 83 %.
+>>> Hay 5684 Li depositados. Progreso = 85 %.
+>>> Hay 5834 Li depositados. Progreso = 87 %.
+>>> Hay 5953 Li depositados. Progreso = 90 %.
+>>> Hay 6097 Li depositados. Progreso = 92 %.
+>>> Hay 6221 Li depositados. Progreso = 94 %.
+>>> Hay 6357 Li depositados. Progreso = 97 %.
+>>> Hay 6489 Li depositados. Progreso = 99 %.
+Hay un total de 6501 Li depositados (100 %).
+Tiempo simulando = 473.224 ms
+WALL TIME = 127.838083 s
+PFLOPS = 624.588562
+
+<<<<< FIN CON 6500 PARTÍCULAS
+>>>>> INICIO CON 7000 PARTÍCULAS
+rm -f dendritas *.o .depend
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=7000 -c xoshiro.c -o xoshiro.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=7000 -c core.c -o core.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=7000 -c dendritas.c -o dendritas.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1205 Li depositados. Progreso = 3 %.
+>>> Hay 1304 Li depositados. Progreso = 5 %.
+>>> Hay 1413 Li depositados. Progreso = 6 %.
+>>> Hay 1514 Li depositados. Progreso = 8 %.
+>>> Hay 1621 Li depositados. Progreso = 10 %.
+>>> Hay 1724 Li depositados. Progreso = 12 %.
+>>> Hay 1844 Li depositados. Progreso = 14 %.
+>>> Hay 1941 Li depositados. Progreso = 15 %.
+>>> Hay 2045 Li depositados. Progreso = 17 %.
+>>> Hay 2152 Li depositados. Progreso = 19 %.
+>>> Hay 2271 Li depositados. Progreso = 21 %.
+>>> Hay 2375 Li depositados. Progreso = 22 %.
+>>> Hay 2478 Li depositados. Progreso = 24 %.
+>>> Hay 2571 Li depositados. Progreso = 26 %.
+>>> Hay 2677 Li depositados. Progreso = 27 %.
+>>> Hay 2787 Li depositados. Progreso = 29 %.
+>>> Hay 2885 Li depositados. Progreso = 31 %.
+>>> Hay 2971 Li depositados. Progreso = 32 %.
+>>> Hay 3063 Li depositados. Progreso = 34 %.
+>>> Hay 3188 Li depositados. Progreso = 36 %.
+>>> Hay 3309 Li depositados. Progreso = 38 %.
+>>> Hay 3390 Li depositados. Progreso = 39 %.
+>>> Hay 3486 Li depositados. Progreso = 41 %.
+>>> Hay 3590 Li depositados. Progreso = 43 %.
+>>> Hay 3728 Li depositados. Progreso = 45 %.
+>>> Hay 3828 Li depositados. Progreso = 47 %.
+>>> Hay 3947 Li depositados. Progreso = 49 %.
+>>> Hay 4056 Li depositados. Progreso = 50 %.
+>>> Hay 4191 Li depositados. Progreso = 53 %.
+>>> Hay 4305 Li depositados. Progreso = 55 %.
+>>> Hay 4410 Li depositados. Progreso = 56 %.
+>>> Hay 4543 Li depositados. Progreso = 59 %.
+>>> Hay 4644 Li depositados. Progreso = 60 %.
+>>> Hay 4776 Li depositados. Progreso = 62 %.
+>>> Hay 4904 Li depositados. Progreso = 65 %.
+>>> Hay 5044 Li depositados. Progreso = 67 %.
+>>> Hay 5159 Li depositados. Progreso = 69 %.
+>>> Hay 5292 Li depositados. Progreso = 71 %.
+>>> Hay 5428 Li depositados. Progreso = 73 %.
+>>> Hay 5556 Li depositados. Progreso = 75 %.
+>>> Hay 5684 Li depositados. Progreso = 78 %.
+>>> Hay 5803 Li depositados. Progreso = 80 %.
+>>> Hay 5947 Li depositados. Progreso = 82 %.
+>>> Hay 6084 Li depositados. Progreso = 84 %.
+>>> Hay 6224 Li depositados. Progreso = 87 %.
+>>> Hay 6354 Li depositados. Progreso = 89 %.
+>>> Hay 6480 Li depositados. Progreso = 91 %.
+>>> Hay 6608 Li depositados. Progreso = 93 %.
+>>> Hay 6747 Li depositados. Progreso = 95 %.
+>>> Hay 6892 Li depositados. Progreso = 98 %.
+Hay un total de 7001 Li depositados (100 %).
+Tiempo simulando = 511.345 ms
+WALL TIME = 144.355147 s
+PFLOPS = 678.378601
+
+<<<<< FIN CON 7000 PARTÍCULAS
+>>>>> INICIO CON 7500 PARTÍCULAS
+rm -f dendritas *.o .depend
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=7500 -c xoshiro.c -o xoshiro.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=7500 -c core.c -o core.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=7500 -c dendritas.c -o dendritas.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1205 Li depositados. Progreso = 3 %.
+>>> Hay 1304 Li depositados. Progreso = 4 %.
+>>> Hay 1413 Li depositados. Progreso = 6 %.
+>>> Hay 1514 Li depositados. Progreso = 7 %.
+>>> Hay 1621 Li depositados. Progreso = 9 %.
+>>> Hay 1724 Li depositados. Progreso = 11 %.
+>>> Hay 1844 Li depositados. Progreso = 12 %.
+>>> Hay 1941 Li depositados. Progreso = 14 %.
+>>> Hay 2045 Li depositados. Progreso = 16 %.
+>>> Hay 2152 Li depositados. Progreso = 17 %.
+>>> Hay 2271 Li depositados. Progreso = 19 %.
+>>> Hay 2375 Li depositados. Progreso = 21 %.
+>>> Hay 2478 Li depositados. Progreso = 22 %.
+>>> Hay 2589 Li depositados. Progreso = 24 %.
+>>> Hay 2697 Li depositados. Progreso = 26 %.
+>>> Hay 2809 Li depositados. Progreso = 27 %.
+>>> Hay 2904 Li depositados. Progreso = 29 %.
+>>> Hay 3012 Li depositados. Progreso = 30 %.
+>>> Hay 3124 Li depositados. Progreso = 32 %.
+>>> Hay 3234 Li depositados. Progreso = 34 %.
+>>> Hay 3338 Li depositados. Progreso = 35 %.
+>>> Hay 3448 Li depositados. Progreso = 37 %.
+>>> Hay 3543 Li depositados. Progreso = 39 %.
+>>> Hay 3658 Li depositados. Progreso = 40 %.
+>>> Hay 3782 Li depositados. Progreso = 42 %.
+>>> Hay 3909 Li depositados. Progreso = 44 %.
+>>> Hay 4031 Li depositados. Progreso = 46 %.
+>>> Hay 4155 Li depositados. Progreso = 48 %.
+>>> Hay 4277 Li depositados. Progreso = 50 %.
+>>> Hay 4414 Li depositados. Progreso = 52 %.
+>>> Hay 4532 Li depositados. Progreso = 54 %.
+>>> Hay 4665 Li depositados. Progreso = 56 %.
+>>> Hay 4769 Li depositados. Progreso = 57 %.
+>>> Hay 4886 Li depositados. Progreso = 59 %.
+>>> Hay 5006 Li depositados. Progreso = 61 %.
+>>> Hay 5142 Li depositados. Progreso = 63 %.
+>>> Hay 5264 Li depositados. Progreso = 65 %.
+>>> Hay 5381 Li depositados. Progreso = 67 %.
+>>> Hay 5511 Li depositados. Progreso = 69 %.
+>>> Hay 5659 Li depositados. Progreso = 71 %.
+>>> Hay 5797 Li depositados. Progreso = 73 %.
+>>> Hay 5914 Li depositados. Progreso = 75 %.
+>>> Hay 6035 Li depositados. Progreso = 77 %.
+>>> Hay 6183 Li depositados. Progreso = 79 %.
+>>> Hay 6317 Li depositados. Progreso = 81 %.
+>>> Hay 6459 Li depositados. Progreso = 83 %.
+>>> Hay 6579 Li depositados. Progreso = 85 %.
+>>> Hay 6715 Li depositados. Progreso = 87 %.
+>>> Hay 6862 Li depositados. Progreso = 90 %.
+>>> Hay 6998 Li depositados. Progreso = 92 %.
+>>> Hay 7164 Li depositados. Progreso = 94 %.
+>>> Hay 7292 Li depositados. Progreso = 96 %.
+>>> Hay 7429 Li depositados. Progreso = 98 %.
+Hay un total de 7501 Li depositados (100 %).
+Tiempo simulando = 537.343 ms
+WALL TIME = 160.737041 s
+PFLOPS = 711.195862
+
+<<<<< FIN CON 7500 PARTÍCULAS
+>>>>> INICIO CON 8000 PARTÍCULAS
+rm -f dendritas *.o .depend
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=8000 -c xoshiro.c -o xoshiro.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=8000 -c core.c -o core.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=8000 -c dendritas.c -o dendritas.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1205 Li depositados. Progreso = 2 %.
+>>> Hay 1304 Li depositados. Progreso = 4 %.
+>>> Hay 1413 Li depositados. Progreso = 5 %.
+>>> Hay 1514 Li depositados. Progreso = 7 %.
+>>> Hay 1621 Li depositados. Progreso = 8 %.
+>>> Hay 1724 Li depositados. Progreso = 10 %.
+>>> Hay 1844 Li depositados. Progreso = 12 %.
+>>> Hay 1941 Li depositados. Progreso = 13 %.
+>>> Hay 2045 Li depositados. Progreso = 14 %.
+>>> Hay 2152 Li depositados. Progreso = 16 %.
+>>> Hay 2271 Li depositados. Progreso = 18 %.
+>>> Hay 2375 Li depositados. Progreso = 19 %.
+>>> Hay 2479 Li depositados. Progreso = 21 %.
+>>> Hay 2574 Li depositados. Progreso = 22 %.
+>>> Hay 2682 Li depositados. Progreso = 24 %.
+>>> Hay 2795 Li depositados. Progreso = 25 %.
+>>> Hay 2903 Li depositados. Progreso = 27 %.
+>>> Hay 2994 Li depositados. Progreso = 28 %.
+>>> Hay 3095 Li depositados. Progreso = 29 %.
+>>> Hay 3197 Li depositados. Progreso = 31 %.
+>>> Hay 3298 Li depositados. Progreso = 32 %.
+>>> Hay 3412 Li depositados. Progreso = 34 %.
+>>> Hay 3524 Li depositados. Progreso = 36 %.
+>>> Hay 3619 Li depositados. Progreso = 37 %.
+>>> Hay 3747 Li depositados. Progreso = 39 %.
+>>> Hay 3859 Li depositados. Progreso = 40 %.
+>>> Hay 3995 Li depositados. Progreso = 42 %.
+>>> Hay 4110 Li depositados. Progreso = 44 %.
+>>> Hay 4228 Li depositados. Progreso = 46 %.
+>>> Hay 4350 Li depositados. Progreso = 47 %.
+>>> Hay 4448 Li depositados. Progreso = 49 %.
+>>> Hay 4572 Li depositados. Progreso = 51 %.
+>>> Hay 4699 Li depositados. Progreso = 52 %.
+>>> Hay 4825 Li depositados. Progreso = 54 %.
+>>> Hay 4933 Li depositados. Progreso = 56 %.
+>>> Hay 5049 Li depositados. Progreso = 57 %.
+>>> Hay 5167 Li depositados. Progreso = 59 %.
+>>> Hay 5316 Li depositados. Progreso = 61 %.
+>>> Hay 5451 Li depositados. Progreso = 63 %.
+>>> Hay 5573 Li depositados. Progreso = 65 %.
+>>> Hay 5684 Li depositados. Progreso = 66 %.
+>>> Hay 5834 Li depositados. Progreso = 69 %.
+>>> Hay 5953 Li depositados. Progreso = 70 %.
+>>> Hay 6097 Li depositados. Progreso = 72 %.
+>>> Hay 6221 Li depositados. Progreso = 74 %.
+>>> Hay 6357 Li depositados. Progreso = 76 %.
+>>> Hay 6489 Li depositados. Progreso = 78 %.
+>>> Hay 6616 Li depositados. Progreso = 80 %.
+>>> Hay 6769 Li depositados. Progreso = 82 %.
+>>> Hay 6914 Li depositados. Progreso = 84 %.
+>>> Hay 7045 Li depositados. Progreso = 86 %.
+>>> Hay 7180 Li depositados. Progreso = 88 %.
+>>> Hay 7322 Li depositados. Progreso = 90 %.
+>>> Hay 7463 Li depositados. Progreso = 92 %.
+>>> Hay 7606 Li depositados. Progreso = 94 %.
+>>> Hay 7760 Li depositados. Progreso = 96 %.
+>>> Hay 7921 Li depositados. Progreso = 98 %.
+Hay un total de 8001 Li depositados (100 %).
+Tiempo simulando = 576.384 ms
+WALL TIME = 179.965731 s
+PFLOPS = 763.934143
+
+<<<<< FIN CON 8000 PARTÍCULAS
+>>>>> INICIO CON 8500 PARTÍCULAS
+rm -f dendritas *.o .depend
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=8500 -c xoshiro.c -o xoshiro.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=8500 -c core.c -o core.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=8500 -c dendritas.c -o dendritas.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1205 Li depositados. Progreso = 2 %.
+>>> Hay 1304 Li depositados. Progreso = 4 %.
+>>> Hay 1413 Li depositados. Progreso = 5 %.
+>>> Hay 1514 Li depositados. Progreso = 6 %.
+>>> Hay 1621 Li depositados. Progreso = 8 %.
+>>> Hay 1724 Li depositados. Progreso = 9 %.
+>>> Hay 1844 Li depositados. Progreso = 11 %.
+>>> Hay 1941 Li depositados. Progreso = 12 %.
+>>> Hay 2045 Li depositados. Progreso = 13 %.
+>>> Hay 2152 Li depositados. Progreso = 15 %.
+>>> Hay 2271 Li depositados. Progreso = 16 %.
+>>> Hay 2375 Li depositados. Progreso = 18 %.
+>>> Hay 2478 Li depositados. Progreso = 19 %.
+>>> Hay 2589 Li depositados. Progreso = 21 %.
+>>> Hay 2697 Li depositados. Progreso = 22 %.
+>>> Hay 2809 Li depositados. Progreso = 24 %.
+>>> Hay 2904 Li depositados. Progreso = 25 %.
+>>> Hay 3012 Li depositados. Progreso = 26 %.
+>>> Hay 3124 Li depositados. Progreso = 28 %.
+>>> Hay 3234 Li depositados. Progreso = 29 %.
+>>> Hay 3338 Li depositados. Progreso = 31 %.
+>>> Hay 3448 Li depositados. Progreso = 32 %.
+>>> Hay 3543 Li depositados. Progreso = 33 %.
+>>> Hay 3658 Li depositados. Progreso = 35 %.
+>>> Hay 3782 Li depositados. Progreso = 37 %.
+>>> Hay 3909 Li depositados. Progreso = 38 %.
+>>> Hay 4031 Li depositados. Progreso = 40 %.
+>>> Hay 4155 Li depositados. Progreso = 42 %.
+>>> Hay 4277 Li depositados. Progreso = 43 %.
+>>> Hay 4414 Li depositados. Progreso = 45 %.
+>>> Hay 4532 Li depositados. Progreso = 47 %.
+>>> Hay 4665 Li depositados. Progreso = 48 %.
+>>> Hay 4769 Li depositados. Progreso = 50 %.
+>>> Hay 4886 Li depositados. Progreso = 51 %.
+>>> Hay 5006 Li depositados. Progreso = 53 %.
+>>> Hay 5142 Li depositados. Progreso = 55 %.
+>>> Hay 5264 Li depositados. Progreso = 56 %.
+>>> Hay 5381 Li depositados. Progreso = 58 %.
+>>> Hay 5511 Li depositados. Progreso = 60 %.
+>>> Hay 5659 Li depositados. Progreso = 62 %.
+>>> Hay 5797 Li depositados. Progreso = 63 %.
+>>> Hay 5914 Li depositados. Progreso = 65 %.
+>>> Hay 6035 Li depositados. Progreso = 67 %.
+>>> Hay 6183 Li depositados. Progreso = 69 %.
+>>> Hay 6317 Li depositados. Progreso = 70 %.
+>>> Hay 6459 Li depositados. Progreso = 72 %.
+>>> Hay 6579 Li depositados. Progreso = 74 %.
+>>> Hay 6715 Li depositados. Progreso = 76 %.
+>>> Hay 6862 Li depositados. Progreso = 78 %.
+>>> Hay 6998 Li depositados. Progreso = 79 %.
+>>> Hay 7164 Li depositados. Progreso = 82 %.
+>>> Hay 7292 Li depositados. Progreso = 83 %.
+>>> Hay 7429 Li depositados. Progreso = 85 %.
+>>> Hay 7574 Li depositados. Progreso = 87 %.
+>>> Hay 7727 Li depositados. Progreso = 89 %.
+>>> Hay 7892 Li depositados. Progreso = 91 %.
+>>> Hay 8061 Li depositados. Progreso = 94 %.
+>>> Hay 8226 Li depositados. Progreso = 96 %.
+>>> Hay 8387 Li depositados. Progreso = 98 %.
+Hay un total de 8501 Li depositados (100 %).
+Tiempo simulando = 598.367 ms
+WALL TIME = 193.342995 s
+PFLOPS = 798.334839
+
+<<<<< FIN CON 8500 PARTÍCULAS
+>>>>> INICIO CON 9000 PARTÍCULAS
+rm -f dendritas *.o .depend
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=9000 -c xoshiro.c -o xoshiro.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=9000 -c core.c -o core.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=9000 -c dendritas.c -o dendritas.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1205 Li depositados. Progreso = 2 %.
+>>> Hay 1304 Li depositados. Progreso = 3 %.
+>>> Hay 1413 Li depositados. Progreso = 5 %.
+>>> Hay 1514 Li depositados. Progreso = 6 %.
+>>> Hay 1621 Li depositados. Progreso = 7 %.
+>>> Hay 1724 Li depositados. Progreso = 9 %.
+>>> Hay 1844 Li depositados. Progreso = 10 %.
+>>> Hay 1941 Li depositados. Progreso = 11 %.
+>>> Hay 2045 Li depositados. Progreso = 13 %.
+>>> Hay 2152 Li depositados. Progreso = 14 %.
+>>> Hay 2271 Li depositados. Progreso = 15 %.
+>>> Hay 2375 Li depositados. Progreso = 17 %.
+>>> Hay 2478 Li depositados. Progreso = 18 %.
+>>> Hay 2571 Li depositados. Progreso = 19 %.
+>>> Hay 2677 Li depositados. Progreso = 20 %.
+>>> Hay 2787 Li depositados. Progreso = 22 %.
+>>> Hay 2885 Li depositados. Progreso = 23 %.
+>>> Hay 2971 Li depositados. Progreso = 24 %.
+>>> Hay 3063 Li depositados. Progreso = 25 %.
+>>> Hay 3188 Li depositados. Progreso = 27 %.
+>>> Hay 3309 Li depositados. Progreso = 28 %.
+>>> Hay 3390 Li depositados. Progreso = 29 %.
+>>> Hay 3486 Li depositados. Progreso = 31 %.
+>>> Hay 3590 Li depositados. Progreso = 32 %.
+>>> Hay 3728 Li depositados. Progreso = 34 %.
+>>> Hay 3828 Li depositados. Progreso = 35 %.
+>>> Hay 3947 Li depositados. Progreso = 36 %.
+>>> Hay 4056 Li depositados. Progreso = 38 %.
+>>> Hay 4191 Li depositados. Progreso = 39 %.
+>>> Hay 4305 Li depositados. Progreso = 41 %.
+>>> Hay 4410 Li depositados. Progreso = 42 %.
+>>> Hay 4543 Li depositados. Progreso = 44 %.
+>>> Hay 4644 Li depositados. Progreso = 45 %.
+>>> Hay 4776 Li depositados. Progreso = 47 %.
+>>> Hay 4904 Li depositados. Progreso = 48 %.
+>>> Hay 5044 Li depositados. Progreso = 50 %.
+>>> Hay 5159 Li depositados. Progreso = 51 %.
+>>> Hay 5292 Li depositados. Progreso = 53 %.
+>>> Hay 5428 Li depositados. Progreso = 55 %.
+>>> Hay 5556 Li depositados. Progreso = 56 %.
+>>> Hay 5684 Li depositados. Progreso = 58 %.
+>>> Hay 5803 Li depositados. Progreso = 60 %.
+>>> Hay 5947 Li depositados. Progreso = 61 %.
+>>> Hay 6084 Li depositados. Progreso = 63 %.
+>>> Hay 6224 Li depositados. Progreso = 65 %.
+>>> Hay 6354 Li depositados. Progreso = 66 %.
+>>> Hay 6480 Li depositados. Progreso = 68 %.
+>>> Hay 6608 Li depositados. Progreso = 70 %.
+>>> Hay 6747 Li depositados. Progreso = 71 %.
+>>> Hay 6892 Li depositados. Progreso = 73 %.
+>>> Hay 7018 Li depositados. Progreso = 75 %.
+>>> Hay 7160 Li depositados. Progreso = 77 %.
+>>> Hay 7318 Li depositados. Progreso = 78 %.
+>>> Hay 7454 Li depositados. Progreso = 80 %.
+>>> Hay 7615 Li depositados. Progreso = 82 %.
+>>> Hay 7780 Li depositados. Progreso = 84 %.
+>>> Hay 7929 Li depositados. Progreso = 86 %.
+>>> Hay 8084 Li depositados. Progreso = 88 %.
+>>> Hay 8250 Li depositados. Progreso = 90 %.
+>>> Hay 8430 Li depositados. Progreso = 92 %.
+>>> Hay 8585 Li depositados. Progreso = 94 %.
+>>> Hay 8780 Li depositados. Progreso = 97 %.
+>>> Hay 8957 Li depositados. Progreso = 99 %.
+Hay un total de 9001 Li depositados (100 %).
+Tiempo simulando = 632.195 ms
+WALL TIME = 211.328534 s
+PFLOPS = 843.060120
+
+<<<<< FIN CON 9000 PARTÍCULAS
+>>>>> INICIO CON 9500 PARTÍCULAS
+rm -f dendritas *.o .depend
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=9500 -c xoshiro.c -o xoshiro.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=9500 -c core.c -o core.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=9500 -c dendritas.c -o dendritas.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1205 Li depositados. Progreso = 2 %.
+>>> Hay 1304 Li depositados. Progreso = 3 %.
+>>> Hay 1413 Li depositados. Progreso = 4 %.
+>>> Hay 1514 Li depositados. Progreso = 6 %.
+>>> Hay 1621 Li depositados. Progreso = 7 %.
+>>> Hay 1724 Li depositados. Progreso = 8 %.
+>>> Hay 1844 Li depositados. Progreso = 9 %.
+>>> Hay 1941 Li depositados. Progreso = 11 %.
+>>> Hay 2045 Li depositados. Progreso = 12 %.
+>>> Hay 2152 Li depositados. Progreso = 13 %.
+>>> Hay 2271 Li depositados. Progreso = 14 %.
+>>> Hay 2375 Li depositados. Progreso = 16 %.
+>>> Hay 2479 Li depositados. Progreso = 17 %.
+>>> Hay 2574 Li depositados. Progreso = 18 %.
+>>> Hay 2682 Li depositados. Progreso = 19 %.
+>>> Hay 2795 Li depositados. Progreso = 21 %.
+>>> Hay 2903 Li depositados. Progreso = 22 %.
+>>> Hay 2994 Li depositados. Progreso = 23 %.
+>>> Hay 3095 Li depositados. Progreso = 24 %.
+>>> Hay 3197 Li depositados. Progreso = 25 %.
+>>> Hay 3298 Li depositados. Progreso = 27 %.
+>>> Hay 3412 Li depositados. Progreso = 28 %.
+>>> Hay 3524 Li depositados. Progreso = 29 %.
+>>> Hay 3619 Li depositados. Progreso = 30 %.
+>>> Hay 3747 Li depositados. Progreso = 32 %.
+>>> Hay 3859 Li depositados. Progreso = 33 %.
+>>> Hay 3995 Li depositados. Progreso = 35 %.
+>>> Hay 4110 Li depositados. Progreso = 36 %.
+>>> Hay 4228 Li depositados. Progreso = 37 %.
+>>> Hay 4350 Li depositados. Progreso = 39 %.
+>>> Hay 4448 Li depositados. Progreso = 40 %.
+>>> Hay 4572 Li depositados. Progreso = 42 %.
+>>> Hay 4699 Li depositados. Progreso = 43 %.
+>>> Hay 4825 Li depositados. Progreso = 45 %.
+>>> Hay 4933 Li depositados. Progreso = 46 %.
+>>> Hay 5049 Li depositados. Progreso = 47 %.
+>>> Hay 5167 Li depositados. Progreso = 49 %.
+>>> Hay 5316 Li depositados. Progreso = 50 %.
+>>> Hay 5451 Li depositados. Progreso = 52 %.
+>>> Hay 5573 Li depositados. Progreso = 53 %.
+>>> Hay 5684 Li depositados. Progreso = 55 %.
+>>> Hay 5834 Li depositados. Progreso = 56 %.
+>>> Hay 5953 Li depositados. Progreso = 58 %.
+>>> Hay 6097 Li depositados. Progreso = 59 %.
+>>> Hay 6221 Li depositados. Progreso = 61 %.
+>>> Hay 6365 Li depositados. Progreso = 63 %.
+>>> Hay 6483 Li depositados. Progreso = 64 %.
+>>> Hay 6609 Li depositados. Progreso = 65 %.
+>>> Hay 6756 Li depositados. Progreso = 67 %.
+>>> Hay 6894 Li depositados. Progreso = 69 %.
+>>> Hay 7046 Li depositados. Progreso = 71 %.
+>>> Hay 7206 Li depositados. Progreso = 73 %.
+>>> Hay 7352 Li depositados. Progreso = 74 %.
+>>> Hay 7511 Li depositados. Progreso = 76 %.
+>>> Hay 7650 Li depositados. Progreso = 78 %.
+>>> Hay 7808 Li depositados. Progreso = 80 %.
+>>> Hay 7970 Li depositados. Progreso = 82 %.
+>>> Hay 8125 Li depositados. Progreso = 83 %.
+>>> Hay 8277 Li depositados. Progreso = 85 %.
+>>> Hay 8428 Li depositados. Progreso = 87 %.
+>>> Hay 8591 Li depositados. Progreso = 89 %.
+>>> Hay 8781 Li depositados. Progreso = 91 %.
+>>> Hay 8938 Li depositados. Progreso = 93 %.
+>>> Hay 9101 Li depositados. Progreso = 95 %.
+>>> Hay 9281 Li depositados. Progreso = 97 %.
+>>> Hay 9452 Li depositados. Progreso = 99 %.
+Hay un total de 9501 Li depositados (100 %).
+Tiempo simulando = 661.696 ms
+WALL TIME = 230.567391 s
+PFLOPS = 884.749817
+
+<<<<< FIN CON 9500 PARTÍCULAS
+>>>>> INICIO CON 10000 PARTÍCULAS
+rm -f dendritas *.o .depend
+clang-11 -MM core.c dendritas.c xoshiro.c > .depend
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=10000 -c xoshiro.c -o xoshiro.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=10000 -c core.c -o core.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  -DNMAX=10000 -c dendritas.c -o dendritas.o
+clang-11 -std=gnu11 -Wall -Wextra -g -O2 -march=native -funroll-loops -fopenmp  xoshiro.o core.o dendritas.o -o dendritas -lm
+>>> Hay 1000 Li depositados. Progreso = 0 %.
+>>> Hay 1205 Li depositados. Progreso = 2 %.
+>>> Hay 1304 Li depositados. Progreso = 3 %.
+>>> Hay 1413 Li depositados. Progreso = 4 %.
+>>> Hay 1514 Li depositados. Progreso = 5 %.
+>>> Hay 1621 Li depositados. Progreso = 6 %.
+>>> Hay 1724 Li depositados. Progreso = 8 %.
+>>> Hay 1844 Li depositados. Progreso = 9 %.
+>>> Hay 1941 Li depositados. Progreso = 10 %.
+>>> Hay 2045 Li depositados. Progreso = 11 %.
+>>> Hay 2152 Li depositados. Progreso = 12 %.
+>>> Hay 2271 Li depositados. Progreso = 14 %.
+>>> Hay 2375 Li depositados. Progreso = 15 %.
+>>> Hay 2475 Li depositados. Progreso = 16 %.
+>>> Hay 2585 Li depositados. Progreso = 17 %.
+>>> Hay 2689 Li depositados. Progreso = 18 %.
+>>> Hay 2803 Li depositados. Progreso = 20 %.
+>>> Hay 2916 Li depositados. Progreso = 21 %.
+>>> Hay 3031 Li depositados. Progreso = 22 %.
+>>> Hay 3144 Li depositados. Progreso = 23 %.
+>>> Hay 3259 Li depositados. Progreso = 25 %.
+>>> Hay 3376 Li depositados. Progreso = 26 %.
+>>> Hay 3482 Li depositados. Progreso = 27 %.
+>>> Hay 3579 Li depositados. Progreso = 28 %.
+>>> Hay 3696 Li depositados. Progreso = 29 %.
+>>> Hay 3794 Li depositados. Progreso = 31 %.
+>>> Hay 3922 Li depositados. Progreso = 32 %.
+>>> Hay 4045 Li depositados. Progreso = 33 %.
+>>> Hay 4149 Li depositados. Progreso = 34 %.
+>>> Hay 4267 Li depositados. Progreso = 36 %.
+>>> Hay 4389 Li depositados. Progreso = 37 %.
+>>> Hay 4515 Li depositados. Progreso = 39 %.
+>>> Hay 4638 Li depositados. Progreso = 40 %.
+>>> Hay 4757 Li depositados. Progreso = 41 %.
+>>> Hay 4904 Li depositados. Progreso = 43 %.
+>>> Hay 5025 Li depositados. Progreso = 44 %.
+>>> Hay 5161 Li depositados. Progreso = 46 %.
+>>> Hay 5279 Li depositados. Progreso = 47 %.
+>>> Hay 5380 Li depositados. Progreso = 48 %.
+>>> Hay 5541 Li depositados. Progreso = 50 %.
+>>> Hay 5659 Li depositados. Progreso = 51 %.
+>>> Hay 5809 Li depositados. Progreso = 53 %.
+>>> Hay 5950 Li depositados. Progreso = 55 %.
+>>> Hay 6057 Li depositados. Progreso = 56 %.
+>>> Hay 6194 Li depositados. Progreso = 57 %.
+>>> Hay 6305 Li depositados. Progreso = 58 %.
+>>> Hay 6451 Li depositados. Progreso = 60 %.
+>>> Hay 6583 Li depositados. Progreso = 62 %.
+>>> Hay 6726 Li depositados. Progreso = 63 %.
+>>> Hay 6876 Li depositados. Progreso = 65 %.
+>>> Hay 7015 Li depositados. Progreso = 66 %.
+>>> Hay 7156 Li depositados. Progreso = 68 %.
+>>> Hay 7285 Li depositados. Progreso = 69 %.
+>>> Hay 7420 Li depositados. Progreso = 71 %.
+>>> Hay 7572 Li depositados. Progreso = 73 %.
+>>> Hay 7732 Li depositados. Progreso = 74 %.
+>>> Hay 7915 Li depositados. Progreso = 76 %.
+>>> Hay 8061 Li depositados. Progreso = 78 %.
+>>> Hay 8207 Li depositados. Progreso = 80 %.
+>>> Hay 8398 Li depositados. Progreso = 82 %.
+>>> Hay 8547 Li depositados. Progreso = 83 %.
+>>> Hay 8696 Li depositados. Progreso = 85 %.
+>>> Hay 8866 Li depositados. Progreso = 87 %.
+>>> Hay 9040 Li depositados. Progreso = 89 %.
+>>> Hay 9187 Li depositados. Progreso = 90 %.
+>>> Hay 9396 Li depositados. Progreso = 93 %.
+>>> Hay 9571 Li depositados. Progreso = 95 %.
+>>> Hay 9771 Li depositados. Progreso = 97 %.
+>>> Hay 9972 Li depositados. Progreso = 99 %.
+Hay un total de 10001 Li depositados (100 %).
+Tiempo simulando = 679.907 ms
+WALL TIME = 245.948588 s
+PFLOPS = 906.450745
+
+<<<<< FIN CON 10000 PARTÍCULAS
+rm -f dendritas *.o .depend
